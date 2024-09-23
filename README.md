@@ -4,7 +4,7 @@
 *By Mark Moutter, Ahmet Yildirim, Le Tuan Huy Nguyen*
 
 
-MatrixView is the final team project for *Program development in a graphical environment, 420-204*
+MatrixView is the final team project for *Program development in a graphical environment, 420-203*
 Vanier College, Fall 2024 Semester.
 
 
