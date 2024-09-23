@@ -3,7 +3,7 @@
 ## Features
 
 
-## How do I download MatrixView?
+## How do I use MatrixView?
 
 
 
