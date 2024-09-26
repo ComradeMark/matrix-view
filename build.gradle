@@ -48,5 +48,6 @@ java {
 application {       
    // TODO: Specify the fully-qualified name of the class 
    //       that contains the main method to be executed.
-   mainClass = 'edu.vanier.template.MainApp'   
+   mainClass = 'edu.vanier.matrixView.MainApp'
+    mainClass2 = 'edu.vanier.matrixView.test.Driver'
 }

@@ -1,6 +1,6 @@
-package edu.vanier.template.controllers;
+package edu.vanier.matrixView.controllers;
 
-import edu.vanier.template.MainApp;
+import edu.vanier.matrixView.MainApp;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

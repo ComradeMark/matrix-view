@@ -1,6 +1,6 @@
-package edu.vanier.template;
+package edu.vanier.matrixView;
 
-import edu.vanier.template.controllers.MainAppFXMLController;
+import edu.vanier.matrixView.controllers.MainAppFXMLController;
 import java.io.IOException;
 import java.util.logging.Level;
 import javafx.application.Application;
@@ -21,6 +21,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
         try {
             logger.info("Bootstrapping the application...");
             // Load the scene of the primary stage.
