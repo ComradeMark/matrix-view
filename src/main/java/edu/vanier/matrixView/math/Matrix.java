@@ -73,19 +73,17 @@ public class Matrix {
         return matrix.getA()*matrix.getD() - matrix.getB()*matrix.getC();
     }
 
-    public static Matrix adjugate(Matrix matrix) {
-        String temp1 = matrix.getA();
-        String temp2 = matrix.getD();
-        matrix.setA(temp2);
-        matrix.setD(temp1);
-        temp1 = "-"+ matrix.getB();
-        temp2 = "-"+ matrix.getC();
-        matrix.setB(temp1);
-        matrix.setC(temp2);
+    public static void adjugate(Matrix matrix) {
+        matrix.setA(matrix.getD());
+        matrix.setD(matrix.getA());
+        matrix.setB(matrix.getB()*-1);
+        matrix.setC(matrix.getC()*-1);
     }
 
-    public static Matrix inverse(Matrix matrix) {
-        return determinant(matrix) + "" + adjugate(matrix);
-        // Todo how to make the inverse here?
+    public static void inverse(Matrix matrix) {
+        // Todo implement the logic
     }
 }
+
+// Dude how do i set up the rep again?
+
