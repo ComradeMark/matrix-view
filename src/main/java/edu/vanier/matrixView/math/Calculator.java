@@ -14,6 +14,10 @@ public class Calculator  {
         throw new ExecutionControl.NotImplementedException("Not implemented");
     }
 
+    public static Vector[] matrixAdd(Matrix matrix, Coordinate[] coordinate) throws ExecutionControl.NotImplementedException {
+        throw new ExecutionControl.NotImplementedException("Not implemented");
+    }
+
     public static double determinant(Matrix matrix) {
         return matrix.getA() * matrix.getD() - matrix.getB() * matrix.getC();
     }
