@@ -88,9 +88,11 @@ public class Matrix {
         temp.setB(temp.getB() * det);
         temp.setC(temp.getC() * det);
         temp.setD(temp.getD() * det);
-        
+
         return temp;
     }
+
+
 }
 
 
