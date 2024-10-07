@@ -1,7 +1,6 @@
 package edu.vanier.matrixView.math;
 
 import jdk.jshell.spi.ExecutionControl;
-
 public class Calculator  {
 
 
@@ -14,7 +13,4 @@ public class Calculator  {
 
         throw new ExecutionControl.NotImplementedException("Not implemented");
     }
-
-    
-
 }
