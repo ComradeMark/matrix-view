@@ -73,17 +73,25 @@ public class Matrix {
         return matrix.getA()*matrix.getD() - matrix.getB()*matrix.getC();
     }
 
-    public static void adjugate(Matrix matrix) {
+    public static Matrix adjugate(Matrix matrix) {
         matrix.setA(matrix.getD());
         matrix.setD(matrix.getA());
         matrix.setB(matrix.getB()*-1);
         matrix.setC(matrix.getC()*-1);
+        return matrix;
     }
 
-    public static void inverse(Matrix matrix) {
-        // Todo implement the logic
+    public static Matrix inverse(Matrix matrix) {
+        double det = determinant(matrix);
+        Matrix temp = Matrix.adjugate(matrix);
+        temp.setA(temp.getA() * det);
+        temp.setB(temp.getB() * det);
+        temp.setC(temp.getC() * det);
+        temp.setD(temp.getD() * det);
+        
+        return temp;
     }
 }
 
-// Dude how do i set up the rep again?
+
 
