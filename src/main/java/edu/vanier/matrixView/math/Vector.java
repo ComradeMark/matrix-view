@@ -17,4 +17,11 @@ public class Vector extends Coordinate{
     public double getMagnitude() {
         return magnitude;
     }
+
+    @Override
+    public String toString() {
+        return "{"+super.toString() + ", Vector{" + "magnitude=" + magnitude + "}}";
+    }
+
+    
 }

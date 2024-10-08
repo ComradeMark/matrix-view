@@ -1,5 +1,6 @@
 package edu.vanier.matrixView.math;
 
+import java.util.ArrayList;
 import jdk.jshell.spi.ExecutionControl;
 public class Calculator  {
 
@@ -9,10 +10,34 @@ public class Calculator  {
 //        throw new ExecutionControl.NotImplementedException("Not implemented");
 //    }
 
-    public static Vector[] matrixMultiply(Matrix matrix, Coordinate[] coordinate) throws ExecutionControl.NotImplementedException {
+    public static ArrayList<Coordinate> matrixMultiply(Matrix matrix, ArrayList<Coordinate> coordinates){
+        ArrayList<Coordinate> outs = new ArrayList<>();
+        double a = matrix.getA();
+        double b = matrix.getB();
+        double c = matrix.getC();
+        double d = matrix.getD();
 
-        throw new ExecutionControl.NotImplementedException("Not implemented");
+
+        for (Coordinate inCoord : coordinates) {
+            double x = inCoord.getX();
+            double y = inCoord.getY();
+            
+            if(inCoord.getClass() == Vector.class){
+                outs.add(new Vector(
+                        a * x + b * y,
+                        c * x + d * y
+                ));
+                continue;
+            }
+            outs.add(new Coordinate(
+                    a * x + b * y,
+                    c * x + b * y
+            ));
+        }
+        
+        return outs;
     }
+    
 
     public static Vector[] matrixAdd(Matrix matrix, Coordinate[] coordinate) throws ExecutionControl.NotImplementedException {
         throw new ExecutionControl.NotImplementedException("Not implemented");

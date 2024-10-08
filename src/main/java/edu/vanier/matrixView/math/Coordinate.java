@@ -30,4 +30,9 @@ public class Coordinate {
     public void setY(double y) {
         this.y = y;
     }
+
+    @Override
+    public String toString() {
+        return "Coordinate{" + "x=" + x + ", y=" + y + '}';
+    }
 }
