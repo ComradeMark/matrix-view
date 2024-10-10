@@ -3,6 +3,9 @@ package edu.vanier.matrixView;
 import edu.vanier.matrixView.controllers.MainAppFXMLController;
 import java.io.IOException;
 import java.util.logging.Level;
+
+import edu.vanier.matrixView.math.Calculator;
+import edu.vanier.matrixView.math.Matrix;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -70,6 +73,12 @@ public class MainApp extends Application {
     }
 
     public static void main(String[] args) {
+
+
+
+
+
         launch(args);
     }
+
 }

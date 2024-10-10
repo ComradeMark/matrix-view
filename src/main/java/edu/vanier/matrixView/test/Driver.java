@@ -14,5 +14,8 @@ public class Driver {
         ArrayList<Coordinate> coordinates = new ArrayList<>();
         coordinates.add(v);
         System.out.println(Calculator.matrixMultiply(mtx, coordinates));
+        Matrix m1 = new Matrix(2, 3, -2, 4);
+        Calculator c1 = new Calculator();
+        Calculator.rowEchelon(m1);
     }
 }

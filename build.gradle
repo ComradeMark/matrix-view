@@ -21,6 +21,9 @@ javafx {
 }
 
 dependencies {
+    // https://mvnrepository.com/artifact/com.github.davidgutierrezrubio/JMathAnim
+    implementation group: 'com.github.davidgutierrezrubio', name: 'JMathAnim', version: '0.9.4'
+
     // The following .jars are pulled from:
     // https://repo.maven.apache.org/maven2/org/openjfx/    
     compileOnly  "org.openjfx:javafx-base:$javafxVersion:sources"
