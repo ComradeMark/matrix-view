@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -136,6 +137,9 @@
       </Accordion>
    </right>
    <left>
-      <Pane prefHeight="400.0" prefWidth="400.0" BorderPane.alignment="CENTER" />
+      <Pane prefHeight="400.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+         <children>
+            <Canvas fx:id="canvasPane" height="400.0" width="400.0" />
+         </children></Pane>
    </left>
 </BorderPane>

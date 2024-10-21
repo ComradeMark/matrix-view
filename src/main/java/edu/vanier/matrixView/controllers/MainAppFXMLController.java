@@ -3,6 +3,7 @@ package edu.vanier.matrixView.controllers;
 import edu.vanier.matrixView.MainApp;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
@@ -59,6 +60,8 @@ public class MainAppFXMLController {
 
     @FXML
     Button btnSwitchScene;
+    @FXML
+    Canvas canvasPane;
 
     @FXML
     public void initialize() {

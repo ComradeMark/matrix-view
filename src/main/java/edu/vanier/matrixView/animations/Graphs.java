@@ -52,6 +52,7 @@ public class Graphs extends Application {
                 axes
         );
 
+
         return plot;
     }
 
