@@ -161,5 +161,4 @@ import jdk.jshell.spi.ExecutionControl;
         System.out.println("[" + matrix.getC() + " " + matrix.getD() + "]");
     }
 
-
 }
