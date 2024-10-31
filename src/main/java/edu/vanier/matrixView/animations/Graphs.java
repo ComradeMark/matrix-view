@@ -20,7 +20,9 @@ public class Graphs extends Application {
     int y = 2;
     int w = 2;
     int h = 2;
-    static int windowSize = 1010;
+    int initialScreenHeight = 1010;
+    int initialScreenWidth = 1010;
+    int[] origin = {initialScreenWidth / 2 -2, initialScreenHeight /2 -2};
 
     // launch the application
     public void start(Stage stage)
@@ -58,9 +60,9 @@ public class Graphs extends Application {
         }
 
         //Create axis lines
-        Line xAxis = new Line(0, 503, 1000, 503);
-        Line yAxis = new Line(502,0,502,1001);
-        Line arrow = new Line(502, 503, 552, 600);
+        Line xAxis = new Line(0, origin[1], initialScreenWidth, origin[1]);
+        Line yAxis = new Line(origin[0],0,origin[0],initialScreenHeight);
+        Line arrow = new Line(origin[0], origin[1], 552, 600);
         arrow.setStroke(Color.RED);
         arrow.setStrokeWidth(3);
         group.getChildren().addAll(xAxis, yAxis, arrow);
