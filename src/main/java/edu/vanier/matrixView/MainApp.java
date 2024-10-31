@@ -1,5 +1,6 @@
 package edu.vanier.matrixView;
 
+import edu.vanier.matrixView.animations.Graphs;
 import edu.vanier.matrixView.controllers.MainAppFXMLController;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -17,7 +18,7 @@ import org.slf4j.LoggerFactory;
 
 public class MainApp extends Application {
 
-    public static final String MAINAPP_LAYOUT = "MainApp_layout";
+    public static final String MAINAPP_LAYOUT = "MainAppMinimalViablePage";
     public static final String SECONDARY_LAYOUT = "secondary_layout";
     private final static Logger logger = LoggerFactory.getLogger(MainApp.class);
     private static Scene scene;
@@ -26,17 +27,21 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
 
         try {
+
+
             logger.info("Bootstrapping the application...");
             // Load the scene of the primary stage.
             Parent root = loadFXML(MAINAPP_LAYOUT, new MainAppFXMLController());
             scene = new Scene(root, 640, 480);
             primaryStage.setScene(scene);
+
             primaryStage.sizeToScene();
             // Put this appliation's main window on top of other already-opened windows
             // upon launching the app.
             primaryStage.setAlwaysOnTop(true);
             primaryStage.show();
             primaryStage.setAlwaysOnTop(false);
+
         } catch (IOException ex) {
             logger.error(ex.getMessage(), ex);
         }

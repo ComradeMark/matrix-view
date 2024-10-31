@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.Group;
 
 public class Graphs extends Application {
+    public static final String MAINAPP_LAYOUT = "MainAppMinimalViablePage";
 
     int x = 0;
     int y = 0;
@@ -23,6 +24,7 @@ public class Graphs extends Application {
     // launch the application
     public void start(Stage stage)
     {
+
 
         // set title for the stage
         stage.setTitle("creating canvas");
@@ -34,11 +36,9 @@ public class Graphs extends Application {
         GraphicsContext graphics_context =
                 canvas.getGraphicsContext2D();
 
-        Line xAxis = new Line(0, 1000/2, 1000, 1000/2);
 
         // create a Group
         Group group = new Group(canvas);
-        group.getChildren().add(xAxis);
 
         // create a scene
         Scene scene = new Scene(group, 1000, 1000);
@@ -48,15 +48,17 @@ public class Graphs extends Application {
             for (int j = 0; j < 100; j++) {
                     graphics_context.setFill(Color.BLACK);
                     graphics_context.fillOval(x, y, w, h);
-                    x += 30;
+                    x += 50;
 
             }
             x = 2;
-            y += 30;
+            y += 50;
 
         }
 
         //Create axis lines
+        Line xAxis = new Line(0, 500, 1000, 500);
+        group.getChildren().add(xAxis);
 
 
 
