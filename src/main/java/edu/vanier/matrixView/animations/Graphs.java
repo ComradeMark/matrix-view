@@ -33,7 +33,7 @@ public class Graphs extends Application {
         stage.setTitle("creating canvas");
 
         // create a canvas
-        Canvas canvas = new Canvas(1010, 1010);
+        Canvas canvas = new Canvas(initialScreenHeight , initialScreenWidth );
 
         // graphics context
         GraphicsContext graphics_context =
@@ -44,7 +44,7 @@ public class Graphs extends Application {
         Group group = new Group(canvas);
 
         // create a scene
-        Scene scene = new Scene(group, 1010, 1010);
+        Scene scene = new Scene(group, initialScreenWidth, initialScreenHeight);
 
         // loop for creating points
         for (int i = 0; i < 100; i++) {
@@ -62,7 +62,7 @@ public class Graphs extends Application {
         //Create axis lines
         Line xAxis = new Line(0, origin[1], initialScreenWidth, origin[1]);
         Line yAxis = new Line(origin[0],0,origin[0],initialScreenHeight);
-        Line arrow = new Line(origin[0], origin[1], 552, 600);
+        Line arrow = new Line(origin[0], origin[1], 512, 531);
         arrow.setStroke(Color.RED);
         arrow.setStrokeWidth(3);
         group.getChildren().addAll(xAxis, yAxis, arrow);
