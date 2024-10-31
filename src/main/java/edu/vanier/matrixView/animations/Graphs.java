@@ -15,7 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.Group;
 
 public class Graphs extends Application {
-
+    //Todo see how we can update the coordinate system while the screen has a new dimension
     int x = 2;
     int y = 2;
     int w = 2;
