@@ -4,12 +4,6 @@ import java.util.ArrayList;
 import jdk.jshell.spi.ExecutionControl;
  public class Calculator {
 
-
-//    public static Vector Multiply(Matrix matrix, Coordinate coordinate) throws ExecutionControl.NotImplementedException {
-//
-//        throw new ExecutionControl.NotImplementedException("Not implemented");
-//    }
-
     public static ArrayList<Coordinate> matrixMultiply(Matrix matrix, ArrayList<Coordinate> coordinates) {
         ArrayList<Coordinate> outs = new ArrayList<>();
         double a = matrix.getA();
@@ -128,8 +122,6 @@ import jdk.jshell.spi.ExecutionControl;
             rref.setD(row2[1]);
             printMatrix(rref);
 
-
-
             return rref;
         }
     return rref; }
@@ -151,10 +143,11 @@ import jdk.jshell.spi.ExecutionControl;
 
     }
     /**
-     * Static method that multiplies a row of matrix values by a scalar, before adding that result to another array. Declared as a static to be able to use without instantiation.
+     * Static method that multiplies a row of matrix values by a scalar, before adding that
+     * result to another array. Declared as a static to be able to use without instantiation.
      */
-    private static void rowTimesAndAdd(){
-
+    private static void rowTimesAndAdd(double factor, double[] returnedArray, double[] enteredArray){
+        
     }
     private static void printMatrix(Matrix matrix){
         System.out.println("[" + matrix.getA() + " " + matrix.getB() + "]");

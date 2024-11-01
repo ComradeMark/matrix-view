@@ -16,13 +16,13 @@ import javafx.scene.Group;
 
 public class Graphs extends Application {
     //Todo see how we can update the coordinate system while the screen has a new dimension
-    int x = 2;
-    int y = 2;
+    int x = -1;
+    int y = -1;
     int w = 2;
     int h = 2;
     int initialScreenHeight = 1010;
     int initialScreenWidth = 1010;
-    int[] origin = {initialScreenWidth / 2 -2, initialScreenHeight /2 -2};
+    int[] origin = {initialScreenWidth / 2 - 4, initialScreenHeight /2 - 4};
 
     // launch the application
     public void start(Stage stage)
@@ -52,11 +52,22 @@ public class Graphs extends Application {
                     graphics_context.setFill(Color.BLACK);
                     graphics_context.fillOval(x, y, w, h);
                     x += 50;
-
             }
-            x = 2;
+            x = -1;
             y += 50;
+        }
 
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        int spacing = 50;
+        gc.setStroke(Color.LIGHTGRAY);
+        gc.setLineWidth(0.5);
+        // adds vertical lines
+        for (int x = 0; x < canvas.getWidth(); x += spacing) {
+            gc.strokeLine(x, 0, x, canvas.getHeight());
+        }
+        // adds horizontal lines
+        for (int y = 0; y < canvas.getHeight(); y += spacing) {
+            gc.strokeLine(0, y, canvas.getWidth(), y);
         }
 
         //Create axis lines
