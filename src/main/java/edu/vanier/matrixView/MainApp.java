@@ -9,8 +9,12 @@ import edu.vanier.matrixView.math.Calculator;
 import edu.vanier.matrixView.math.Matrix;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +35,12 @@ public class MainApp extends Application {
 
             logger.info("Bootstrapping the application...");
             // Load the scene of the primary stage.
-            Parent root = loadFXML(MAINAPP_LAYOUT, new MainAppFXMLController());
+            MainAppFXMLController controller = new MainAppFXMLController();
+            BorderPane root = (BorderPane)loadFXML(MAINAPP_LAYOUT, controller);
+            
+            Graphs graph = new Graphs();
+            controller.setCanvasPane(graph.getGraph(400, 400));
+            System.out.println(((Canvas)((Pane)root.getChildren().get(1)).getChildren().get(0)).getTranslateX());
             scene = new Scene(root, 640, 480);
             primaryStage.setScene(scene);
 

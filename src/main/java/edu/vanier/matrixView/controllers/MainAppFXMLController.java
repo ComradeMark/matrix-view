@@ -31,37 +31,37 @@ public class MainAppFXMLController {
     Spinner spinnerD;
 
     @FXML
-    TitledPane valuePane;
+    private TitledPane valuePane;
     @FXML
-    TextField fieldDet;
+    private TextField fieldDet;
     @FXML
-    TextField transA;
+    private TextField transA;
     @FXML
-    TextField transB;
+    private TextField transB;
     @FXML
-    TextField transC;
+    private TextField transC;
     @FXML
-    TextField transD;
+    private TextField transD;
     @FXML
-    TextField invA;
+    private TextField invA;
     @FXML
-    TextField invB;
+    private TextField invB;
     @FXML
-    TextField invC;
+    private TextField invC;
     @FXML
-    TextField invD;
+    private TextField invD;
 
     @FXML
-    TitledPane controlPane;
+    private TitledPane controlPane;
     @FXML
-    Button btnGenerate;
+    private Button btnGenerate;
     @FXML
-    Button btnReset;
+    private Button btnReset;
 
     @FXML
-    Button btnSwitchScene;
+    private Button btnSwitchScene;
     @FXML
-    Canvas canvasPane;
+    private Canvas canvasPane;
 
     @FXML
     public void initialize() {
@@ -76,4 +76,166 @@ public class MainAppFXMLController {
     private void loadSecondaryScene(Event e) {
 
     }
+
+    public TitledPane getConfigPane() {
+        return configPane;
+    }
+
+    public void setConfigPane(TitledPane configPane) {
+        this.configPane = configPane;
+    }
+
+    public Spinner getSpinnerA() {
+        return spinnerA;
+    }
+
+    public void setSpinnerA(Spinner spinnerA) {
+        this.spinnerA = spinnerA;
+    }
+
+    public Spinner getSpinnerB() {
+        return spinnerB;
+    }
+
+    public void setSpinnerB(Spinner spinnerB) {
+        this.spinnerB = spinnerB;
+    }
+
+    public Spinner getSpinnerC() {
+        return spinnerC;
+    }
+
+    public void setSpinnerC(Spinner spinnerC) {
+        this.spinnerC = spinnerC;
+    }
+
+    public Spinner getSpinnerD() {
+        return spinnerD;
+    }
+
+    public void setSpinnerD(Spinner spinnerD) {
+        this.spinnerD = spinnerD;
+    }
+
+    public TitledPane getValuePane() {
+        return valuePane;
+    }
+
+    public void setValuePane(TitledPane valuePane) {
+        this.valuePane = valuePane;
+    }
+
+    public TextField getFieldDet() {
+        return fieldDet;
+    }
+
+    public void setFieldDet(TextField fieldDet) {
+        this.fieldDet = fieldDet;
+    }
+
+    public TextField getTransA() {
+        return transA;
+    }
+
+    public void setTransA(TextField transA) {
+        this.transA = transA;
+    }
+
+    public TextField getTransB() {
+        return transB;
+    }
+
+    public void setTransB(TextField transB) {
+        this.transB = transB;
+    }
+
+    public TextField getTransC() {
+        return transC;
+    }
+
+    public void setTransC(TextField transC) {
+        this.transC = transC;
+    }
+
+    public TextField getTransD() {
+        return transD;
+    }
+
+    public void setTransD(TextField transD) {
+        this.transD = transD;
+    }
+
+    public TextField getInvA() {
+        return invA;
+    }
+
+    public void setInvA(TextField invA) {
+        this.invA = invA;
+    }
+
+    public TextField getInvB() {
+        return invB;
+    }
+
+    public void setInvB(TextField invB) {
+        this.invB = invB;
+    }
+
+    public TextField getInvC() {
+        return invC;
+    }
+
+    public void setInvC(TextField invC) {
+        this.invC = invC;
+    }
+
+    public TextField getInvD() {
+        return invD;
+    }
+
+    public void setInvD(TextField invD) {
+        this.invD = invD;
+    }
+
+    public TitledPane getControlPane() {
+        return controlPane;
+    }
+
+    public void setControlPane(TitledPane controlPane) {
+        this.controlPane = controlPane;
+    }
+
+    public Button getBtnGenerate() {
+        return btnGenerate;
+    }
+
+    public void setBtnGenerate(Button btnGenerate) {
+        this.btnGenerate = btnGenerate;
+    }
+
+    public Button getBtnReset() {
+        return btnReset;
+    }
+
+    public void setBtnReset(Button btnReset) {
+        this.btnReset = btnReset;
+    }
+
+    public Button getBtnSwitchScene() {
+        return btnSwitchScene;
+    }
+
+    public void setBtnSwitchScene(Button btnSwitchScene) {
+        this.btnSwitchScene = btnSwitchScene;
+    }
+
+    public Canvas getCanvasPane() {
+        return canvasPane;
+    }
+
+    public void setCanvasPane(Canvas canvasPane) {
+        this.canvasPane = canvasPane;
+    }
+    
+    
 }
