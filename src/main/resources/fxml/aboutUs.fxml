@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text fill="WHITE" layoutX="106.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MatrixView is an open-source linear transformation visualizer.">
+         <font>
+            <Font name="Microsoft Himalaya" size="23.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="103.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Developed by Mechanized Technological Advancement Incorporated (MTAI) Ltd. Copyright 2024, All Rights Reserved under international treaties." textAlignment="CENTER" wrappingWidth="394.203125">
+         <font>
+            <Font name="Microsoft Himalaya" size="23.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="164.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mark Moutter, Ahmet Yildrim, Le Tuan Huy Nguyen" />
+      <ImageView fitHeight="213.0" fitWidth="484.0" layoutX="54.0" layoutY="51.0">
+         <image>
+            <Image url="@img/LOGO.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnClose" layoutX="516.0" layoutY="341.0" mnemonicParsing="false" text="Close" />
+   </children>
+</Pane>
