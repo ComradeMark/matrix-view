@@ -127,40 +127,61 @@ public class Graphs extends Application {
         Canvas canvas = new Canvas(width , height);
 
         // graphics context
-        GraphicsContext gc =
+        GraphicsContext graphics_context =
                 canvas.getGraphicsContext2D();
 
 
         // create a Group
         Group group = new Group(canvas);
 
-        gc.setFill(Color.BLACK);
+        int spacing = 10;
+
+        // create a scene
+        Scene scene = new Scene(group, initialScreenWidth, initialScreenHeight);
+
+        graphics_context.setFill(Color.BLACK);
         // loop for creating points
-        for (Coordinate coordinate : coordinates) {
-            System.out.println(coordinate.getX() +", "+  coordinate.getY());
-            gc.fillOval(coordinate.getX(), coordinate.getY(), w* 3, h* 3);
+        for (int i = 0; i < 100; i++) {
+            for (int j = 0; j < 100; j++) {
+                graphics_context.fillOval(x, y, w, h);
+                coordinates.add(new Coordinate(x, y));
+                x += spacing;
+
+            }
+            x = -1;
+            y += spacing;
         }
 
-        int spacing = 50;
+        GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setStroke(Color.LIGHTGRAY);
         gc.setLineWidth(0.5);
         // adds vertical lines
         for (int x = 0; x < canvas.getWidth(); x += spacing) {
+            if (Math.abs(origin[0] - x) <= spacing/2){
+                gc.setStroke(Color.BLACK);
+                gc.strokeLine(x, 0, x, canvas.getHeight());
+                gc.setStroke(Color.LIGHTGRAY);
+                continue;
+            }
             gc.strokeLine(x, 0, x, canvas.getHeight());
         }
         // adds horizontal lines
         for (int y = 0; y < canvas.getHeight(); y += spacing) {
+            if (Math.abs(origin[1] - y) <= spacing/2){
+                gc.setStroke(Color.BLACK);
+                gc.strokeLine(0, y, canvas.getWidth(), y);
+                gc.setStroke(Color.LIGHTGRAY);
+                continue;
+            }
             gc.strokeLine(0, y, canvas.getWidth(), y);
         }
 
-        //Create axis lines
-        Line xAxis = new Line(0, origin[1], initialScreenWidth, origin[1]);
-        Line yAxis = new Line(origin[0],0,origin[0],initialScreenHeight);
         Line arrow = new Line(origin[0], origin[1], 512, 531);
         arrow.setStroke(Color.RED);
         arrow.setStrokeWidth(3);
-        group.getChildren().addAll(xAxis, yAxis, arrow);
-        
+//        group.getChildren().addAll(xAxis, yAxis, arrow);
+
+
         return canvas;
     }
 }

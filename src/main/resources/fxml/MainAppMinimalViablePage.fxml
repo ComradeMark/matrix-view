@@ -15,8 +15,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <right>
       <Accordion BorderPane.alignment="CENTER">
         <panes>
@@ -47,6 +48,7 @@
                                     <Spinner fx:id="spinnerD" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                  </children>
                               </GridPane>
+                              <Text fx:id="intWarning" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Only integers allowed" />
                            </children>
                         </VBox>
                      </children>
@@ -130,6 +132,7 @@
                      <children>
                         <Button fx:id="btnGenerate" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Generate simulation" />
                         <Button fx:id="btnReset" mnemonicParsing="false" text="Reset" />
+                        <Button fx:id="btnAbout" mnemonicParsing="false" text="About" />
                      </children>
                   </VBox>
                </content></TitledPane>
@@ -137,7 +140,7 @@
       </Accordion>
    </right>
    <left>
-      <Pane prefHeight="400.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+      <Pane fx:id="graphPane" prefHeight="400.0" prefWidth="400.0" BorderPane.alignment="CENTER">
          <children>
             <Canvas fx:id="canvasPane" height="400.0" width="400.0" />
          </children></Pane>
