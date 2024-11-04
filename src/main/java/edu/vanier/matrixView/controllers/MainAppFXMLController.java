@@ -159,7 +159,6 @@ public class MainAppFXMLController {
         {
             aboutUsStage aboutUs = new aboutUsStage();
 
-
         }));
 
 
@@ -171,11 +170,16 @@ public class MainAppFXMLController {
         int height = (int) canvasPane.getHeight();
 
         mainGraph.drawGraph(width, height, canvasPane);
+        mainGraph.drawLine(mainGraph.spacing, mainGraph.spacing, canvasPane);
+
+
+
         System.out.println(graphPane.getHeight());
         spinnerA.setValueFactory(spinnerAProperties);
         spinnerB.setValueFactory(spinnerBProperties);
         spinnerC.setValueFactory(spinnerCProperties);
         spinnerD.setValueFactory(spinnerDProperties);
+
 
     }
 
