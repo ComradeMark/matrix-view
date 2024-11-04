@@ -2,19 +2,10 @@ package edu.vanier.matrixView.animations;
 
 import edu.vanier.matrixView.math.Coordinate;
 import java.util.ArrayList;
-import javafx.application.Application;
+
 import javafx.scene.shape.Line;
-import javafx.stage.Stage;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.stage.Stage;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.canvas.*;
 import javafx.scene.paint.Color;
-import javafx.scene.Group;
 
 public class Graphs {
     //Todo see how we can update the coordinate system while the screen has a new dimension
@@ -25,15 +16,14 @@ public class Graphs {
     
     private ArrayList<Coordinate> coordinates = new ArrayList<>();
 
-    public Canvas getGraph(int width, int height){
-        Canvas canvas = new Canvas(width , height);
+    public void drawGraph(int width, int height, Canvas canvas){
 
         int[] origin = {width / 2 - 4, height /2 - 4};
         // graphics context
         GraphicsContext gc =
                 canvas.getGraphicsContext2D();
 
-        int spacing = 10;
+        int spacing = 20;
 
         int x = -1;
         int y = -1;
@@ -75,6 +65,10 @@ public class Graphs {
             gc.strokeLine(0, y_pos, canvas.getWidth(), y_pos);
         }
 
-        return canvas;
+    }
+
+    public Line drawLine() {
+        Line line = new Line();
+        return  line;
     }
 }

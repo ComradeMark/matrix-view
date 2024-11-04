@@ -37,10 +37,6 @@ public class MainApp extends Application {
             // Load the scene of the primary stage.
             MainAppFXMLController controller = new MainAppFXMLController();
             BorderPane root = (BorderPane)loadFXML(MAINAPP_LAYOUT, controller);
-            
-            Graphs graph = new Graphs();
-            controller.setCanvasPane(graph.getGraph(400, 400));
-            System.out.println(((Canvas)((Pane)root.getChildren().get(1)).getChildren().get(0)).getTranslateX());
             scene = new Scene(root, 640, 480);
             primaryStage.setScene(scene);
 
