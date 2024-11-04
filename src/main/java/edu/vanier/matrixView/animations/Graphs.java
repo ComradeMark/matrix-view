@@ -1,21 +1,11 @@
 package edu.vanier.matrixView.animations;
 
 import edu.vanier.matrixView.math.Coordinate;
-import edu.vanier.matrixView.math.Vector;
 import java.util.ArrayList;
-import javafx.application.Application;
+
 import javafx.scene.shape.Line;
-import javafx.stage.Stage;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.stage.Stage;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.canvas.*;
 import javafx.scene.paint.Color;
-import javafx.scene.Group;
 
 public class Graphs {
     //Todo see how we can update the coordinate system while the screen has a new dimension
@@ -24,28 +14,16 @@ public class Graphs {
 //    private int initialScreenWidth = 600;
 //    private int[] origin = {initialScreenWidth / 2 - 4, initialScreenHeight /2 - 4};
     
-    
-    private ArrayList<Coordinate> verticalAxis = new ArrayList<>();
-    private ArrayList<Coordinate> horizontalAxis = new ArrayList<>();
+    private ArrayList<Coordinate> coordinates = new ArrayList<>();
 
-    private Vector ihat;
-    private Vector jhat;
+    public void drawGraph(int width, int height, Canvas canvas){
 
-    public Graphs() {
-        ihat = new Vector(1, 0);
-        jhat = new Vector(0, 1);
-    }
- 
-    
-    public Canvas getGraph(int width, int height){
-        Canvas canvas = new Canvas(width , height);
-
-        int[] origin = {width / 2, height /2};
+        int[] origin = {width / 2 - 4, height /2 - 4};
         // graphics context
         GraphicsContext gc =
                 canvas.getGraphicsContext2D();
 
-        int spacing = 10;
+        int spacing = 20;
 
         int x = -1;
         int y = -1;
@@ -55,14 +33,8 @@ public class Graphs {
         // loop for creating points
         for (int i = 0; i < 100; i++) {
             for (int j = 0; j < 100; j++) {
-                if (Math.abs(origin[0] - x) <= spacing/2){
-                    gc.fillOval(x, y, w, h);
-                    verticalAxis.add(new Coordinate(x, y));
-                }
-                if (Math.abs(origin[1] - y) <= spacing/2){
-                    gc.fillOval(x, y, w, h);
-                    horizontalAxis.add(new Coordinate(x, y));
-                }
+                gc.fillOval(x, y, w, h);
+                coordinates.add(new Coordinate(x, y));
                 x += spacing;
 
             }
@@ -93,6 +65,10 @@ public class Graphs {
             gc.strokeLine(0, y_pos, canvas.getWidth(), y_pos);
         }
 
-        return canvas;
+    }
+
+    public Line drawLine() {
+        Line line = new Line();
+        return  line;
     }
 }
