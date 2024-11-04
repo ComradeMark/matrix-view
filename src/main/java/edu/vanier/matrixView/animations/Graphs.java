@@ -10,15 +10,15 @@ import javafx.scene.paint.Color;
 public class Graphs {
     //Todo see how we can update the coordinate system while the screen has a new dimension
 
-//    private int initialScreenHeight = 300;
-//    private int initialScreenWidth = 600;
-//    private int[] origin = {initialScreenWidth / 2 - 4, initialScreenHeight /2 - 4};
+    private int initialScreenHeight = 400;
+    private int initialScreenWidth = 400;
+    private int[] origin = {initialScreenWidth / 2, initialScreenHeight /2 };
     
     private ArrayList<Coordinate> coordinates = new ArrayList<>();
 
     public void drawGraph(int width, int height, Canvas canvas){
 
-        int[] origin = {width / 2 - 4, height /2 - 4};
+        int[] origin = {width / 2 , height /2 };
         // graphics context
         GraphicsContext gc =
                 canvas.getGraphicsContext2D();
@@ -63,12 +63,16 @@ public class Graphs {
                 continue;
             }
             gc.strokeLine(0, y_pos, canvas.getWidth(), y_pos);
+
         }
 
     }
 
-    public Line drawLine() {
+    public void drawLine(float xEnd, float yEnd,  Canvas canvas) {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
         Line line = new Line();
-        return  line;
+        line.strokeProperty().set(Color.RED);
+        line.setStrokeWidth(20);
+        gc.strokeLine(origin[0],origin[1], origin[0] + xEnd, origin[1]+ yEnd);
     }
 }
