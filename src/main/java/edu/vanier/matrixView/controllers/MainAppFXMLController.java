@@ -171,7 +171,8 @@ public class MainAppFXMLController {
         int height = (int) canvasPane.getHeight();
 
         mainGraph.drawGraph(width, height, canvasPane);
-        mainGraph.drawLine(10,10, canvasPane);
+        mainGraph.drawLine(mainGraph.spacing, mainGraph.spacing, canvasPane);
+
 
 
         System.out.println(graphPane.getHeight());
@@ -179,6 +180,7 @@ public class MainAppFXMLController {
         spinnerB.setValueFactory(spinnerBProperties);
         spinnerC.setValueFactory(spinnerCProperties);
         spinnerD.setValueFactory(spinnerDProperties);
+
 
     }
 

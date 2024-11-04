@@ -8,7 +8,10 @@ import javafx.scene.canvas.*;
 import javafx.scene.paint.Color;
 
 public class Graphs {
+
     //Todo see how we can update the coordinate system while the screen has a new dimension
+
+    public int spacing = 20;
 
     private int initialScreenHeight = 400;
     private int initialScreenWidth = 400;
@@ -23,7 +26,6 @@ public class Graphs {
         GraphicsContext gc =
                 canvas.getGraphicsContext2D();
 
-        int spacing = 20;
 
         int x = -1;
         int y = -1;
@@ -69,10 +71,16 @@ public class Graphs {
     }
 
     public void drawLine(float xEnd, float yEnd,  Canvas canvas) {
+
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        Line line = new Line();
-        line.strokeProperty().set(Color.RED);
-        line.setStrokeWidth(20);
+        gc.setStroke(Color.RED);
+        gc.setLineWidth(2.0);
+
         gc.strokeLine(origin[0],origin[1], origin[0] + xEnd, origin[1]+ yEnd);
+
+            gc.stroke();
+
+
+
     }
 }
