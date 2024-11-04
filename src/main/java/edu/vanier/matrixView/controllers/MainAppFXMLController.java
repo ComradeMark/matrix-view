@@ -170,7 +170,7 @@ public class MainAppFXMLController {
         int height = (int) canvasPane.getHeight();
 
         mainGraph.drawGraph(width, height, canvasPane);
-        mainGraph.drawLine(mainGraph.spacing, mainGraph.spacing, canvasPane);
+//        mainGraph.drawLine(mainGraph.spacing, mainGraph.spacing, canvasPane);
 
 
 

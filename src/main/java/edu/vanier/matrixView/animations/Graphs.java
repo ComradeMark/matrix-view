@@ -25,6 +25,9 @@ public class Graphs {
     
     
     private Coordinate origin = new Vector(0, 0);
+    
+    public int spacing = 20;
+
 
     private Vector ihat;
     private Vector jhat;
@@ -45,7 +48,6 @@ public class Graphs {
         GraphicsContext gc =
                 canvas.getGraphicsContext2D();
 
-        int spacing = 20;
 
         int x = 0;
         int y = 0;
@@ -73,7 +75,7 @@ public class Graphs {
                 x += spacing;
 
             }
-//            x = -1;
+            x = -1;
             y += spacing;
         }
         
