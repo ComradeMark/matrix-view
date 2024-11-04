@@ -159,7 +159,6 @@ public class MainAppFXMLController {
         {
             aboutUsStage aboutUs = new aboutUsStage();
 
-
         }));
 
 

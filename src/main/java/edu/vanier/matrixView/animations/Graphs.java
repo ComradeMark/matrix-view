@@ -13,6 +13,7 @@ public class Graphs {
     private int initialScreenHeight = 400;
     private int initialScreenWidth = 400;
     private int[] origin = {initialScreenWidth / 2, initialScreenHeight /2 };
+    GraphicsContext gc;
     
     private ArrayList<Coordinate> coordinates = new ArrayList<>();
 
@@ -20,8 +21,8 @@ public class Graphs {
 
         int[] origin = {width / 2 , height /2 };
         // graphics context
-        GraphicsContext gc =
-                canvas.getGraphicsContext2D();
+
+        gc = canvas.getGraphicsContext2D();
 
         int spacing = 20;
 
@@ -69,10 +70,8 @@ public class Graphs {
     }
 
     public void drawLine(float xEnd, float yEnd,  Canvas canvas) {
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        Line line = new Line();
-        line.strokeProperty().set(Color.RED);
-        line.setStrokeWidth(20);
+        gc = canvas.getGraphicsContext2D();
+        gc.setStroke(Color.RED);
         gc.strokeLine(origin[0],origin[1], origin[0] + xEnd, origin[1]+ yEnd);
     }
 }
