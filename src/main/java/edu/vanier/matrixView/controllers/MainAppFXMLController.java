@@ -11,6 +11,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -24,6 +25,72 @@ public class MainAppFXMLController {
 
     private final static Logger logger = LoggerFactory.getLogger(MainAppFXMLController.class);
 
+    @FXML
+    BorderPane mainPanel;
+
+    public BorderPane getMainPanel() {
+        return mainPanel;
+    }
+
+    public void setMainPanel(BorderPane mainPanel) {
+        this.mainPanel = mainPanel;
+    }
+
+    public SpinnerValueFactory<Integer> getSpinnerAProperties() {
+        return spinnerAProperties;
+    }
+
+    public void setSpinnerAProperties(SpinnerValueFactory<Integer> spinnerAProperties) {
+        this.spinnerAProperties = spinnerAProperties;
+    }
+
+    public SpinnerValueFactory<Integer> getSpinnerBProperties() {
+        return spinnerBProperties;
+    }
+
+    public void setSpinnerBProperties(SpinnerValueFactory<Integer> spinnerBProperties) {
+        this.spinnerBProperties = spinnerBProperties;
+    }
+
+    public SpinnerValueFactory<Integer> getSpinnerCProperties() {
+        return spinnerCProperties;
+    }
+
+    public void setSpinnerCProperties(SpinnerValueFactory<Integer> spinnerCProperties) {
+        this.spinnerCProperties = spinnerCProperties;
+    }
+
+    public SpinnerValueFactory<Integer> getSpinnerDProperties() {
+        return spinnerDProperties;
+    }
+
+    public void setSpinnerDProperties(SpinnerValueFactory<Integer> spinnerDProperties) {
+        this.spinnerDProperties = spinnerDProperties;
+    }
+
+    public Text getIntWarning() {
+        return intWarning;
+    }
+
+    public void setIntWarning(Text intWarning) {
+        this.intWarning = intWarning;
+    }
+
+    public Button getBtnAbout() {
+        return btnAbout;
+    }
+
+    public void setBtnAbout(Button btnAbout) {
+        this.btnAbout = btnAbout;
+    }
+
+    public Pane getGraphPane() {
+        return graphPane;
+    }
+
+    public void setGraphPane(Pane graphPane) {
+        this.graphPane = graphPane;
+    }
     @FXML
     TitledPane configPane;
     @FXML
@@ -187,6 +254,9 @@ public class MainAppFXMLController {
         spinnerC.setValueFactory(spinnerCProperties);
         spinnerD.setValueFactory(spinnerDProperties);
 
+        
+    
+        
         }
 
 

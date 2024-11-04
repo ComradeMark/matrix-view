@@ -36,7 +36,7 @@ public class Driver extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("MatrixView Home");
         primaryStage.show();
-
+           
 
 
     }

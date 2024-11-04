@@ -1,6 +1,7 @@
 package edu.vanier.matrixView.animations;
 
 import edu.vanier.matrixView.math.Coordinate;
+import edu.vanier.matrixView.math.Vector;
 import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.scene.shape.Line;
@@ -23,12 +24,23 @@ public class Graphs {
 //    private int initialScreenWidth = 600;
 //    private int[] origin = {initialScreenWidth / 2 - 4, initialScreenHeight /2 - 4};
     
-    private ArrayList<Coordinate> coordinates = new ArrayList<>();
+    
+    private ArrayList<Coordinate> verticalAxis = new ArrayList<>();
+    private ArrayList<Coordinate> horizontalAxis = new ArrayList<>();
 
+    private Vector ihat;
+    private Vector jhat;
+
+    public Graphs() {
+        ihat = new Vector(1, 0);
+        jhat = new Vector(0, 1);
+    }
+ 
+    
     public Canvas getGraph(int width, int height){
         Canvas canvas = new Canvas(width , height);
 
-        int[] origin = {width / 2 - 4, height /2 - 4};
+        int[] origin = {width / 2, height /2};
         // graphics context
         GraphicsContext gc =
                 canvas.getGraphicsContext2D();
@@ -43,8 +55,14 @@ public class Graphs {
         // loop for creating points
         for (int i = 0; i < 100; i++) {
             for (int j = 0; j < 100; j++) {
-                gc.fillOval(x, y, w, h);
-                coordinates.add(new Coordinate(x, y));
+                if (Math.abs(origin[0] - x) <= spacing/2){
+                    gc.fillOval(x, y, w, h);
+                    verticalAxis.add(new Coordinate(x, y));
+                }
+                if (Math.abs(origin[1] - y) <= spacing/2){
+                    gc.fillOval(x, y, w, h);
+                    horizontalAxis.add(new Coordinate(x, y));
+                }
                 x += spacing;
 
             }
