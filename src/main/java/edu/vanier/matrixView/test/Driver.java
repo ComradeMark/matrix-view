@@ -32,7 +32,7 @@ public class Driver extends Application {
         FXMLLoader loader = new FXMLLoader(Driver.class.getResource("/fxml/MainAppMinimalViablePage.fxml"));
         loader.setController(new MainAppFXMLController());
         Parent root = (Parent) loader.load();
-        Scene scene = new Scene(root, 700, 700);
+        Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle("MatrixView Home");
         primaryStage.show();

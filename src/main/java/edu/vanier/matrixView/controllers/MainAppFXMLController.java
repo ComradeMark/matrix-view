@@ -175,7 +175,13 @@ public class MainAppFXMLController {
 
         // All graph insertion code
         Graphs mainGraph = new Graphs();
-        graphPane.getChildren().add(mainGraph.getGraph(499, 700));
+//        canvasPane = mainGraph.getGraph(400, 400);
+
+        int width = (int)canvasPane.getWidth();
+        int height = (int)canvasPane.getHeight();
+
+        graphPane.getChildren().set(0, mainGraph.getGraph(width, height));
+        System.out.println(graphPane.getHeight());
         spinnerA.setValueFactory(spinnerAProperties);
         spinnerB.setValueFactory(spinnerBProperties);
         spinnerC.setValueFactory(spinnerCProperties);
