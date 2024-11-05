@@ -28,14 +28,13 @@ public class Graphs {
     
     public int spacing = 20;
 
-
     private Vector ihat;
     private Vector jhat;
     private Matrix tfm;
 
     public Graphs() {
-        ihat = new Vector(0,-1);
-        jhat = new Vector(-1,0);
+        ihat = new Vector(2, 6);
+        jhat = new Vector(0.25, 1);
         tfm = new Matrix(ihat.getX(), ihat.getY(), jhat.getX(), jhat.getY());
 ;    }
     
@@ -49,87 +48,64 @@ public class Graphs {
                 canvas.getGraphicsContext2D();
 
 
-        int x = 0;
-        int y = 0;
+//        int x = 0;
+//        int y = 0;
         int w = 2;
         int h = 2;
+
+        int numAxisPts = 40;
         gc.setFill(Color.BLACK);
         // loop for creating points
-        for (int i = 0; i < 100; i++) {
-            for (int j = 0; j < 100; j++) {
-                if (Math.abs(offsets[0] - x) <= spacing/2 && Math.abs(offsets[1] - y) <= spacing/2){
-                    // skip the origin point
-                    gc.fillOval(x, y, w, h);
-
-                    x += spacing;
-                    continue;
-                }
-                else if (Math.abs(offsets[0] - x) <= spacing/2){
-                    gc.fillOval(x, y, w, h);
-                    yCoords.add(new Coordinate(x - offsets[0], y - offsets[1]));
-                }   
-                else if (Math.abs(offsets[1] - y) <= spacing/2){
-                    gc.fillOval(x, y, w, h);
-                    xCoords.add(new Coordinate(x - offsets[0], y - offsets[1]));
-                }
-                x += spacing;
-
-            }
-            x = -1;
-            y += spacing;
+        for (int i = -numAxisPts/2; i < numAxisPts/2 + 1; i++) {
+            if(i == 0){continue;}
+//            gc.fillOval(i * spacing + offsets[0], offsets[1], w, h);
+            xCoords.add(new Coordinate(i * spacing , 0));
         }
+        for (int j = -numAxisPts/2; j < numAxisPts/2 + 1; j++) {
+            if(j == 0){continue;}
+//            gc.fillOval(offsets[0], j * spacing + offsets[1], w, h);
+            yCoords.add(new Coordinate(0, j * spacing));
+
+        }
+
         
-        gc.setStroke(Color.LIGHTGRAY);
-        gc.setLineWidth(5);
         double lineLen = 800;
-        // Drawn main axes
-        gc.setStroke(Color.BLACK);
-        
-        gc.strokeLine(offsets[0]- lineLen *ihat.getX(), offsets[1] + lineLen * ihat.getY(), offsets[0] + lineLen *ihat.getX(), offsets[1] - lineLen * ihat.getY());
-        gc.strokeLine(offsets[0]- lineLen *jhat.getX(), offsets[1] + lineLen * jhat.getY(), offsets[0] + lineLen *jhat.getX(), offsets[1] - lineLen * jhat.getY());
-
-        System.out.println(origin);
-
-        System.out.println(yCoords);
-        System.out.println(xCoords);
-        
         ArrayList<Coordinate> tfmXCoords = Calculator.matrixMultiply(tfm, xCoords);
         ArrayList<Coordinate> tfmYCoords = Calculator.matrixMultiply(tfm, yCoords);
+        
+        System.out.println(xCoords);
+        System.out.println(tfmXCoords);
+        System.out.println(yCoords);
+        System.out.println(tfmYCoords);
+        
         gc.setLineWidth(2);
         gc.setStroke(Color.LIGHTGRAY);
         for (Coordinate coordinate: tfmXCoords){   
-            gc.strokeLine(coordinate.getX()- lineLen *jhat.getX(), coordinate.getY() + lineLen * jhat.getY(), coordinate.getX() + lineLen *jhat.getX(), coordinate.getX() - lineLen * jhat.getY());
+            gc.strokeLine(coordinate.getX() + offsets[0] - lineLen * jhat.getX(), 
+                    coordinate.getY() + offsets[1] + lineLen * jhat.getY(),
+                    coordinate.getX() + offsets[0] + lineLen * jhat.getX(), 
+                    coordinate.getX() + offsets[1] - lineLen * jhat.getY());
 
         }
-        for (Coordinate coordinate: tfmYCoords){
-            
-            gc.strokeLine(coordinate.getX()- lineLen *ihat.getX(), coordinate.getY() + lineLen * ihat.getY(), coordinate.getX() + lineLen *ihat.getX(), coordinate.getX() - lineLen * ihat.getY());
 
+        for (Coordinate coordinate: tfmYCoords){   
+            gc.strokeLine(coordinate.getX() + offsets[0] - lineLen * ihat.getX(), 
+                    coordinate.getY() + offsets[1] + lineLen * ihat.getY(),
+                    coordinate.getX() + offsets[0] + lineLen * ihat.getX(), 
+                    coordinate.getY() + offsets[1] - lineLen * ihat.getY());
         }
         
-        System.out.println(Arrays.toString(offsets));
-        System.out.println(offsets[0] + " " + offsets[1] + " " + (offsets[0] + ihat.getX()) + " " + (offsets[1] - ihat.getY()));
-        // adds vertical lines
-//        for (int x_pos = 0; x_pos < canvas.getWidth(); x_pos += spacing) {
-//            if (Math.abs(origin[0] - x_pos) <= spacing/2){
-//                gc.setStroke(Color.BLACK);
-//                gc.strokeLine(x_pos, 0, x_pos, canvas.getHeight());
-//                gc.setStroke(Color.LIGHTGRAY);
-//                continue;
-//            }
-//            gc.strokeLine(x_pos, 0, x_pos, canvas.getHeight());
-//        }
-//        // adds horizontal lines
-//        for (int y_pos = 0; y_pos < canvas.getHeight(); y_pos += spacing) {
-//            if (Math.abs(origin[1] - y_pos) <= spacing/2){
-//                gc.setStroke(Color.BLACK);
-//                gc.strokeLine(0, y_pos, canvas.getWidth(), y_pos);
-//                gc.setStroke(Color.LIGHTGRAY);
-//                continue;
-//            }
-//            gc.strokeLine(0, y_pos, canvas.getWidth(), y_pos);
-//        }
-
+        // Drawn main axes
+        gc.setStroke(Color.BLACK);
+        
+        gc.strokeLine(offsets[0]- lineLen *ihat.getX(), 
+                offsets[1] + lineLen * ihat.getY(), 
+                offsets[0] + lineLen *ihat.getX(), 
+                offsets[1] - lineLen * ihat.getY());
+        gc.strokeLine(offsets[0]- lineLen *jhat.getX(), 
+                offsets[1] + lineLen * jhat.getY(), 
+                offsets[0] + lineLen *jhat.getX(), 
+                offsets[1] - lineLen * jhat.getY());
     }
     public Line drawLine() {
         Line line = new Line();

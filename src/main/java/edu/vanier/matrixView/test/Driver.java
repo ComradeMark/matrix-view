@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import javafx.animation.Timeline;
 
 public class Driver extends Application {
     public static void main(String[] args) {
@@ -36,8 +37,13 @@ public class Driver extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("MatrixView Home");
         primaryStage.show();
-           
-
-
+        
+        Act
+        Timeline tl = new Timeline();
+       
+    }
+    
+    public void updateCanvas(){
+        
     }
 }

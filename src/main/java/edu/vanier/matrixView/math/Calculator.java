@@ -25,7 +25,7 @@ import jdk.jshell.spi.ExecutionControl;
             }
             outs.add(new Coordinate(
                     a * x + b * y,
-                    c * x + b * y
+                    c * x + d * y
             ));
         }
 
