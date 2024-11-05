@@ -2,24 +2,32 @@ package edu.vanier.matrixView.controllers;
 
 import edu.vanier.matrixView.UI.aboutUsStage;
 import edu.vanier.matrixView.animations.Graphs;
+import edu.vanier.matrixView.math.Matrix;
 import javafx.animation.PauseTransition;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.text.ParseException;
+
 /**
  * FXML controller for controlling the main window.
  */
 public class MainAppFXMLController {
+    GraphicsContext ugraph;
+    Graphs userGraph;
+    Graphs mainGraph;
 
     private final static Logger logger = LoggerFactory.getLogger(MainAppFXMLController.class);
 
@@ -28,21 +36,21 @@ public class MainAppFXMLController {
     @FXML
     Spinner spinnerA = new Spinner(-1000, 1000, 0);
     ;
-    SpinnerValueFactory<Integer> spinnerAProperties = new SpinnerValueFactory.IntegerSpinnerValueFactory(Integer.MIN_VALUE, Integer.MAX_VALUE, 0);
+    SpinnerValueFactory<Double> spinnerAProperties = new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE, Double.MAX_VALUE, 0.0);
 
     @FXML
     Spinner spinnerB = new Spinner(Integer.MIN_VALUE, Integer.MAX_VALUE, 0);
-    SpinnerValueFactory<Integer> spinnerBProperties = new SpinnerValueFactory.IntegerSpinnerValueFactory(Integer.MIN_VALUE, Integer.MAX_VALUE, 0);
+    SpinnerValueFactory<Double> spinnerBProperties = new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE, Double.MAX_VALUE, 0.0);
 
 
     @FXML
     Spinner spinnerC = new Spinner<Integer>(Integer.MIN_VALUE, Integer.MAX_VALUE, 0);
-    SpinnerValueFactory<Integer> spinnerCProperties = new SpinnerValueFactory.IntegerSpinnerValueFactory(Integer.MIN_VALUE, Integer.MAX_VALUE, 0);
+    SpinnerValueFactory<Double> spinnerCProperties = new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE, Double.MAX_VALUE, 0.0);
 
 
     @FXML
     Spinner spinnerD = new Spinner<Integer>(Integer.MIN_VALUE, Integer.MAX_VALUE, 0);
-    SpinnerValueFactory<Integer> spinnerDProperties = new SpinnerValueFactory.IntegerSpinnerValueFactory(Integer.MIN_VALUE, Integer.MAX_VALUE, 0);
+    SpinnerValueFactory<Double> spinnerDProperties = new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE, Double.MAX_VALUE, 0.0);
 
 
     @FXML
@@ -99,11 +107,29 @@ public class MainAppFXMLController {
             @Override
             public void handle(KeyEvent event) {
 
+                if (
+                        spinnerA.getValue().toString().matches("[a-zA-Z]") ||
+                                spinnerB.getValue().toString().matches("[a-zA-Z]") ||
+                                spinnerC.getValue().toString().matches("[a-zA-Z]") ||
+                                spinnerD.getValue().toString().matches("[a-zA-Z]")
+                ) {
+
+
+
+                    // reset editor to INITAL_VALUE
+                    spinnerA.getEditor().textProperty().set(INITAL_VALUE);
+                    spinnerB.getEditor().textProperty().set(INITAL_VALUE);
+                    spinnerC.getEditor().textProperty().set(INITAL_VALUE);
+                    spinnerD.getEditor().textProperty().set(INITAL_VALUE);
+                    intWarning.setVisible(true);
+
+                }
+
                 // handle users "enter key event"
                 if (event.getCode() == KeyCode.ENTER) {
 
                     try {
-                        Integer.parseInt(spinnerA.getPromptText());
+                        Double.parseDouble(spinnerA.getPromptText());
                     } catch (NumberFormatException e) {
                         intWarning.setVisible(true);
                         PauseTransition intError = new PauseTransition(
@@ -126,22 +152,21 @@ public class MainAppFXMLController {
             }
         };
 
-
-        spinnerA.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(Integer.MIN_VALUE, Integer.MAX_VALUE,
-                Integer.parseInt(INITAL_VALUE)));
+        spinnerA.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE, Double.MAX_VALUE,
+                Double.parseDouble(INITAL_VALUE)));
         spinnerA.setEditable(true);
         spinnerA.getEditor().addEventHandler(KeyEvent.KEY_PRESSED, enterKeyEventHandler);
 
-        spinnerB.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(Integer.MIN_VALUE, Integer.MAX_VALUE,
-                Integer.parseInt(INITAL_VALUE)));
+        spinnerB.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE, Double.MAX_VALUE,
+                Double.parseDouble(INITAL_VALUE)));
         spinnerB.setEditable(true);
         spinnerB.getEditor().addEventHandler(KeyEvent.KEY_PRESSED, enterKeyEventHandler);
-        spinnerC.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(Integer.MIN_VALUE, Integer.MAX_VALUE,
-                Integer.parseInt(INITAL_VALUE)));
+        spinnerC.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE, Double.MAX_VALUE,
+                Double.parseDouble(INITAL_VALUE)));
         spinnerC.setEditable(true);
         spinnerC.getEditor().addEventHandler(KeyEvent.KEY_PRESSED, enterKeyEventHandler);
-        spinnerD.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(Integer.MIN_VALUE, Integer.MAX_VALUE,
-                Integer.parseInt(INITAL_VALUE)));
+        spinnerD.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE, Double.MAX_VALUE,
+                Double.parseDouble(INITAL_VALUE)));
         spinnerD.setEditable(true);
         spinnerD.getEditor().addEventHandler(KeyEvent.KEY_PRESSED, enterKeyEventHandler);
 
@@ -160,17 +185,11 @@ public class MainAppFXMLController {
             aboutUsStage aboutUs = new aboutUsStage();
 
         }));
-
-
-        // All graph insertion code
-        Graphs mainGraph = new Graphs();
-//        canvasPane = mainGraph.getGraph(400, 400);
-
         int width = (int) canvasPane.getWidth();
         int height = (int) canvasPane.getHeight();
-
-        mainGraph.drawGraph(width, height, canvasPane);
+       drawDefaultSpace(width, height);
 //        mainGraph.drawLine(mainGraph.spacing, mainGraph.spacing, canvasPane);
+
 
 
 
@@ -181,8 +200,46 @@ public class MainAppFXMLController {
         spinnerD.setValueFactory(spinnerDProperties);
 
 
+
+//      Generates desired graph using matrix input
+        btnGenerate.setOnAction(event -> {
+            Matrix userMatrix;
+            //ugraph.clearRect(0, 0, ugraph.getCanvas().getWidth(), ugraph.getCanvas().getHeight());
+
+
+            double a = (double) spinnerA.getValue();
+            double b = (double) spinnerB.getValue();
+            double c = (double) spinnerC.getValue();
+            double d = (double) spinnerD.getValue();
+
+            userMatrix = new Matrix(a, b, c, d);
+            userGraph = new Graphs(userMatrix);
+            ugraph = userGraph.drawGraph(width, height, canvasPane, Color.RED, Color.LIGHTSLATEGREY);
+
+
+
+
+        });
+        //      Handles reset button behaviour
+        btnReset.setOnAction(event -> {
+        userGraph.removeGraph(ugraph);
+        drawDefaultSpace((int) ugraph.getCanvas().getWidth(), (int) ugraph.getCanvas().getHeight());
+
+        });
+
     }
 
+//      Draws default euclidean space
+    void drawDefaultSpace(int width, int height){
+        Matrix simpleBasis = new Matrix(1, 0, 0, 1);
+        // All graph insertion code
+        Graphs mainGraph = new Graphs(simpleBasis);
+//        canvasPane = mainGraph.getGraph(400, 400);
+
+
+
+        mainGraph.drawGraph(width, height, canvasPane, Color.BLACK, Color.LIGHTGRAY);
+    }
 
     private void handleClickMe(Event e) {
 

@@ -38,9 +38,8 @@ public class Driver extends Application {
         primaryStage.setTitle("MatrixView Home");
         primaryStage.show();
         
-        Act
-        Timeline tl = new Timeline();
-       
+
+
     }
     
     public void updateCanvas(){

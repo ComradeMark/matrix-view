@@ -48,7 +48,7 @@
                                     <Spinner fx:id="spinnerD" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                  </children>
                               </GridPane>
-                              <Text fx:id="intWarning" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Only integers allowed" />
+                              <Text fx:id="intWarning" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Only doubles allowed" />
                            </children>
                         </VBox>
                      </children>

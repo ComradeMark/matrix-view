@@ -32,14 +32,20 @@ public class Graphs {
     private Vector jhat;
     private Matrix tfm;
 
-    public Graphs() {
-        ihat = new Vector(2, 6);
-        jhat = new Vector(0.25, 1);
+    public Graphs(Matrix userMatrix) {
+        ihat = new Vector(userMatrix.getA(), userMatrix.getB());
+        jhat = new Vector(userMatrix.getC(), userMatrix.getD());
         tfm = new Matrix(ihat.getX(), ihat.getY(), jhat.getX(), jhat.getY());
 ;    }
+
+//Removed all user graphs from pane. Used in reset method.
+    public void removeGraph(GraphicsContext gc){
+        gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
+    }
+
     
     
-    public void drawGraph(int width, int height, Canvas canvas){
+    public GraphicsContext drawGraph(int width, int height, Canvas canvas, Color graphColor, Color secondaryColor){
 
         int[] offsets = {width / 2, height /2};
      
@@ -68,6 +74,7 @@ public class Graphs {
 
         }
 
+
         
         double lineLen = 800;
         ArrayList<Coordinate> tfmXCoords = Calculator.matrixMultiply(tfm, xCoords);
@@ -79,7 +86,7 @@ public class Graphs {
         System.out.println(tfmYCoords);
         
         gc.setLineWidth(2);
-        gc.setStroke(Color.LIGHTGRAY);
+        gc.setStroke(secondaryColor);
         for (Coordinate coordinate: tfmXCoords){   
             gc.strokeLine(coordinate.getX() + offsets[0] - lineLen * jhat.getX(), 
                     coordinate.getY() + offsets[1] + lineLen * jhat.getY(),
@@ -96,7 +103,7 @@ public class Graphs {
         }
         
         // Drawn main axes
-        gc.setStroke(Color.BLACK);
+        gc.setStroke(graphColor);
         
         gc.strokeLine(offsets[0]- lineLen *ihat.getX(), 
                 offsets[1] + lineLen * ihat.getY(), 
@@ -106,6 +113,8 @@ public class Graphs {
                 offsets[1] + lineLen * jhat.getY(), 
                 offsets[0] + lineLen *jhat.getX(), 
                 offsets[1] - lineLen * jhat.getY());
+    return gc;
+
     }
     public Line drawLine() {
         Line line = new Line();
