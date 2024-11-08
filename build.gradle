@@ -17,7 +17,7 @@ repositories {
 //-- Loads the JavaFX modules of the selected JavaFX version.
 javafx {    
     version = "$javafxVersion"
-    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.media' ]
+    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.media', 'javafx.swing']
 }
 
 dependencies {
