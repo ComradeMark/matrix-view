@@ -23,7 +23,7 @@ public class DataExport {
      * image. This canvas is rendered to an image and saved to the user's
      * selected file location.
      */
-    public void exportCanvasToPng(Stage ownerStage, Canvas canvas) {
+    public static void exportCanvasToPng(Stage ownerStage, Canvas canvas) {
         // Open the file chooser and get the selected file path
         File selectedFile = openFileChooser(ownerStage);
 
@@ -60,7 +60,7 @@ public class DataExport {
      * @return The selected file, or {@code null} if the user cancels the file
      * selection.
      */
-    private File openFileChooser(Stage ownerStage) {
+    private static File openFileChooser(Stage ownerStage) {
         FileChooser fileChooser = new FileChooser();
         // Add file filters (optional)
         FileChooser.ExtensionFilter textFilter = new FileChooser.ExtensionFilter("Text Files", "*.txt");

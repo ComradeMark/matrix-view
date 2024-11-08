@@ -2,6 +2,7 @@ package edu.vanier.matrixView.controllers;
 
 import edu.vanier.matrixView.UI.aboutUsStage;
 import edu.vanier.matrixView.animations.Graphs;
+import edu.vanier.matrixView.export.DataExport;
 import edu.vanier.matrixView.math.Matrix;
 import javafx.animation.PauseTransition;
 import javafx.event.Event;
@@ -31,6 +32,8 @@ public class MainAppFXMLController {
 
     private final static Logger logger = LoggerFactory.getLogger(MainAppFXMLController.class);
 
+    @FXML
+    Button exportButton;
     @FXML
     TitledPane configPane;
     @FXML
@@ -225,6 +228,11 @@ public class MainAppFXMLController {
         userGraph.removeGraph(ugraph);
         drawDefaultSpace((int) ugraph.getCanvas().getWidth(), (int) ugraph.getCanvas().getHeight());
 
+        });
+        // handles export button behaviour
+        exportButton.setOnAction(event -> {
+            // DataExport.exportCanvasToPng(, canvasPane);
+            // Todo: i dont know which stage we need to pass
         });
 
     }

@@ -12,8 +12,6 @@ import java.io.IOException;
 
 public class aboutUsStage extends Stage {
 
-
-
     public aboutUsStage(){
         initComponents();
         initModality(Modality.APPLICATION_MODAL);
