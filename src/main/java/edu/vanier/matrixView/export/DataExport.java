@@ -1,11 +1,9 @@
 package edu.vanier.matrixView.export;
 import edu.vanier.matrixView.math.Matrix;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.WritableImage;
-import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
@@ -31,6 +29,8 @@ public class DataExport {
      */
     public static void exportCanvasToPng(Stage ownerStage, Canvas canvas, Matrix matrix) {
         // Open the file chooser and get the selected file path
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+
         String text = String.valueOf(matrix);
         File selectedFile = openFileChooser(ownerStage, text);
 
@@ -38,7 +38,6 @@ public class DataExport {
             // Create a WritableImage with the same dimensions as the canvas
             WritableImage writableImage = new WritableImage((int) canvas.getWidth(), (int) canvas.getHeight());
 
-            GraphicsContext gc = canvas.getGraphicsContext2D();
             gc.drawImage(writableImage, 0, 0);
             double det = Calculator.determinant(matrix);
             Matrix adj = Calculator.adjugate(matrix);
@@ -47,18 +46,14 @@ public class DataExport {
             gc.strokeText(String.valueOf(det), 200,200);
             gc.strokeText(String.valueOf(inv), 300,300);
             gc.strokeText(String.valueOf(adj), 400,400);
-
             // Capture the content of the canvas into the WritableImage
             canvas.snapshot(null, writableImage);
-            gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 
             // Convert the WritableImage to a BufferedImage
             BufferedImage bufferedImage = SwingFXUtils.fromFXImage(writableImage, null);
 
-            // Save the BufferedImage to the file (PNG format)
             try {
                 ImageIO.write(bufferedImage, "PNG", selectedFile);
-                System.out.println("Image saved to: " + selectedFile.getAbsolutePath());
             } catch (IOException e) {
                 e.printStackTrace();
             }
