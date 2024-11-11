@@ -76,7 +76,7 @@ public class Graphs {
 
 
         
-        double lineLen = 800;
+        double lineLen = 10000;
         ArrayList<Coordinate> tfmXCoords = Calculator.matrixMultiply(tfm, xCoords);
         ArrayList<Coordinate> tfmYCoords = Calculator.matrixMultiply(tfm, yCoords);
         
