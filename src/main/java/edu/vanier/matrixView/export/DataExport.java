@@ -1,9 +1,11 @@
 package edu.vanier.matrixView.export;
+import edu.vanier.matrixView.animations.Graphs;
 import edu.vanier.matrixView.math.Matrix;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.WritableImage;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
@@ -29,8 +31,9 @@ public class DataExport {
      */
     public static void exportCanvasToPng(Stage ownerStage, Canvas canvas, Matrix matrix) {
         // Open the file chooser and get the selected file path
+        int width = (int) Math.ceil(canvas.getWidth());
+        int height = (int) Math.ceil(canvas.getWidth());
         GraphicsContext gc = canvas.getGraphicsContext2D();
-
         String text = String.valueOf(matrix);
         File selectedFile = openFileChooser(ownerStage, text);
 
@@ -51,6 +54,11 @@ public class DataExport {
 
             // Convert the WritableImage to a BufferedImage
             BufferedImage bufferedImage = SwingFXUtils.fromFXImage(writableImage, null);
+            gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
+            Graphs graphs = new Graphs(matrix);
+            graphs.drawGraph(width, height, canvas, Color.BLACK, Color.GRAY);
+            // Todo: there is a problem of color matching when it comes to lines
+            graphs.drawDefaultSpace(width, height, canvas);
 
             try {
                 ImageIO.write(bufferedImage, "PNG", selectedFile);
