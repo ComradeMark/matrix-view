@@ -19,18 +19,20 @@ public class Graphs {
 //    private int[] origin = {initialScreenWidth / 2 - 4, initialScreenHeight /2 - 4};
     
     
-    
+    // Axis grid points
     private ArrayList<Coordinate> xCoords = new ArrayList<>();
     private ArrayList<Coordinate> yCoords = new ArrayList<>();
     
-    
-    private Coordinate origin = new Vector(0, 0);
+    private Coordinate origin = new Coordinate(0, 0);
     
     public int spacing = 20;
 
     private Vector ihat;
     private Vector jhat;
     private Matrix tfm;
+    
+    private double coordW = 10;
+    private double coordH = 10;
 
     public Graphs(Matrix userMatrix) {
         ihat = new Vector(userMatrix.getA(), userMatrix.getB());
@@ -53,12 +55,6 @@ public class Graphs {
         GraphicsContext gc =
                 canvas.getGraphicsContext2D();
 
-
-//        int x = 0;
-//        int y = 0;
-        int w = 2;
-        int h = 2;
-
         int numAxisPts = 40;
         gc.setFill(Color.BLACK);
         // loop for creating points
@@ -73,7 +69,6 @@ public class Graphs {
             yCoords.add(new Coordinate(0, j * spacing));
 
         }
-
 
         
         double lineLen = 10000;
@@ -113,12 +108,27 @@ public class Graphs {
                 offsets[1] + lineLen * jhat.getY(), 
                 offsets[0] + lineLen *jhat.getX(), 
                 offsets[1] - lineLen * jhat.getY());
-    return gc;
+        
+        return gc;
 
     }
-    public Line drawLine() {
-        Line line = new Line();
-        return  line;
+    
+    public void drawShit(ArrayList<Coordinate> initShit, Canvas canvas){
+        double[] offsets = {canvas.getWidth() / 2, canvas.getHeight() /2};
+        GraphicsContext gc =
+                canvas.getGraphicsContext2D();
+        
+        gc.setStroke(Color.BLUE);
+        ArrayList<Coordinate> tfmShit = Calculator.matrixMultiply(tfm, initShit);
+
+        for (Coordinate shit: tfmShit){
+            if (shit.getClass() == Vector.class){
+                gc.strokeLine(offsets[0], offsets[1] , shit.getX() + offsets[0], shit.getY() - offsets[1]);
+                continue;
+            }
+            gc.fillOval(shit.getX() + offsets[0] + coordW/2, shit.getY() + offsets[1] + coordH/2, coordW, coordH);
+
+        }
     }
 
     public void drawDefaultSpace(int width, int height, Canvas canvasPane){

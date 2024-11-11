@@ -3,7 +3,9 @@ package edu.vanier.matrixView.controllers;
 import edu.vanier.matrixView.UI.aboutUsStage;
 import edu.vanier.matrixView.animations.Graphs;
 import edu.vanier.matrixView.export.DataExport;
+import edu.vanier.matrixView.math.Coordinate;
 import edu.vanier.matrixView.math.Matrix;
+import edu.vanier.matrixView.math.Vector;
 import javafx.animation.PauseTransition;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -22,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 
 /**
  * FXML controller for controlling the main window.
@@ -221,10 +224,13 @@ public class MainAppFXMLController {
             userMatrix = new Matrix(a, b, c, d);
             userGraph = new Graphs(userMatrix);
             ugraph = userGraph.drawGraph(width, height, canvasPane, Color.RED, Color.LIGHTSLATEGREY);
-
-
-
-
+            
+            Vector v = new Vector(1 * userGraph.spacing, 1 * userGraph.spacing);
+            Coordinate coord = new Coordinate(-20, -20);
+            ArrayList<Coordinate> initShit = new ArrayList<>();
+            initShit.add(v);
+            initShit.add(coord);
+            userGraph.drawShit(initShit, canvasPane);
         });
         //      Handles reset button behaviour
         btnReset.setOnAction(event -> {
