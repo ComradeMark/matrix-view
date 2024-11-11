@@ -236,20 +236,16 @@ public class MainAppFXMLController {
         // handles export button behaviour
         exportButton.setOnAction(event -> {
             DataExport.exportCanvasToPng(stage, canvasPane, userMatrix);
-
-            // Todo: i dont know which stage we need to pass
         });
 
     }
 
 //      Draws default euclidean space
-    void drawDefaultSpace(int width, int height){
+    public void drawDefaultSpace(int width, int height){
         Matrix simpleBasis = new Matrix(1, 0, 0, 1);
         // All graph insertion code
         Graphs mainGraph = new Graphs(simpleBasis);
 //        canvasPane = mainGraph.getGraph(400, 400);
-
-
 
         mainGraph.drawGraph(width, height, canvasPane, Color.BLACK, Color.LIGHTGRAY);
     }
