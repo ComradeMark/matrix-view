@@ -236,7 +236,6 @@ public class MainAppFXMLController {
         btnReset.setOnAction(event -> {
         userGraph.removeGraph(ugraph);
         drawDefaultSpace((int) ugraph.getCanvas().getWidth(), (int) ugraph.getCanvas().getHeight());
-
         });
         // handles export button behaviour
         exportButton.setOnAction(event -> {
