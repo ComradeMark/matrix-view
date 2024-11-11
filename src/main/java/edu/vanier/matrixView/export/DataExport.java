@@ -1,13 +1,19 @@
 package edu.vanier.matrixView.export;
+import edu.vanier.matrixView.math.Matrix;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.WritableImage;
+import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import edu.vanier.matrixView.math.Calculator;
+
 
 public class DataExport {
 
@@ -23,16 +29,28 @@ public class DataExport {
      * image. This canvas is rendered to an image and saved to the user's
      * selected file location.
      */
-    public static void exportCanvasToPng(Stage ownerStage, Canvas canvas) {
+    public static void exportCanvasToPng(Stage ownerStage, Canvas canvas, Matrix matrix) {
         // Open the file chooser and get the selected file path
-        File selectedFile = openFileChooser(ownerStage);
+        String text = String.valueOf(matrix);
+        File selectedFile = openFileChooser(ownerStage, text);
 
         if (selectedFile != null) {
             // Create a WritableImage with the same dimensions as the canvas
             WritableImage writableImage = new WritableImage((int) canvas.getWidth(), (int) canvas.getHeight());
 
+            GraphicsContext gc = canvas.getGraphicsContext2D();
+            gc.drawImage(writableImage, 0, 0);
+            double det = Calculator.determinant(matrix);
+            Matrix adj = Calculator.adjugate(matrix);
+            Matrix inv = Calculator.adjugate(matrix);
+            gc.strokeText(String.valueOf(matrix), 100,100);
+            gc.strokeText(String.valueOf(det), 200,200);
+            gc.strokeText(String.valueOf(inv), 300,300);
+            gc.strokeText(String.valueOf(adj), 400,400);
+
             // Capture the content of the canvas into the WritableImage
             canvas.snapshot(null, writableImage);
+            gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 
             // Convert the WritableImage to a BufferedImage
             BufferedImage bufferedImage = SwingFXUtils.fromFXImage(writableImage, null);
@@ -60,13 +78,13 @@ public class DataExport {
      * @return The selected file, or {@code null} if the user cancels the file
      * selection.
      */
-    private static File openFileChooser(Stage ownerStage) {
+    private static File openFileChooser(Stage ownerStage, String text) {
         FileChooser fileChooser = new FileChooser();
         // Add file filters (optional)
         FileChooser.ExtensionFilter textFilter = new FileChooser.ExtensionFilter("Text Files", "*.txt");
         FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif");
         fileChooser.getExtensionFilters().addAll(imageFilter, textFilter);
-        fileChooser.setInitialFileName("canvasDrawing.png");  // Default file name
+        fileChooser.setInitialFileName(text);  // Default file name
 
         // Set the initial directory of the FileChooser to the user's Desktop
         File desktopDirectory = new File(System.getProperty("user.home"), "Desktop");
@@ -80,4 +98,5 @@ public class DataExport {
         // Show the file chooser and get the selected file
         return fileChooser.showSaveDialog(ownerStage);
     }
+
 }

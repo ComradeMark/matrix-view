@@ -29,7 +29,6 @@ import java.text.ParseException;
 public class MainAppFXMLController {
     GraphicsContext ugraph;
     Graphs userGraph;
-    Graphs mainGraph;
 
     private final static Logger logger = LoggerFactory.getLogger(MainAppFXMLController.class);
 
@@ -46,16 +45,13 @@ public class MainAppFXMLController {
     Spinner spinnerB = new Spinner(Integer.MIN_VALUE, Integer.MAX_VALUE, 0);
     SpinnerValueFactory<Double> spinnerBProperties = new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE, Double.MAX_VALUE, 0.0);
 
-
     @FXML
     Spinner spinnerC = new Spinner<Integer>(Integer.MIN_VALUE, Integer.MAX_VALUE, 0);
     SpinnerValueFactory<Double> spinnerCProperties = new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE, Double.MAX_VALUE, 0.0);
 
-
     @FXML
     Spinner spinnerD = new Spinner<Integer>(Integer.MIN_VALUE, Integer.MAX_VALUE, 0);
     SpinnerValueFactory<Double> spinnerDProperties = new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE, Double.MAX_VALUE, 1.0);
-
 
 
     @FXML
@@ -99,6 +95,7 @@ public class MainAppFXMLController {
     protected static final String INITAL_VALUE = "0";
 
     Stage stage;
+    Matrix userMatrix;
 
     @FXML
     public void initialize() {
@@ -213,7 +210,6 @@ public class MainAppFXMLController {
 
 //      Generates desired graph using matrix input
         btnGenerate.setOnAction(event -> {
-            Matrix userMatrix;
             //ugraph.clearRect(0, 0, ugraph.getCanvas().getWidth(), ugraph.getCanvas().getHeight());
 
 
@@ -238,7 +234,8 @@ public class MainAppFXMLController {
         });
         // handles export button behaviour
         exportButton.setOnAction(event -> {
-            DataExport.exportCanvasToPng(stage, canvasPane);
+            DataExport.exportCanvasToPng(stage, canvasPane, userMatrix);
+
             // Todo: i dont know which stage we need to pass
         });
 
