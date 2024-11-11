@@ -40,9 +40,9 @@ public class MainAppFXMLController {
     @FXML
     TitledPane configPane;
     @FXML
-    Spinner spinnerA = new Spinner(-1000, 1000, 0);
+    Spinner spinnerA = new Spinner(-1000, 1000, 1.0);
     ;
-    SpinnerValueFactory<Double> spinnerAProperties = new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE, Double.MAX_VALUE, 0.0);
+    SpinnerValueFactory<Double> spinnerAProperties = new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE, Double.MAX_VALUE, 1.0);
 
     @FXML
     Spinner spinnerB = new Spinner(Integer.MIN_VALUE, Integer.MAX_VALUE, 0);
@@ -54,7 +54,8 @@ public class MainAppFXMLController {
 
     @FXML
     Spinner spinnerD = new Spinner<Integer>(Integer.MIN_VALUE, Integer.MAX_VALUE, 0);
-    SpinnerValueFactory<Double> spinnerDProperties = new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE, Double.MAX_VALUE, 0.0);
+    SpinnerValueFactory<Double> spinnerDProperties = new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE, Double.MAX_VALUE, 1.0);
+
 
     @FXML
     private TitledPane valuePane;
@@ -101,6 +102,9 @@ public class MainAppFXMLController {
 
     @FXML
     public void initialize() {
+
+
+
 
 
         intWarning.setVisible(false);
