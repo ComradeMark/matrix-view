@@ -16,6 +16,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -95,6 +96,8 @@ public class MainAppFXMLController {
     @FXML
     private Canvas canvasPane;
     protected static final String INITAL_VALUE = "0";
+
+    Stage stage;
 
     @FXML
     public void initialize() {
@@ -231,7 +234,7 @@ public class MainAppFXMLController {
         });
         // handles export button behaviour
         exportButton.setOnAction(event -> {
-            // DataExport.exportCanvasToPng(, canvasPane);
+            DataExport.exportCanvasToPng(stage, canvasPane);
             // Todo: i dont know which stage we need to pass
         });
 
