@@ -103,10 +103,6 @@ public class MainAppFXMLController {
     @FXML
     public void initialize() {
 
-
-
-
-
         intWarning.setVisible(false);
         EventHandler<KeyEvent> enterKeyEventHandler;
 
@@ -225,8 +221,8 @@ public class MainAppFXMLController {
             userGraph = new Graphs(userMatrix);
             ugraph = userGraph.drawGraph(width, height, canvasPane, Color.RED, Color.LIGHTSLATEGREY);
             
-            Vector v = new Vector(1 * userGraph.spacing, 1 * userGraph.spacing);
-            Coordinate coord = new Coordinate(-20, -20);
+            Vector v = new Vector(1 * userGraph.spacing, 0.5 * userGraph.spacing);
+            Coordinate coord = new Coordinate(-1 * userGraph.spacing, -1 * userGraph.spacing);
             ArrayList<Coordinate> initShit = new ArrayList<>();
             initShit.add(v);
             initShit.add(coord);

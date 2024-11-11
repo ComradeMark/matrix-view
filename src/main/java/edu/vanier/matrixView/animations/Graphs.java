@@ -72,14 +72,19 @@ public class Graphs {
 
         
         double lineLen = 10000;
-        ArrayList<Coordinate> tfmXCoords = Calculator.matrixMultiply(tfm, xCoords);
-        ArrayList<Coordinate> tfmYCoords = Calculator.matrixMultiply(tfm, yCoords);
-        
-        System.out.println(xCoords);
-        System.out.println(tfmXCoords);
-        System.out.println(yCoords);
-        System.out.println(tfmYCoords);
-        
+        ArrayList<Coordinate> tfmXCoords = new ArrayList<Coordinate>();
+        ArrayList<Coordinate> tfmYCoords = new ArrayList<Coordinate>();
+//
+//        System.out.println(xCoords);
+//        System.out.println(tfmXCoords);
+//        System.out.println(yCoords);
+//        System.out.println(tfmYCoords);
+
+        for (int i = -numAxisPts/2; i < numAxisPts/2; i ++){
+            tfmXCoords.add(new Coordinate(ihat.getX() * i * spacing, ihat.getY() * i * spacing));
+            tfmYCoords.add(new Coordinate(jhat.getX() * i * spacing, jhat.getY() * i * spacing));
+        }
+
         gc.setLineWidth(2);
         gc.setStroke(secondaryColor);
         for (Coordinate coordinate: tfmXCoords){   
@@ -121,13 +126,88 @@ public class Graphs {
         gc.setStroke(Color.BLUE);
         ArrayList<Coordinate> tfmShit = Calculator.matrixMultiply(tfm, initShit);
 
+        System.out.println(tfmShit);
         for (Coordinate shit: tfmShit){
             if (shit.getClass() == Vector.class){
-                gc.strokeLine(offsets[0], offsets[1] , shit.getX() + offsets[0], shit.getY() - offsets[1]);
+                gc.strokeLine(offsets[0], offsets[1], shit.getY() + offsets[1], -shit.getX() + offsets[0]);
+
+//                gc.strokeLine(offsets[0], offsets[1], shit.getX() + offsets[0], -shit.getY() + offsets[1]);
                 continue;
             }
-            gc.fillOval(shit.getX() + offsets[0] + coordW/2, shit.getY() + offsets[1] + coordH/2, coordW, coordH);
+            gc.fillOval(shit.getX() + offsets[0] - coordW/2, -shit.getY() + offsets[1] - coordH/2, coordW, coordH);
 
         }
+    }
+
+    public ArrayList<Coordinate> getxCoords() {
+        return xCoords;
+    }
+
+    public void setxCoords(ArrayList<Coordinate> xCoords) {
+        this.xCoords = xCoords;
+    }
+
+    public ArrayList<Coordinate> getyCoords() {
+        return yCoords;
+    }
+
+    public void setyCoords(ArrayList<Coordinate> yCoords) {
+        this.yCoords = yCoords;
+    }
+
+    public Coordinate getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(Coordinate origin) {
+        this.origin = origin;
+    }
+
+    public int getSpacing() {
+        return spacing;
+    }
+
+    public void setSpacing(int spacing) {
+        this.spacing = spacing;
+    }
+
+    public Vector getIhat() {
+        return ihat;
+    }
+
+    public void setIhat(Vector ihat) {
+        this.ihat = ihat;
+    }
+
+    public Vector getJhat() {
+        return jhat;
+    }
+
+    public void setJhat(Vector jhat) {
+        this.jhat = jhat;
+    }
+
+    public Matrix getTfm() {
+        return tfm;
+    }
+
+    public void setTfm(Matrix tfm) {
+        this.tfm = tfm;
+    }
+
+    public double getCoordW() {
+        return coordW;
+    }
+
+    public void setCoordW(double coordW) {
+        this.coordW = coordW;
+    }
+
+    public double getCoordH() {
+        return coordH;
+    }
+
+    public void setCoordH(double coordH) {
+        this.coordH = coordH;
     }
 }
