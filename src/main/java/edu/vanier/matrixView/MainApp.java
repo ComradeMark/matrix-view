@@ -29,10 +29,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
         try {
-
-
             logger.info("Bootstrapping the application...");
             // Load the scene of the primary stage.
             MainAppFXMLController controller = new MainAppFXMLController();
@@ -83,11 +80,6 @@ public class MainApp extends Application {
     }
 
     public static void main(String[] args) {
-
-
-
-
-
         launch(args);
     }
 
