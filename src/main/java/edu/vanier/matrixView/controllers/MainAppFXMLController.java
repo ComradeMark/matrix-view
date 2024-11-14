@@ -3,7 +3,6 @@ package edu.vanier.matrixView.controllers;
 import edu.vanier.matrixView.UI.aboutUsStage;
 import edu.vanier.matrixView.animations.Graphs;
 import edu.vanier.matrixView.export.DataExport;
-import edu.vanier.matrixView.math.Calculator;
 import edu.vanier.matrixView.math.Coordinate;
 import edu.vanier.matrixView.math.Matrix;
 import edu.vanier.matrixView.math.Vector;
@@ -122,6 +121,7 @@ public class MainAppFXMLController {
                 ) {
 
 
+
                     // reset editor to INITAL_VALUE
                     spinnerA.getEditor().textProperty().set(INITAL_VALUE);
                     spinnerB.getEditor().textProperty().set(INITAL_VALUE);
@@ -193,8 +193,10 @@ public class MainAppFXMLController {
         }));
         int width = (int) canvasPane.getWidth();
         int height = (int) canvasPane.getHeight();
-        drawDefaultSpace(width, height);
+       drawDefaultSpace(width, height);
 //        mainGraph.drawLine(mainGraph.spacing, mainGraph.spacing, canvasPane);
+
+
 
 
         System.out.println(graphPane.getHeight());
@@ -204,10 +206,9 @@ public class MainAppFXMLController {
         spinnerD.setValueFactory(spinnerDProperties);
 
 
+
 //      Generates desired graph using matrix input
         btnGenerate.setOnAction(event -> {
-
-
             //ugraph.clearRect(0, 0, ugraph.getCanvas().getWidth(), ugraph.getCanvas().getHeight());
 
 
@@ -219,44 +220,25 @@ public class MainAppFXMLController {
             userMatrix = new Matrix(a, b, c, d);
             userGraph = new Graphs(userMatrix);
             ugraph = userGraph.drawGraph(width, height, canvasPane, Color.RED, Color.LIGHTSLATEGREY);
-
-            Vector v = new Vector(1 * userGraph.spacing, 0.5 * userGraph.spacing);
+            
+            Vector v = new Vector(2 * userGraph.spacing, 2 * userGraph.spacing);
             Coordinate coord = new Coordinate(-1 * userGraph.spacing, -1 * userGraph.spacing);
             ArrayList<Coordinate> initShit = new ArrayList<>();
             initShit.add(v);
             initShit.add(coord);
             userGraph.drawShit(initShit, canvasPane);
-
-            //Fills needed fields in application with calculated values
-            if (Calculator.isInvertible(userMatrix)) {
-
-                Matrix inverseUserMatrix = Calculator.inverse(userMatrix);
-                invA.setText(String.valueOf(inverseUserMatrix.getA()));
-                invB.setText(String.valueOf(inverseUserMatrix.getB()));
-                invC.setText(String.valueOf(inverseUserMatrix.getC()));
-                invD.setText(String.valueOf(inverseUserMatrix.getD()));
-
-
-            }
+        });
+        //      Handles reset button behaviour
+        btnReset.setOnAction(event -> {
+        userGraph.removeGraph(ugraph);
+        drawDefaultSpace((int) ugraph.getCanvas().getWidth(), (int) ugraph.getCanvas().getHeight());
+        });
+        // handles export button behaviour
+        exportButton.setOnAction(event -> {
+            DataExport.exportCanvasToPng(stage, canvasPane, userMatrix);
         });
 
-
-
-
-            //      Handles reset button behaviour
-            btnReset.setOnAction(event -> {
-                userGraph.removeGraph(ugraph);
-                drawDefaultSpace((int) ugraph.getCanvas().getWidth(), (int) ugraph.getCanvas().getHeight());
-            });
-            // handles export button behaviour
-            exportButton.setOnAction(event -> {
-                DataExport.exportCanvasToPng(stage, canvasPane, userMatrix);
-            });
-
-
-        }
-
-
+    }
 
 //      Draws default euclidean space
     public void drawDefaultSpace(int width, int height){
@@ -266,14 +248,6 @@ public class MainAppFXMLController {
 //        canvasPane = mainGraph.getGraph(400, 400);
 
         mainGraph.drawGraph(width, height, canvasPane, Color.BLACK, Color.LIGHTGRAY);
-    }
-
-    private void handleClickMe(Event e) {
-
-    }
-
-    private void loadSecondaryScene(Event e) {
-
     }
 
     public TitledPane getConfigPane() {
