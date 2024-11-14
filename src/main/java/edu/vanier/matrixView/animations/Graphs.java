@@ -84,14 +84,15 @@ public class Graphs {
             tfmXCoords.add(new Coordinate(ihat.getX() * i * spacing, ihat.getY() * i * spacing));
             tfmYCoords.add(new Coordinate(jhat.getX() * i * spacing, jhat.getY() * i * spacing));
         }
-
+        
+        System.out.println(tfmXCoords);
         gc.setLineWidth(2);
         gc.setStroke(secondaryColor);
         for (Coordinate coordinate: tfmXCoords){   
             gc.strokeLine(coordinate.getX() + offsets[0] - lineLen * jhat.getX(), 
                     coordinate.getY() + offsets[1] + lineLen * jhat.getY(),
                     coordinate.getX() + offsets[0] + lineLen * jhat.getX(), 
-                    coordinate.getX() + offsets[1] - lineLen * jhat.getY());
+                    coordinate.getY() + offsets[1] - lineLen * jhat.getY());
 
         }
 
@@ -132,7 +133,8 @@ public class Graphs {
                         -(shit.getX() * ihat.getY() + shit.getY() * jhat.getY()) + offsets[1]);
                 continue;
             }
-            gc.fillOval(shit.getX() + offsets[0] - coordW/2, -shit.getY() + offsets[1] - coordH/2, coordW, coordH);
+            gc.fillOval(shit.getX() * ihat.getX() + shit.getY() * jhat.getX() + offsets[0] - coordW/2,
+                    -(shit.getX() * ihat.getY() + shit.getY() * jhat.getY()) + offsets[1] - coordH/2, coordW, coordH);
 
         }
     }
