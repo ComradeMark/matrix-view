@@ -221,7 +221,7 @@ public class MainAppFXMLController {
             userGraph = new Graphs(userMatrix);
             ugraph = userGraph.drawGraph(width, height, canvasPane, Color.RED, Color.LIGHTSLATEGREY);
             
-            Vector v = new Vector(1 * userGraph.spacing, 0.5 * userGraph.spacing);
+            Vector v = new Vector(1 * userGraph.spacing, 0 * userGraph.spacing);
             Coordinate coord = new Coordinate(-1 * userGraph.spacing, -1 * userGraph.spacing);
             ArrayList<Coordinate> initShit = new ArrayList<>();
             initShit.add(v);
@@ -248,14 +248,6 @@ public class MainAppFXMLController {
 //        canvasPane = mainGraph.getGraph(400, 400);
 
         mainGraph.drawGraph(width, height, canvasPane, Color.BLACK, Color.LIGHTGRAY);
-    }
-
-    private void handleClickMe(Event e) {
-
-    }
-
-    private void loadSecondaryScene(Event e) {
-
     }
 
     public TitledPane getConfigPane() {

@@ -124,14 +124,12 @@ public class Graphs {
                 canvas.getGraphicsContext2D();
         
         gc.setStroke(Color.BLUE);
-        ArrayList<Coordinate> tfmShit = Calculator.matrixMultiply(tfm, initShit);
+//        ArrayList<Coordinate> tfmShit = Calculator.matrixMultiply(tfm, initShit);
 
-        System.out.println(tfmShit);
-        for (Coordinate shit: tfmShit){
+        for (Coordinate shit: initShit){
             if (shit.getClass() == Vector.class){
-                gc.strokeLine(offsets[0], offsets[1], shit.getY() + offsets[1], -shit.getX() + offsets[0]);
-
-//                gc.strokeLine(offsets[0], offsets[1], shit.getX() + offsets[0], -shit.getY() + offsets[1]);
+                gc.strokeLine(offsets[0], offsets[1], shit.getX() * ihat.getX() + shit.getY() * jhat.getX() + offsets[0], 
+                        -(shit.getX() * ihat.getY() + shit.getY() * jhat.getY()) + offsets[1]);
                 continue;
             }
             gc.fillOval(shit.getX() + offsets[0] - coordW/2, -shit.getY() + offsets[1] - coordH/2, coordW, coordH);
