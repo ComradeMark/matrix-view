@@ -102,11 +102,12 @@ public class MainAppFXMLController {
     private AnimationTimer animationTimer;   
     private long lastUpdate = 0;
     
-    
+    int spacing = 30;
     Matrix initMatrix = new Matrix(1, 0, 0, 1);
     Stage stage;
     Matrix userMatrix;
-       
+
+    Matrix finalPosMtx = initMatrix;
     
     @FXML
     public void initialize() {
@@ -229,7 +230,7 @@ public class MainAppFXMLController {
             
             setupAnimation();
             animationTimer.start();
-            
+
 //            Vector v = new Vector(1 * userGraph.spacing, 1 * userGraph.spacing);
 //            Coordinate coord = new Coordinate(-1 * userGraph.spacing, -1 * userGraph.spacing);
 //            ArrayList<Coordinate> initShit = new ArrayList<>();
@@ -245,7 +246,8 @@ public class MainAppFXMLController {
         btnReset.setOnAction(event -> {
             animationTimer.stop();
             userGraph.removeGraph(canvasPane.getGraphicsContext2D());
-            initMatrix = new Matrix(1, 0, 0, 1);
+            userMatrix = initMatrix;
+
             userGraph.drawDefaultSpace(width, height, canvasPane);
             
         });
@@ -264,7 +266,7 @@ public class MainAppFXMLController {
         Graphs mainGraph = new Graphs(simpleBasis);
 //        canvasPane = mainGraph.getGraph(400, 400);
 
-        mainGraph.drawGraph(width, height, canvasPane, Color.BLACK, Color.LIGHTGRAY);
+        mainGraph.drawGraph(width, height, canvasPane, Color.BLACK, Color.LIGHTSLATEGREY, 20);
     }
     
     private void setupAnimation() {
@@ -284,17 +286,22 @@ public class MainAppFXMLController {
     
     private void updateAnimation(double deltaTime){
         userGraph.removeGraph(canvasPane.getGraphicsContext2D());
-        Matrix moveMtx = Calculator.matrixSubtract(userMatrix, initMatrix);
+        Matrix moveMtx = Calculator.matrixSubtract(userMatrix, finalPosMtx);
         Matrix scaledMoveMtx = Calculator.scalarMult(deltaTime, moveMtx);
-        Matrix finalPosMtx = Calculator.matrixAdd(initMatrix, scaledMoveMtx);
-        initMatrix = finalPosMtx;
+        finalPosMtx = Calculator.matrixAdd(finalPosMtx, scaledMoveMtx);
         int width = (int) canvasPane.getWidth();
         int height = (int) canvasPane.getHeight();
         userGraph = new Graphs(finalPosMtx);
-        ugraph = userGraph.drawGraph(width, height, canvasPane, Color.RED, Color.LIGHTSLATEGREY);
+        ugraph = userGraph.drawGraph(width, height, canvasPane, Color.RED, Color.LIGHTSLATEGREY, spacing);
 
-        if (Math.abs(scaledMoveMtx.getA() + scaledMoveMtx.getB() + scaledMoveMtx.getC() + scaledMoveMtx.getD()) < 0.01){
-            System.out.println("STOPP");
+        Vector v = new Vector(1 * spacing, 1 * spacing);
+        Coordinate coord = new Coordinate(-1 * spacing, -1 * spacing);
+        ArrayList<Coordinate> initShit = new ArrayList<>();
+        initShit.add(v);
+        initShit.add(coord);
+        userGraph.drawShit(initShit, canvasPane);
+
+        if (Math.abs(scaledMoveMtx.getA() + scaledMoveMtx.getB() + scaledMoveMtx.getC() + scaledMoveMtx.getD()) < 10000){
             animationTimer.stop();
         }
     }

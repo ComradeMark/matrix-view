@@ -140,7 +140,8 @@ public class Graphs {
     public void drawDefaultSpace(int width, int height, Canvas canvasPane){
         Matrix simpleBasis = new Matrix(1, 0, 0, 1);
         Graphs mainGraph = new Graphs(simpleBasis);
-        mainGraph.drawGraph(width, height, canvasPane, Color.BLACK, Color.LIGHTGRAY);
+        mainGraph.drawGraph(width, height, canvasPane, Color.BLACK, Color.LIGHTGRAY, 20
+        );
     }
 
     public ArrayList<Coordinate> getxCoords() {

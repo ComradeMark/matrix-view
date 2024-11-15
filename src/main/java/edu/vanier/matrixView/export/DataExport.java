@@ -56,7 +56,7 @@ public class DataExport {
             BufferedImage bufferedImage = SwingFXUtils.fromFXImage(writableImage, null);
             gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
             Graphs graphs = new Graphs(matrix);
-            graphs.drawGraph(width, height, canvas, Color.BLACK, Color.GRAY);
+            graphs.drawGraph(width, height, canvas, Color.BLACK, Color.GRAY, 20);
             // Todo: there is a problem of color matching when it comes to lines
             graphs.drawDefaultSpace(width, height, canvas);
 
