@@ -74,25 +74,11 @@ public class Graphs {
         double lineLen = 10000;
         ArrayList<Coordinate> tfmXCoords = Calculator.matrixMultiply(tfm, xCoords);
         ArrayList<Coordinate> tfmYCoords = Calculator.matrixMultiply(tfm, yCoords);
-//
-//        System.out.println(xCoords);
-//        System.out.println(tfmXCoords);
-//        System.out.println(yCoords);
-//        System.out.println(tfmYCoords);
-
-//        double spacingWRTX = Math.sqrt(Math.pow(ihat.getMagnitude(), 2) - Math.pow(ihat.getY(), 2));
-//        double spacingWRTY = Math.sqrt(Math.pow(jhat.getMagnitude(), 2) - Math.pow(jhat.getX(), 2));
-
-//        for (int i = -numAxisPts/2; i < numAxisPts/2; i ++){
-//            tfmXCoords.add(new Coordinate(ihat.getX() * i * spacing, ihat.getY() * i * spacing));
-//            tfmYCoords.add(new Coordinate(jhat.getX() * i * spacing, jhat.getY() * i * spacing));
-//        }
 
 
         double w = 5;
         double h = 5;
         
-        System.out.println(tfmXCoords);
         gc.setLineWidth(2);
         gc.setStroke(secondaryColor);
         for (Coordinate coordinate: tfmXCoords){
@@ -102,7 +88,6 @@ public class Graphs {
                     coordinate.getY() + offsets[1] - lineLen * jhat.getY());
             
             gc.setFill(Color.GRAY);
-            System.out.println(coordinate.getX() + offsets[0]);
             gc.fillOval(-coordinate.getX() + offsets[0] - w/2, coordinate.getY() + offsets[1] - h/2, w, h);
         }
 
@@ -112,8 +97,7 @@ public class Graphs {
                     coordinate.getX() + offsets[0] + lineLen * ihat.getX(), 
                     -coordinate.getY() + offsets[1] - lineLen * ihat.getY());
             
-                        gc.setFill(Color.GRAY);
-            System.out.println(coordinate.getX() + offsets[0]);
+            gc.setFill(Color.GRAY);
             gc.fillOval(coordinate.getX() + offsets[0] - w/2, -coordinate.getY() + offsets[1] - h/2, w, h);
         }
         
@@ -148,7 +132,7 @@ public class Graphs {
                 continue;
             }
             gc.fillOval(shit.getX() + offsets[0] - coordW/2,
-                    -shit.getX() + offsets[1] - coordH/2, coordW, coordH);
+                    -shit.getY() + offsets[1] - coordH/2, coordW, coordH);
 
         }
     }

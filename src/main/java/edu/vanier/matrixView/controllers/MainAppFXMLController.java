@@ -3,6 +3,7 @@ package edu.vanier.matrixView.controllers;
 import edu.vanier.matrixView.UI.aboutUsStage;
 import edu.vanier.matrixView.animations.Graphs;
 import edu.vanier.matrixView.export.DataExport;
+import edu.vanier.matrixView.math.Calculator;
 import edu.vanier.matrixView.math.Coordinate;
 import edu.vanier.matrixView.math.Matrix;
 import edu.vanier.matrixView.math.Vector;
@@ -25,6 +26,7 @@ import org.slf4j.LoggerFactory;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import javafx.animation.AnimationTimer;
 
 /**
  * FXML controller for controlling the main window.
@@ -96,10 +98,16 @@ public class MainAppFXMLController {
     @FXML
     private Canvas canvasPane;
     protected static final String INITAL_VALUE = "0";
-
+    
+    private AnimationTimer animationTimer;   
+    private long lastUpdate = 0;
+    
+    
+    Matrix initMatrix = new Matrix(1, 0, 0, 1);
     Stage stage;
     Matrix userMatrix;
-
+       
+    
     @FXML
     public void initialize() {
 
@@ -210,29 +218,38 @@ public class MainAppFXMLController {
 //      Generates desired graph using matrix input
         btnGenerate.setOnAction(event -> {
             //ugraph.clearRect(0, 0, ugraph.getCanvas().getWidth(), ugraph.getCanvas().getHeight());
-
-
             double a = (double) spinnerA.getValue();
             double b = (double) spinnerB.getValue();
             double c = (double) spinnerC.getValue();
             double d = (double) spinnerD.getValue();
 
             userMatrix = new Matrix(a, b, c, d);
-            userGraph = new Graphs(userMatrix);
-            ugraph = userGraph.drawGraph(width, height, canvasPane, Color.RED, Color.LIGHTSLATEGREY);
+            userGraph = new Graphs(initMatrix);
+//            ugraph = userGraph.drawGraph(width, height, canvasPane, Color.RED, Color.LIGHTSLATEGREY);
             
-            Vector v = new Vector(1 * userGraph.spacing, 1 * userGraph.spacing);
-            Coordinate coord = new Coordinate(-1 * userGraph.spacing, -1 * userGraph.spacing);
-            ArrayList<Coordinate> initShit = new ArrayList<>();
-            initShit.add(v);
-            initShit.add(coord);
-            userGraph.drawShit(initShit, canvasPane);
+            setupAnimation();
+            animationTimer.start();
+            
+//            Vector v = new Vector(1 * userGraph.spacing, 1 * userGraph.spacing);
+//            Coordinate coord = new Coordinate(-1 * userGraph.spacing, -1 * userGraph.spacing);
+//            ArrayList<Coordinate> initShit = new ArrayList<>();
+//            initShit.add(v);
+//            initShit.add(coord);
+
+//            userGraph.drawShit(initShit, canvasPane);
+            setupAnimation();
+            animationTimer.start();
+
         });
         //      Handles reset button behaviour
         btnReset.setOnAction(event -> {
-        userGraph.removeGraph(ugraph);
-        drawDefaultSpace((int) ugraph.getCanvas().getWidth(), (int) ugraph.getCanvas().getHeight());
+            animationTimer.stop();
+            userGraph.removeGraph(canvasPane.getGraphicsContext2D());
+            initMatrix = new Matrix(1, 0, 0, 1);
+            userGraph.drawDefaultSpace(width, height, canvasPane);
+            
         });
+        
         // handles export button behaviour
         exportButton.setOnAction(event -> {
             DataExport.exportCanvasToPng(stage, canvasPane, userMatrix);
@@ -242,12 +259,44 @@ public class MainAppFXMLController {
 
 //      Draws default euclidean space
     public void drawDefaultSpace(int width, int height){
-        Matrix simpleBasis = new Matrix(1, 0, 0, 1);
+        Matrix simpleBasis = initMatrix;
         // All graph insertion code
         Graphs mainGraph = new Graphs(simpleBasis);
 //        canvasPane = mainGraph.getGraph(400, 400);
 
         mainGraph.drawGraph(width, height, canvasPane, Color.BLACK, Color.LIGHTGRAY);
+    }
+    
+    private void setupAnimation() {
+        animationTimer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                
+                if(lastUpdate > 0){
+                    double deltaTime = (now - lastUpdate) / 1_000_000_000.0;
+                    
+                    updateAnimation(deltaTime);
+                }
+                lastUpdate = now;
+            }
+        };
+    }
+    
+    private void updateAnimation(double deltaTime){
+        userGraph.removeGraph(canvasPane.getGraphicsContext2D());
+        Matrix moveMtx = Calculator.matrixSubtract(userMatrix, initMatrix);
+        Matrix scaledMoveMtx = Calculator.scalarMult(deltaTime, moveMtx);
+        Matrix finalPosMtx = Calculator.matrixAdd(initMatrix, scaledMoveMtx);
+        initMatrix = finalPosMtx;
+        int width = (int) canvasPane.getWidth();
+        int height = (int) canvasPane.getHeight();
+        userGraph = new Graphs(finalPosMtx);
+        ugraph = userGraph.drawGraph(width, height, canvasPane, Color.RED, Color.LIGHTSLATEGREY);
+
+        if (Math.abs(scaledMoveMtx.getA() + scaledMoveMtx.getB() + scaledMoveMtx.getC() + scaledMoveMtx.getD()) < 0.01){
+            System.out.println("STOPP");
+            animationTimer.stop();
+        }
     }
 
     public TitledPane getConfigPane() {

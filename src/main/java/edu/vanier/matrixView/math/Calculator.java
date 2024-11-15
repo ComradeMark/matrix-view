@@ -160,7 +160,16 @@ import jdk.jshell.spi.ExecutionControl;
                 m1.getB() - m2.getB(),
                 m1.getC() - m2.getC(),
                 m1.getD() - m2.getD()
-        )
+        );
+    }
+    
+    public static Matrix matrixAdd(Matrix m1, Matrix m2){
+        return new Matrix(
+                m1.getA() + m2.getA(),
+                m1.getB() + m2.getB(),
+                m1.getC() + m2.getC(),
+                m1.getD() + m2.getD()
+        );
     }
     
     public static Matrix scalarMult(double scalar, Matrix m){
@@ -169,6 +178,6 @@ import jdk.jshell.spi.ExecutionControl;
                 m.getB() * scalar,
                 m.getC() * scalar,
                 m.getD() * scalar
-        )
+        );
     }
 }
