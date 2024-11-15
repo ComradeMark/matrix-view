@@ -22,7 +22,7 @@ public class aboutUsStage extends Stage {
         FXMLLoader loader = new FXMLLoader(Driver.class.getResource("/fxml/aboutUs.fxml"));
         loader.setController(new aboutUsWindowController());
         try{
-            Parent root = (Parent) loader.load();
+            Parent root = loader.load();
             Scene scene = new Scene(root, 600, 400);
             aboutUsStage.setScene(scene);
             aboutUsStage.setTitle("About us");

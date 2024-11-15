@@ -16,6 +16,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -38,12 +40,13 @@ public class MainAppFXMLController {
     private final static Logger logger = LoggerFactory.getLogger(MainAppFXMLController.class);
 
     @FXML
+    BorderPane mainContainer;
+    @FXML
     Button exportButton;
     @FXML
     TitledPane configPane;
     @FXML
     Spinner spinnerA = new Spinner(-1000, 1000, 1.0);
-    ;
     SpinnerValueFactory<Double> spinnerAProperties = new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE, Double.MAX_VALUE, 1.0);
 
     @FXML
@@ -123,13 +126,11 @@ public class MainAppFXMLController {
             public void handle(KeyEvent event) {
 
                 if (
-                        spinnerA.getValue().toString().matches("[a-zA-Z]") ||
-                                spinnerB.getValue().toString().matches("[a-zA-Z]") ||
-                                spinnerC.getValue().toString().matches("[a-zA-Z]") ||
-                                spinnerD.getValue().toString().matches("[a-zA-Z]")
+                    spinnerA.getValue().toString().matches("[a-zA-Z]") ||
+                    spinnerB.getValue().toString().matches("[a-zA-Z]") ||
+                    spinnerC.getValue().toString().matches("[a-zA-Z]") ||
+                    spinnerD.getValue().toString().matches("[a-zA-Z]")
                 ) {
-
-
 
                     // reset editor to INITAL_VALUE
                     spinnerA.getEditor().textProperty().set(INITAL_VALUE);
@@ -205,7 +206,7 @@ public class MainAppFXMLController {
 
         userGraph = drawDefaultSpace(width, height);
 
-        Vector v = new Vector(1 * spacing, 1 * spacing);
+        Vector v = new Vector(spacing, spacing);
         Coordinate coord = new Coordinate(-1 * spacing, -1 * spacing);
         ArrayList<Coordinate> initShit = new ArrayList<>();
         initShit.add(v);
@@ -222,7 +223,6 @@ public class MainAppFXMLController {
 
 //      Generates desired graph using matrix input
         btnGenerate.setOnAction(event -> {
-            //ugraph.clearRect(0, 0, ugraph.getCanvas().getWidth(), ugraph.getCanvas().getHeight());
             double a = (double) spinnerA.getValue();
             double b = (double) spinnerB.getValue();
             double c = (double) spinnerC.getValue();
@@ -230,17 +230,10 @@ public class MainAppFXMLController {
 
             userMatrix = new Matrix(a, b, c, d);
             userGraph = new Graphs(initMatrix);
-//            ugraph = userGraph.drawGraph(width, height, canvasPane, Color.RED, Color.LIGHTSLATEGREY);
             
             setupAnimation();
             animationTimer.start();
 
-//            Vector v = new Vector(1 * spacing, 1 * spacing);
-//            Coordinate coord = new Coordinate(-1 * spacing, -1 * spacing);
-//            ArrayList<Coordinate> initShit = new ArrayList<>();
-//            initShit.add(v);
-//            initShit.add(coord);
-//            userGraph.drawShit(initShit, canvasPane);
             setupAnimation();
             animationTimer.start();
 
@@ -267,7 +260,6 @@ public class MainAppFXMLController {
         Matrix simpleBasis = initMatrix;
         // All graph insertion code
         Graphs mainGraph = new Graphs(simpleBasis);
-//        canvasPane = mainGraph.getGraph(400, 400);
 
         mainGraph.drawGraph(width, height, canvasPane, Color.BLACK, Color.LIGHTSLATEGREY, spacing);
         return mainGraph;
@@ -298,7 +290,7 @@ public class MainAppFXMLController {
         userGraph = new Graphs(finalPosMtx);
         ugraph = userGraph.drawGraph(width, height, canvasPane, Color.RED, Color.LIGHTSLATEGREY, spacing);
 
-        Vector v = new Vector(1 * spacing, 1 * spacing);
+        Vector v = new Vector(spacing, spacing);
         Coordinate coord = new Coordinate(-1 * spacing, -1 * spacing);
         ArrayList<Coordinate> initShit = new ArrayList<>();
         initShit.add(v);
