@@ -25,7 +25,7 @@ public class Graphs {
     
     private Coordinate origin = new Coordinate(0, 0);
     
-    public int spacing = 30;
+    int spacing = 30;
 
     private Vector ihat;
     private Vector jhat;
@@ -47,7 +47,7 @@ public class Graphs {
 
     
     
-    public GraphicsContext drawGraph(int width, int height, Canvas canvas, Color graphColor, Color secondaryColor){
+    public GraphicsContext drawGraph(int width, int height, Canvas canvas, Color graphColor, Color secondaryColor, int spacing){
 
         int[] offsets = {width / 2, height /2};
      

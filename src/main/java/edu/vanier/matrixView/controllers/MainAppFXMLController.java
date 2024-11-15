@@ -194,13 +194,14 @@ public class MainAppFXMLController {
         spinnerD.setPromptText("Value D");
 
         btnAbout.setOnAction((event ->
+
         {
             aboutUsStage aboutUs = new aboutUsStage();
 
         }));
         int width = (int) canvasPane.getWidth();
         int height = (int) canvasPane.getHeight();
-        drawDefaultSpace(width, height);
+       drawDefaultSpace(width, height);
 //        mainGraph.drawLine(mainGraph.spacing, mainGraph.spacing, canvasPane);
 
 
@@ -222,22 +223,22 @@ public class MainAppFXMLController {
             double c = (double) spinnerC.getValue();
             double d = (double) spinnerD.getValue();
 
-            setupAnimation();
-            animationTimer.start();
-            
             userMatrix = new Matrix(a, b, c, d);
             userGraph = new Graphs(initMatrix);
 //            ugraph = userGraph.drawGraph(width, height, canvasPane, Color.RED, Color.LIGHTSLATEGREY);
             
+            setupAnimation();
+            animationTimer.start();
             
 //            Vector v = new Vector(1 * userGraph.spacing, 1 * userGraph.spacing);
 //            Coordinate coord = new Coordinate(-1 * userGraph.spacing, -1 * userGraph.spacing);
 //            ArrayList<Coordinate> initShit = new ArrayList<>();
 //            initShit.add(v);
 //            initShit.add(coord);
-//
+
 //            userGraph.drawShit(initShit, canvasPane);
             setupAnimation();
+            animationTimer.start();
 
         });
         //      Handles reset button behaviour
@@ -245,7 +246,6 @@ public class MainAppFXMLController {
             animationTimer.stop();
             userGraph.removeGraph(canvasPane.getGraphicsContext2D());
             initMatrix = new Matrix(1, 0, 0, 1);
-            userMatrix = initMatrix;
             userGraph.drawDefaultSpace(width, height, canvasPane);
             
         });
@@ -274,6 +274,7 @@ public class MainAppFXMLController {
                 
                 if(lastUpdate > 0){
                     double deltaTime = (now - lastUpdate) / 1_000_000_000.0;
+                    
                     updateAnimation(deltaTime);
                 }
                 lastUpdate = now;
@@ -291,13 +292,6 @@ public class MainAppFXMLController {
         int height = (int) canvasPane.getHeight();
         userGraph = new Graphs(finalPosMtx);
         ugraph = userGraph.drawGraph(width, height, canvasPane, Color.RED, Color.LIGHTSLATEGREY);
-        
-        Vector v = new Vector(1 * userGraph.spacing, 1 * userGraph.spacing);
-        Coordinate coord = new Coordinate(-1 * userGraph.spacing, -1 * userGraph.spacing);
-        ArrayList<Coordinate> initShit = new ArrayList<>();
-        initShit.add(v);
-        initShit.add(coord);
-        userGraph.drawShit(initShit, canvasPane);
 
         if (Math.abs(scaledMoveMtx.getA() + scaledMoveMtx.getB() + scaledMoveMtx.getC() + scaledMoveMtx.getD()) < 0.01){
             System.out.println("STOPP");
