@@ -154,4 +154,21 @@ import jdk.jshell.spi.ExecutionControl;
         System.out.println("[" + matrix.getC() + " " + matrix.getD() + "]");
     }
 
+    public static Matrix matrixSubtract(Matrix m1, Matrix m2){
+        return new Matrix(
+                m1.getA() - m2.getA(),
+                m1.getB() - m2.getB(),
+                m1.getC() - m2.getC(),
+                m1.getD() - m2.getD()
+        )
+    }
+    
+    public static Matrix scalarMult(double scalar, Matrix m){
+        return new Matrix(
+                m.getA() * scalar,
+                m.getB() * scalar,
+                m.getC() * scalar,
+                m.getD() * scalar
+        )
+    }
 }
