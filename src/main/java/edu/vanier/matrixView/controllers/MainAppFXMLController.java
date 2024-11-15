@@ -221,7 +221,7 @@ public class MainAppFXMLController {
             userGraph = new Graphs(userMatrix);
             ugraph = userGraph.drawGraph(width, height, canvasPane, Color.RED, Color.LIGHTSLATEGREY);
             
-            Vector v = new Vector(2 * userGraph.spacing, 2 * userGraph.spacing);
+            Vector v = new Vector(1 * userGraph.spacing, 1 * userGraph.spacing);
             Coordinate coord = new Coordinate(-1 * userGraph.spacing, -1 * userGraph.spacing);
             ArrayList<Coordinate> initShit = new ArrayList<>();
             initShit.add(v);
