@@ -202,13 +202,17 @@ public class MainAppFXMLController {
         }));
         int width = (int) canvasPane.getWidth();
         int height = (int) canvasPane.getHeight();
-       drawDefaultSpace(width, height);
-//        mainGraph.drawLine(mainGraph.spacing, mainGraph.spacing, canvasPane);
 
+        userGraph = drawDefaultSpace(width, height);
 
-
-
+        Vector v = new Vector(1 * spacing, 1 * spacing);
+        Coordinate coord = new Coordinate(-1 * spacing, -1 * spacing);
+        ArrayList<Coordinate> initShit = new ArrayList<>();
+        initShit.add(v);
+        initShit.add(coord);
+        userGraph.drawShit(initShit, canvasPane);
         System.out.println(graphPane.getHeight());
+
         spinnerA.setValueFactory(spinnerAProperties);
         spinnerB.setValueFactory(spinnerBProperties);
         spinnerC.setValueFactory(spinnerCProperties);
@@ -231,12 +235,11 @@ public class MainAppFXMLController {
             setupAnimation();
             animationTimer.start();
 
-//            Vector v = new Vector(1 * userGraph.spacing, 1 * userGraph.spacing);
-//            Coordinate coord = new Coordinate(-1 * userGraph.spacing, -1 * userGraph.spacing);
+//            Vector v = new Vector(1 * spacing, 1 * spacing);
+//            Coordinate coord = new Coordinate(-1 * spacing, -1 * spacing);
 //            ArrayList<Coordinate> initShit = new ArrayList<>();
 //            initShit.add(v);
 //            initShit.add(coord);
-
 //            userGraph.drawShit(initShit, canvasPane);
             setupAnimation();
             animationTimer.start();
@@ -260,13 +263,14 @@ public class MainAppFXMLController {
     }
 
 //      Draws default euclidean space
-    public void drawDefaultSpace(int width, int height){
+    public Graphs drawDefaultSpace(int width, int height){
         Matrix simpleBasis = initMatrix;
         // All graph insertion code
         Graphs mainGraph = new Graphs(simpleBasis);
 //        canvasPane = mainGraph.getGraph(400, 400);
 
-        mainGraph.drawGraph(width, height, canvasPane, Color.BLACK, Color.LIGHTSLATEGREY, 20);
+        mainGraph.drawGraph(width, height, canvasPane, Color.BLACK, Color.LIGHTSLATEGREY, spacing);
+        return mainGraph;
     }
     
     private void setupAnimation() {
