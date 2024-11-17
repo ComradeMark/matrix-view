@@ -16,7 +16,6 @@ import edu.vanier.matrixView.math.Calculator;
 
 
 public class DataExport {
-
     /**
      * Exports the content of a JavaFX canvas to a PNG image file. This method
      * opens a file chooser dialog to let the user specify where to save the
@@ -88,7 +87,6 @@ public class DataExport {
         FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif");
         fileChooser.getExtensionFilters().addAll(imageFilter, textFilter);
         fileChooser.setInitialFileName(text);  // Default file name
-
         // Set the initial directory of the FileChooser to the user's Desktop
         File desktopDirectory = new File(System.getProperty("user.home"), "Desktop");
         if (desktopDirectory.exists() && desktopDirectory.isDirectory()) {
@@ -97,9 +95,7 @@ public class DataExport {
             // Fallback to the user's home directory if Desktop is unavailable
             fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         }
-
         // Show the file chooser and get the selected file
         return fileChooser.showSaveDialog(ownerStage);
     }
-
 }

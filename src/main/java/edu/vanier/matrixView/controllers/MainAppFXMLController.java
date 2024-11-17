@@ -237,6 +237,17 @@ public class MainAppFXMLController {
             setupAnimation();
             animationTimer.start();
 
+            fieldDet.setText(String.valueOf(Calculator.determinant(userMatrix)));
+
+            transA.setText(String.valueOf(Calculator.adjugate(userMatrix).getA()));
+            transB.setText(String.valueOf(Calculator.adjugate(userMatrix).getB()));
+            transC.setText(String.valueOf(Calculator.adjugate(userMatrix).getC()));
+            transD.setText(String.valueOf(Calculator.adjugate(userMatrix).getD()));
+
+            invA.setText(String.valueOf(Calculator.inverse(userMatrix).getA()));
+            invB.setText(String.valueOf(Calculator.inverse(userMatrix).getB()));
+            invC.setText(String.valueOf(Calculator.inverse(userMatrix).getC()));
+            invD.setText(String.valueOf(Calculator.inverse(userMatrix).getD()));
         });
         //      Handles reset button behaviour
         btnReset.setOnAction(event -> {
@@ -245,7 +256,17 @@ public class MainAppFXMLController {
             userMatrix = initMatrix;
 
             userGraph.drawDefaultSpace(width, height, canvasPane);
-            
+            fieldDet.setText(String.valueOf(Calculator.determinant(userMatrix)));
+
+            transA.setText("");
+            transB.setText("");
+            transC.setText("");
+            transD.setText("");
+
+            invA.setText("");
+            invB.setText("");
+            invC.setText("");
+            invD.setText("");
         });
         
         // handles export button behaviour
@@ -461,7 +482,6 @@ public class MainAppFXMLController {
     public void setCanvasPane(Canvas canvasPane) {
         this.canvasPane = canvasPane;
     }
-
 
 }
 

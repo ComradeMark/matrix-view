@@ -22,15 +22,11 @@ public class Graphs {
     // Axis grid points
     private ArrayList<Coordinate> xCoords = new ArrayList<>();
     private ArrayList<Coordinate> yCoords = new ArrayList<>();
-
     private Coordinate origin = new Coordinate(0, 0);
-
     int spacing = 30;
-
     private Vector ihat;
     private Vector jhat;
     private Matrix tfm;
-
     private double coordW = 10;
     private double coordH = 10;
 
@@ -110,9 +106,7 @@ public class Graphs {
                 offsets[1] + lineLen * jhat.getY(),
                 offsets[0] + lineLen *jhat.getX(),
                 offsets[1] - lineLen * jhat.getY());
-
         return gc;
-
     }
 
     public void drawShit(ArrayList<Coordinate> initShit, Canvas canvas){
@@ -131,7 +125,6 @@ public class Graphs {
             }
             gc.fillOval(shit.getX() + offsets[0] - coordW/2,
                     -shit.getY() + offsets[1] - coordH/2, coordW, coordH);
-
         }
     }
 
