@@ -30,6 +30,10 @@ public class Graphs {
     private double coordW = 10;
     private double coordH = 10;
 
+    private ArrayList<Integer> redColor = new ArrayList<>(Arrays.asList(250, 0, 0));
+    private ArrayList<Integer> greyColor = new ArrayList<>(Arrays.asList(250, 0, 0));
+
+
     public Graphs(Matrix userMatrix) {
         ihat = new Vector(userMatrix.getA(), userMatrix.getC());
         jhat = new Vector(userMatrix.getB(), userMatrix.getD());
@@ -126,6 +130,33 @@ public class Graphs {
             gc.fillOval(shit.getX() + offsets[0] - coordW/2,
                     -shit.getY() + offsets[1] - coordH/2, coordW, coordH);
         }
+    }
+
+    private Color getColorFromList(ArrayList<Integer> list) {
+        // Ensure the list has at least 3 values for RGB
+        if (list.size() < 3) {
+            throw new IllegalArgumentException("Color list must contain at least 3 values (red, green, blue).");
+        }
+
+        // Get the red, green, and blue values
+        int red = list.get(0);
+        int green = list.get(1);
+        int blue = list.get(2);
+
+        // Create and return the Color
+        return Color.rgb(red, green, blue);
+    }
+
+
+    public void updateRed() {
+        redColor.set(0, redColor.get(0) - 50);
+        // Todo might cause a problem if we try to stack more than 5
+    }
+
+    public void updateGrey() {
+        greyColor.set(0, greyColor.get(0) - 25);
+        greyColor.set(1, greyColor.get(1) - 25);
+        greyColor.set(2, greyColor.get(2) - 25);
     }
 
     public void drawDefaultSpace(int width, int height, Canvas canvasPane){
