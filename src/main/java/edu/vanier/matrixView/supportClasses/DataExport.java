@@ -1,4 +1,4 @@
-package edu.vanier.matrixView.export;
+package edu.vanier.matrixView.supportClasses;
 import edu.vanier.matrixView.math.Matrix;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.Canvas;

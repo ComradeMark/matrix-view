@@ -16,7 +16,7 @@
          <children>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="398.0" layoutY="312.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@img/DetInfoLogo.png" />
+                  <Image url="@../img/DetInfoLogo.png" />
                </image>
             </ImageView>
             <Text layoutX="58.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DetInfo has calculated your determinant value to be:" />

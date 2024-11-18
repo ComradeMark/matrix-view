@@ -25,7 +25,7 @@
 <?import javafx.scene.control.CheckBox?>
 <BorderPane fx:id="mainContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <right>
-      <Accordion BorderPane.alignment="CENTER">
+      <Accordion fx:id="controllersContainer" BorderPane.alignment="CENTER">
         <panes>
           <TitledPane fx:id="configPane" animated="false" text="Simulation configuration">
             <content>
@@ -88,7 +88,7 @@
                                        <graphic>
                                           <ImageView fx:id="infoBtn" fitHeight="39.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@img/infoBtn.png" />
+                                                <Image url="@../img/infoBtn.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -148,7 +148,7 @@
                                        <graphic>
                                           <ImageView fx:id="resetIcon" fitHeight="23.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@img/resetBtn.png" />
+                                                <Image url="@../img/resetBtn.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>

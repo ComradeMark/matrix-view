@@ -40,6 +40,11 @@ public class MainApp extends Application {
             primaryStage.sizeToScene();
             // Put this appliation's main window on top of other already-opened windows
             // upon launching the app.
+            try {
+                scene.getStylesheets().add(getClass().getResource("/supportClasses/application.css").toExternalForm());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             primaryStage.setAlwaysOnTop(true);
             primaryStage.show();
             primaryStage.setAlwaysOnTop(false);

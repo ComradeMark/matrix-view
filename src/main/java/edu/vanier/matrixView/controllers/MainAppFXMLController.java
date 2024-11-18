@@ -3,7 +3,7 @@ package edu.vanier.matrixView.controllers;
 import edu.vanier.matrixView.UI.aboutUsStage;
 import edu.vanier.matrixView.UI.detInfoStage;
 import edu.vanier.matrixView.animations.Graphs;
-import edu.vanier.matrixView.export.DataExport;
+import edu.vanier.matrixView.supportClasses.DataExport;
 import edu.vanier.matrixView.math.Calculator;
 import edu.vanier.matrixView.math.Coordinate;
 import edu.vanier.matrixView.math.Matrix;

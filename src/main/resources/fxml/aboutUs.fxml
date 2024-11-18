@@ -22,7 +22,7 @@
       <Text fill="WHITE" layoutX="164.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mark Moutter, Ahmet Yildrim, Le Tuan Huy Nguyen" />
       <ImageView fitHeight="213.0" fitWidth="484.0" layoutX="54.0" layoutY="51.0">
          <image>
-            <Image url="@img/LOGO.png" />
+            <Image url="@../img/LOGO.png" />
          </image>
       </ImageView>
       <Button fx:id="btnClose" layoutX="516.0" layoutY="341.0" mnemonicParsing="false" text="Close" />
