@@ -1,5 +1,4 @@
 package edu.vanier.matrixView.export;
-import edu.vanier.matrixView.animations.Graphs;
 import edu.vanier.matrixView.math.Matrix;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.Canvas;
@@ -30,8 +29,6 @@ public class DataExport {
      */
     public static void exportCanvasToPng(Stage ownerStage, Canvas canvas, Matrix matrix) {
         // Open the file chooser and get the selected file path
-        int width = (int) Math.ceil(canvas.getWidth());
-        int height = (int) Math.ceil(canvas.getWidth());
         GraphicsContext gc = canvas.getGraphicsContext2D();
         String text = String.valueOf(matrix);
         File selectedFile = openFileChooser(ownerStage, text);
@@ -39,25 +36,24 @@ public class DataExport {
         if (selectedFile != null) {
             // Create a WritableImage with the same dimensions as the canvas
             WritableImage writableImage = new WritableImage((int) canvas.getWidth(), (int) canvas.getHeight());
-
             gc.drawImage(writableImage, 0, 0);
             double det = Calculator.determinant(matrix);
             Matrix adj = Calculator.adjugate(matrix);
             Matrix inv = Calculator.adjugate(matrix);
-            gc.strokeText(String.valueOf(matrix), 100,100);
-            gc.strokeText(String.valueOf(det), 200,200);
-            gc.strokeText(String.valueOf(inv), 300,300);
-            gc.strokeText(String.valueOf(adj), 400,400);
+            gc.setLineWidth(0.8);
+            gc.setGlobalAlpha(0.5);
+            gc.setFill(Color.GREEN);
+            // todo the color change does not work
+            gc.strokeText(String.valueOf(matrix), 50,50);
+            gc.strokeText(String.valueOf(det), 50,100);
+            gc.strokeText(String.valueOf(inv), 50,150);
+            gc.strokeText(String.valueOf(adj), 50,200);
             // Capture the content of the canvas into the WritableImage
             canvas.snapshot(null, writableImage);
 
             // Convert the WritableImage to a BufferedImage
             BufferedImage bufferedImage = SwingFXUtils.fromFXImage(writableImage, null);
             gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
-            Graphs graphs = new Graphs(matrix);
-            graphs.drawGraph(width, height, canvas, Color.BLACK, Color.GRAY, 20);
-            // Todo: there is a problem of color matching when it comes to lines
-            graphs.drawDefaultSpace(width, height, canvas);
 
             try {
                 ImageIO.write(bufferedImage, "PNG", selectedFile);
