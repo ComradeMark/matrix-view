@@ -45,15 +45,15 @@ public class Graphs {
         gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
     }
 
-    public GraphicsContext drawGraph(int width, int height, Canvas canvas, Color graphColor, Color secondaryColor, double spacing){
+    public GraphicsContext drawGraph(double width, double height, Canvas canvas, Color graphColor, Color secondaryColor, double spacing){
 
-        int[] offsets = {width / 2, height /2};
+        double[] offsets = {width / 2, height /2};
 
         // graphics context
         GraphicsContext gc =
                 canvas.getGraphicsContext2D();
 
-        int numAxisPts = 4000;
+        int numAxisPts = 1000;
         gc.setFill(Color.BLACK);
         // loop for creating points
         for (int i = -numAxisPts/2; i < numAxisPts/2 + 1; i++) {

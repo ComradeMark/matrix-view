@@ -59,6 +59,8 @@ public class MainAppFXMLController {
     Spinner spinnerD = new Spinner<Integer>(Integer.MIN_VALUE, Integer.MAX_VALUE, 0);
 
     @FXML
+    CheckBox showGrid;
+    @FXML
     Button detInfoBtn;
     @FXML
     Button resetBtn;
@@ -115,7 +117,6 @@ public class MainAppFXMLController {
     @FXML
     public void initialize() {
 
-
 //        Sets desired spinner properties
         setSpinnerProperties();
 
@@ -123,6 +124,7 @@ public class MainAppFXMLController {
         btnAbout.setOnAction((event ->
         {
             aboutUsStage aboutUs = new aboutUsStage();
+            aboutUs.setFullScreen(true);
 
         }));
         int width = (int) canvasPane.getWidth();
@@ -164,18 +166,13 @@ public class MainAppFXMLController {
 
         detInfoBtn.setOnAction(event -> {
             detInfoStage detInfo = new detInfoStage();
-
-
-
         });
-
-
-
         
         // handles export button behaviour
         exportButton.setOnAction(event -> {
             DataExport.exportCanvasToPng(stage, canvasPane, userMatrix);
         });
+
 
 //      Zoom functionality
         spacingSlider.valueProperty().addListener(new ChangeListener<Number>() {
@@ -199,6 +196,7 @@ public class MainAppFXMLController {
                 // scale canvas based on the scroll value
                 spacing += DEFAULT_SPACING * zoomFactor;
                 spacingSlider.setValue(spacing);
+
                 if (spacing <= 0) {
                     spacing = 0.1;
                 }
@@ -255,7 +253,7 @@ public class MainAppFXMLController {
     }
 
     //      Draws default euclidean space
-    public Graphs drawDefaultSpace(int width, int height){
+    public Graphs drawDefaultSpace(double width, double height){
         Matrix simpleBasis = initMatrix;
         // All graph insertion code
         Graphs mainGraph = new Graphs(simpleBasis);
@@ -278,7 +276,7 @@ public class MainAppFXMLController {
             }
         };
     }
-    private void generateGraph(){
+    private void generateGraph() {
         double a = (double) spinnerA.getValue();
         double b = (double) spinnerB.getValue();
         double c = (double) spinnerC.getValue();
@@ -310,6 +308,9 @@ public class MainAppFXMLController {
     
     private void updateAnimation(double deltaTime){
         userGraph.removeGraph(canvasPane.getGraphicsContext2D());
+        if (showGrid.isSelected()) {
+            drawDefaultSpace(canvasPane.getWidth(), canvasPane.getHeight());
+        }
         Matrix moveMtx = Calculator.matrixSubtract(userMatrix, finalPosMtx);
         Matrix scaledMoveMtx = Calculator.scalarMult(deltaTime, moveMtx);
         finalPosMtx = Calculator.matrixAdd(finalPosMtx, scaledMoveMtx);
