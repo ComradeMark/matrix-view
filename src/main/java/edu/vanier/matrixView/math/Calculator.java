@@ -1,10 +1,14 @@
 package edu.vanier.matrixView.math;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+
 import jdk.jshell.spi.ExecutionControl;
  public class Calculator {
+     public static ArrayList<String> operations = new ArrayList<>();
 
-    public static ArrayList<Coordinate> matrixMultiply(Matrix matrix, ArrayList<Coordinate> coordinates) {
+
+     public static ArrayList<Coordinate> matrixMultiply(Matrix matrix, ArrayList<Coordinate> coordinates) {
         ArrayList<Coordinate> outs = new ArrayList<>();
         double a = matrix.getA();
         double b = matrix.getB();
@@ -69,6 +73,8 @@ import jdk.jshell.spi.ExecutionControl;
      */
 
     public static Matrix rowEchelon(Matrix matrix) {
+        //Storage for operations
+
         //Creates temporary storage row echelon matrix
         Matrix rref = new Matrix(matrix.getA(), matrix.getB(), matrix.getC(), matrix.getD());
         //Creates rows and columns of matrix as arrays for easier manipulation
@@ -97,6 +103,7 @@ import jdk.jshell.spi.ExecutionControl;
                 double factor = row1[0];
                 row1[0] /= factor;
                 row1[1] /= factor;
+                operations.add(factor + " * row 1" + " -> Row 1 ");
                 System.out.println(factor + " * row 1" + " -> Row 1 ");
 
             }
@@ -106,6 +113,7 @@ import jdk.jshell.spi.ExecutionControl;
                 double factor = row2[0];
                 row2[0] -= factor * row1[0];
                 row2[1] -= factor * row1[1];
+                operations.add(factor + " * row 1" + " + Row 2 " + " -> Row 2 ");
                 System.out.println(factor + " * row 1" + " + Row 2 " + " -> Row 2 ");
 
             }
@@ -113,6 +121,7 @@ import jdk.jshell.spi.ExecutionControl;
             if(row2[1] != 0.00){
                 double factor = row2[1];
                 row2[1] /= factor;
+                operations.add(factor + " * row 2" + " -> Row 2 ");
                 System.out.println(factor + " * row 2" + " -> Row 2 ");
 
             }
@@ -150,6 +159,8 @@ import jdk.jshell.spi.ExecutionControl;
         
     }
     private static void printMatrix(Matrix matrix){
+        operations.add("[" + matrix.getA() + " " + matrix.getB() + "]");
+        operations.add("[" + matrix.getC() + " " + matrix.getD() + "]");
         System.out.println("[" + matrix.getA() + " " + matrix.getB() + "]");
         System.out.println("[" + matrix.getC() + " " + matrix.getD() + "]");
     }

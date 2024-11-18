@@ -24,7 +24,7 @@ public class Driver extends Application {
         System.out.println(Calculator.matrixMultiply(mtx, coordinates));
         Matrix m1 = new Matrix(2, 3, -2, 4);
         Calculator c1 = new Calculator();
-        Calculator.rowEchelon(m1);
+        //Calculator.rowEchelon(m1);
         launch(args);
     }
 

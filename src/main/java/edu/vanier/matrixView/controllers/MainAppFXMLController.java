@@ -1,6 +1,7 @@
 package edu.vanier.matrixView.controllers;
 
 import edu.vanier.matrixView.UI.aboutUsStage;
+import edu.vanier.matrixView.UI.detInfoStage;
 import edu.vanier.matrixView.animations.Graphs;
 import edu.vanier.matrixView.export.DataExport;
 import edu.vanier.matrixView.math.Calculator;
@@ -35,6 +36,7 @@ import javafx.animation.AnimationTimer;
  * FXML controller for controlling the main window.
  */
 public class MainAppFXMLController {
+    public static Matrix userMatrix;
     GraphicsContext ugraph;
     Graphs userGraph;
 
@@ -48,21 +50,20 @@ public class MainAppFXMLController {
     TitledPane configPane;
     @FXML
     Spinner spinnerA = new Spinner(-1000, 1000, 1.0);
-    SpinnerValueFactory<Double> spinnerAProperties = new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE, Double.MAX_VALUE, 1.0);
 
     @FXML
     Spinner spinnerB = new Spinner(Integer.MIN_VALUE, Integer.MAX_VALUE, 0);
-    SpinnerValueFactory<Double> spinnerBProperties = new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE, Double.MAX_VALUE, 0.0);
 
     @FXML
     Spinner spinnerC = new Spinner<Integer>(Integer.MIN_VALUE, Integer.MAX_VALUE, 0);
-    SpinnerValueFactory<Double> spinnerCProperties = new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE, Double.MAX_VALUE, 0.0);
 
     @FXML
     Spinner spinnerD = new Spinner<Integer>(Integer.MIN_VALUE, Integer.MAX_VALUE, 0);
-    SpinnerValueFactory<Double> spinnerDProperties = new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE, Double.MAX_VALUE, 1.0);
 
-
+    @FXML
+    Button detInfoBtn;
+    @FXML
+    Button resetBtn;
     @FXML
     private TitledPane valuePane;
     @FXML
@@ -109,7 +110,6 @@ public class MainAppFXMLController {
     int spacing = 30;
     Matrix initMatrix = new Matrix(1, 0, 0, 1);
     Stage stage;
-    Matrix userMatrix;
 
     Matrix finalPosMtx = initMatrix;
 
@@ -119,88 +119,11 @@ public class MainAppFXMLController {
     @FXML
     public void initialize() {
 
-        intWarning.setVisible(false);
-        EventHandler<KeyEvent> enterKeyEventHandler;
+//        Sets desired spinner properties
+        setSpinnerProperties();
 
-        enterKeyEventHandler = new EventHandler<KeyEvent>() {
-
-
-            // Handles checking whether a manual user entry into field is an integer or not, and resets entry if it is invalid. Uses animation.
-            @Override
-            public void handle(KeyEvent event) {
-
-                if (
-                    spinnerA.getValue().toString().matches("[a-zA-Z]") ||
-                    spinnerB.getValue().toString().matches("[a-zA-Z]") ||
-                    spinnerC.getValue().toString().matches("[a-zA-Z]") ||
-                    spinnerD.getValue().toString().matches("[a-zA-Z]")
-                ) {
-
-                    // reset editor to INITAL_VALUE
-                    spinnerA.getEditor().textProperty().set(INITAL_VALUE);
-                    spinnerB.getEditor().textProperty().set(INITAL_VALUE);
-                    spinnerC.getEditor().textProperty().set(INITAL_VALUE);
-                    spinnerD.getEditor().textProperty().set(INITAL_VALUE);
-                    intWarning.setVisible(true);
-
-                }
-
-                // handle users "enter key event"
-                if (event.getCode() == KeyCode.ENTER) {
-
-                    try {
-                        Double.parseDouble(spinnerA.getPromptText());
-                    } catch (NumberFormatException e) {
-                        intWarning.setVisible(true);
-                        PauseTransition intError = new PauseTransition(
-                                Duration.seconds(3)
-                        );
-                        intError.setOnFinished(
-                                event1 -> intWarning.setVisible(false)
-                        );
-                        intError.play();
-
-                        // reset editor to INITAL_VALUE
-                        spinnerA.getEditor().textProperty().set(INITAL_VALUE);
-                        spinnerB.getEditor().textProperty().set(INITAL_VALUE);
-                        spinnerC.getEditor().textProperty().set(INITAL_VALUE);
-                        spinnerD.getEditor().textProperty().set(INITAL_VALUE);
-
-
-                    }
-                }
-            }
-        };
-
-        spinnerA.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE, Double.MAX_VALUE,
-                Double.parseDouble(INITAL_VALUE)));
-        spinnerA.setEditable(true);
-        spinnerA.getEditor().addEventHandler(KeyEvent.KEY_PRESSED, enterKeyEventHandler);
-
-        spinnerB.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE, Double.MAX_VALUE,
-                Double.parseDouble(INITAL_VALUE)));
-        spinnerB.setEditable(true);
-        spinnerB.getEditor().addEventHandler(KeyEvent.KEY_PRESSED, enterKeyEventHandler);
-        spinnerC.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE, Double.MAX_VALUE,
-                Double.parseDouble(INITAL_VALUE)));
-        spinnerC.setEditable(true);
-        spinnerC.getEditor().addEventHandler(KeyEvent.KEY_PRESSED, enterKeyEventHandler);
-        spinnerD.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE, Double.MAX_VALUE,
-                Double.parseDouble(INITAL_VALUE)));
-        spinnerD.setEditable(true);
-        spinnerD.getEditor().addEventHandler(KeyEvent.KEY_PRESSED, enterKeyEventHandler);
-
-
-        spinnerA.setPromptText("Value A");
-        spinnerB.setEditable(true);
-        spinnerB.setPromptText("Value B");
-        spinnerC.setEditable(true);
-        spinnerC.setPromptText("Value C");
-        spinnerD.setEditable(true);
-        spinnerD.setPromptText("Value D");
-
+//        Handles about section
         btnAbout.setOnAction((event ->
-
         {
             aboutUsStage aboutUs = new aboutUsStage();
 
@@ -218,10 +141,7 @@ public class MainAppFXMLController {
         userGraph.drawShit(initShit, canvasPane);
         System.out.println(graphPane.getHeight());
 
-        spinnerA.setValueFactory(spinnerAProperties);
-        spinnerB.setValueFactory(spinnerBProperties);
-        spinnerC.setValueFactory(spinnerCProperties);
-        spinnerD.setValueFactory(spinnerDProperties);
+
 
 
 
@@ -272,13 +192,23 @@ public class MainAppFXMLController {
             invC.setText("");
             invD.setText("");
         });
+
+        detInfoBtn.setOnAction(event -> {
+            detInfoStage detInfo = new detInfoStage();
+
+
+
+        });
+
+
+
         
         // handles export button behaviour
         exportButton.setOnAction(event -> {
             DataExport.exportCanvasToPng(stage, canvasPane, userMatrix);
         });
 
-
+//      Zoom functionality
         canvasPane.addEventHandler(ScrollEvent.SCROLL, event -> {
             if (event.getDeltaY() != 0) { // mouse events
                 double zoomFactor = (event.getDeltaY() > 0) ? 1.1 : 0.9; // modifying factors
@@ -296,11 +226,56 @@ public class MainAppFXMLController {
                 gc.restore();
             }
         });
-
+    detInfoBtn.setTooltip(new Tooltip("Launch DetInfo"));
+    resetBtn.setTooltip(new Tooltip("Reset configuration"));
 
     }
+//Method to handle spinner properties
+    private void setSpinnerProperties() {
+        intWarning.setVisible(false);
+        EventHandler<KeyEvent> enterKeyEventHandler;
 
-//      Draws default euclidean space
+        spinnerA.setPromptText("Value A");
+        spinnerB.setEditable(true);
+        spinnerB.setPromptText("Value B");
+        spinnerC.setEditable(true);
+        spinnerC.setPromptText("Value C");
+        spinnerD.setEditable(true);
+        spinnerD.setPromptText("Value D");
+
+
+        createSpinner(spinnerA, -100, 100, 1, 0.5);
+        createSpinner(spinnerB, -100, 100, 0, 0.5);
+        createSpinner(spinnerC, -100, 100, 0, 0.5);
+        createSpinner(spinnerD, -100, 100, 1, 0.5);
+
+    }
+//    Method to separate spinners by value factories
+    private Spinner<Double> createSpinner(Spinner<Double> spinner, double min, double max, double initialValue, double step) {
+
+        SpinnerValueFactory<Double> valueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(min, max, initialValue, step);
+        spinner.setValueFactory(valueFactory);
+        spinner.setEditable(true);
+
+        spinner.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
+            try {
+                double value = Double.parseDouble(newValue);
+                if (String.valueOf(value).matches("-?\\d*(\\.\\d+)?")) {
+
+                    spinner.getValueFactory().setValue(value);
+                }
+                 else {
+                    spinner.getEditor().setText(oldValue);
+                }
+            } catch (NumberFormatException e) {
+                spinner.getEditor().setText(oldValue);
+            }
+        });
+
+        return spinner;
+    }
+
+    //      Draws default euclidean space
     public Graphs drawDefaultSpace(int width, int height){
         Matrix simpleBasis = initMatrix;
         // All graph insertion code
@@ -324,6 +299,8 @@ public class MainAppFXMLController {
             }
         };
     }
+
+
     
     private void updateAnimation(double deltaTime){
         userGraph.removeGraph(canvasPane.getGraphicsContext2D());
