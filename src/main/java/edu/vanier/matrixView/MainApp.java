@@ -1,23 +1,18 @@
 package edu.vanier.matrixView;
 
-import edu.vanier.matrixView.animations.Graphs;
 import edu.vanier.matrixView.controllers.MainAppFXMLController;
-import java.io.IOException;
-import java.util.logging.Level;
-
-import edu.vanier.matrixView.math.Calculator;
-import edu.vanier.matrixView.math.Matrix;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.util.Objects;
+import java.util.logging.Level;
 
 
 public class MainApp extends Application {
@@ -36,15 +31,12 @@ public class MainApp extends Application {
             BorderPane root = (BorderPane)loadFXML(MAINAPP_LAYOUT, controller);
             scene = new Scene(root, 640, 480);
             primaryStage.setScene(scene);
+            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("java/edu/vanier/matrixView/supportClasses/application.css")).toExternalForm());
 
             primaryStage.sizeToScene();
-            // Put this appliation's main window on top of other already-opened windows
+            // Put this application's main window on top of other already-opened windows
             // upon launching the app.
-            try {
-                scene.getStylesheets().add(getClass().getResource("/supportClasses/application.css").toExternalForm());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+
             primaryStage.setAlwaysOnTop(true);
             primaryStage.show();
             primaryStage.setAlwaysOnTop(false);
@@ -76,7 +68,6 @@ public class MainApp extends Application {
      * @param fxmlController An instance of the FXML controller to be associated
      * with the loaded FXML scene graph.
      * @return The root node of the loaded scene graph.
-     * @throws IOException
      */
     public static Parent loadFXML(String fxmlFile, Object fxmlController) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("/fxml/" + fxmlFile + ".fxml"));
