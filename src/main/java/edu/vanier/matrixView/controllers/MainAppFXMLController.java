@@ -8,8 +8,6 @@ import edu.vanier.matrixView.math.Calculator;
 import edu.vanier.matrixView.math.Coordinate;
 import edu.vanier.matrixView.math.Matrix;
 import edu.vanier.matrixView.math.Vector;
-import javafx.animation.Interpolator;
-import javafx.animation.RotateTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -24,7 +22,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,8 +37,6 @@ public class MainAppFXMLController {
     Graphs userGraph;
 
     private final static Logger logger = LoggerFactory.getLogger(MainAppFXMLController.class);
-    @FXML
-    private Canvas canvasPane;
 
     @FXML
     BorderPane mainContainer;
@@ -103,8 +98,8 @@ public class MainAppFXMLController {
 
     @FXML
     private Button btnSwitchScene;
-
-
+    @FXML
+    private Canvas canvasPane;
     protected static final String INITAL_VALUE = "0";
     
     private AnimationTimer animationTimer;   
@@ -120,8 +115,6 @@ public class MainAppFXMLController {
     @FXML
     public void initialize() {
 
-         int width = (int) canvasPane.getWidth();
-         int height = (int) canvasPane.getHeight();
 
 //        Sets desired spinner properties
         setSpinnerProperties();
@@ -132,7 +125,8 @@ public class MainAppFXMLController {
             aboutUsStage aboutUs = new aboutUsStage();
 
         }));
-
+        int width = (int) canvasPane.getWidth();
+        int height = (int) canvasPane.getHeight();
 
         userGraph = drawDefaultSpace(width, height);
 
@@ -176,9 +170,7 @@ public class MainAppFXMLController {
         });
 
 
-        resetBtn.setOnAction(event -> {
-            reuseInverseMatrix(width, height);
-        });
+
         
         // handles export button behaviour
         exportButton.setOnAction(event -> {
@@ -207,8 +199,8 @@ public class MainAppFXMLController {
                 // scale canvas based on the scroll value
                 spacing += DEFAULT_SPACING * zoomFactor;
                 spacingSlider.setValue(spacing);
-                if (spacing <= 10) {
-                    spacing = 10;
+                if (spacing <= 0) {
+                    spacing = 0.1;
                 }
 
                 gc.restore();
@@ -218,25 +210,7 @@ public class MainAppFXMLController {
     resetBtn.setTooltip(new Tooltip("Reuse inverse for simulation"));
 
     }
-
-    private void reuseInverseMatrix(int width, int height) {
-        RotateTransition rt = new RotateTransition(Duration.millis(750), resetBtn.getGraphic());
-        userMatrix = Calculator.inverse(userMatrix);
-        spinnerA.getValueFactory().setValue(userMatrix.getA());
-        spinnerB.getValueFactory().setValue(userMatrix.getB());
-        spinnerC.getValueFactory().setValue(userMatrix.getC());
-        spinnerD.getValueFactory().setValue(userMatrix.getD());
-        drawDefaultSpace(width, height);
-        generateGraph();
-
-        rt.setByAngle(-360);
-        rt.setCycleCount(1);
-        rt.setAutoReverse(false);
-        rt.setInterpolator(Interpolator.EASE_IN);
-        rt.play();
-    }
-
-    //Method to handle spinner properties
+//Method to handle spinner properties
     private void setSpinnerProperties() {
         intWarning.setVisible(false);
         EventHandler<KeyEvent> enterKeyEventHandler;
