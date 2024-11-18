@@ -258,7 +258,7 @@ public class MainAppFXMLController {
         // All graph insertion code
         Graphs mainGraph = new Graphs(simpleBasis);
 
-        mainGraph.drawGraph(width, height, canvasPane, Color.BLACK, Color.LIGHTSLATEGREY, spacing);
+        mainGraph.drawGraph(width, height, canvasPane, Color.BLACK, Color.BLACK, spacing);
         return mainGraph;
     }
     
@@ -309,7 +309,10 @@ public class MainAppFXMLController {
     private void updateAnimation(double deltaTime){
         userGraph.removeGraph(canvasPane.getGraphicsContext2D());
         if (showGrid.isSelected()) {
+            canvasPane.getGraphicsContext2D().setGlobalAlpha(0.2);
             drawDefaultSpace(canvasPane.getWidth(), canvasPane.getHeight());
+            canvasPane.getGraphicsContext2D().setGlobalAlpha(1);
+
         }
         Matrix moveMtx = Calculator.matrixSubtract(userMatrix, finalPosMtx);
         Matrix scaledMoveMtx = Calculator.scalarMult(deltaTime, moveMtx);
@@ -317,7 +320,7 @@ public class MainAppFXMLController {
         int width = (int) canvasPane.getWidth();
         int height = (int) canvasPane.getHeight();
         userGraph = new Graphs(finalPosMtx);
-        ugraph = userGraph.drawGraph(width, height, canvasPane, Color.RED, Color.LIGHTSLATEGREY, spacing);
+        ugraph = userGraph.drawGraph(width, height, canvasPane, Color.RED, Color.GRAY, spacing);
 
         Vector v = new Vector(spacing, spacing);
         Coordinate coord = new Coordinate(-1 * spacing, -1 * spacing);

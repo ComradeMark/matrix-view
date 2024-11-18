@@ -52,7 +52,6 @@ public class Graphs {
         // graphics context
         GraphicsContext gc =
                 canvas.getGraphicsContext2D();
-
         int numAxisPts = 1000;
         gc.setFill(Color.BLACK);
         // loop for creating points
@@ -67,7 +66,6 @@ public class Graphs {
             yCoords.add(new Coordinate(0, j * spacing));
 
         }
-
 
         double lineLen = 1000;
         ArrayList<Coordinate> tfmXCoords = Calculator.matrixMultiply(tfm, xCoords);
@@ -100,8 +98,12 @@ public class Graphs {
         }
 
         // Drawn main axes
-        gc.setStroke(graphColor);
+       gc = drawMainGridlines(gc, graphColor);
+        return gc;
+    }
 
+    public GraphicsContext drawMainGridlines(GraphicsContext gc, Color graphColor) {
+        gc.setStroke(graphColor);
         gc.strokeLine(offsets[0]- lineLen *ihat.getX(),
                 offsets[1] + lineLen * ihat.getY(),
                 offsets[0] + lineLen *ihat.getX(),
