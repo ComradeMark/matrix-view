@@ -8,6 +8,8 @@ import edu.vanier.matrixView.math.Calculator;
 import edu.vanier.matrixView.math.Coordinate;
 import edu.vanier.matrixView.math.Matrix;
 import edu.vanier.matrixView.math.Vector;
+import javafx.animation.Interpolator;
+import javafx.animation.RotateTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -22,6 +24,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -168,6 +171,9 @@ public class MainAppFXMLController {
 
 
         });
+        resetBtn.setOnAction(event -> {
+            reuseInverseMatrix(width, height);
+        });
 
 
 
@@ -229,7 +235,25 @@ public class MainAppFXMLController {
         createSpinner(spinnerD, -100, 100, 1, 0.5);
 
     }
-//    Method to separate spinners by value factories
+
+    private void reuseInverseMatrix(int width, int height) {
+        RotateTransition rt = new RotateTransition(Duration.millis(750), resetBtn.getGraphic());
+        userMatrix = Calculator.inverse(userMatrix);
+        spinnerA.getValueFactory().setValue(userMatrix.getA());
+        spinnerB.getValueFactory().setValue(userMatrix.getB());
+        spinnerC.getValueFactory().setValue(userMatrix.getC());
+        spinnerD.getValueFactory().setValue(userMatrix.getD());
+        drawDefaultSpace(width, height);
+        generateGraph();
+        rt.setByAngle(-360);
+        rt.setCycleCount(1);
+        rt.setAutoReverse(false);
+        rt.setInterpolator(Interpolator.EASE_IN);
+        rt.play();
+    }
+
+
+    //    Method to separate spinners by value factories
     private Spinner<Double> createSpinner(Spinner<Double> spinner, double min, double max, double initialValue, double step) {
 
         SpinnerValueFactory<Double> valueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(min, max, initialValue, step);
@@ -253,6 +277,9 @@ public class MainAppFXMLController {
 
         return spinner;
     }
+
+
+
 
     //      Draws default euclidean space
     public Graphs drawDefaultSpace(int width, int height){
