@@ -45,7 +45,7 @@ public class Graphs {
         gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
     }
 
-    public GraphicsContext drawGraph(int width, int height, Canvas canvas, Color graphColor, Color secondaryColor, int spacing){
+    public GraphicsContext drawGraph(int width, int height, Canvas canvas, Color graphColor, Color secondaryColor, double spacing){
 
         int[] offsets = {width / 2, height /2};
 

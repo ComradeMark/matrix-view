@@ -8,27 +8,21 @@ import edu.vanier.matrixView.math.Calculator;
 import edu.vanier.matrixView.math.Coordinate;
 import edu.vanier.matrixView.math.Matrix;
 import edu.vanier.matrixView.math.Vector;
-import javafx.animation.PauseTransition;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.ScrollEvent;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 
@@ -107,14 +101,12 @@ public class MainAppFXMLController {
     private AnimationTimer animationTimer;   
     private long lastUpdate = 0;
     
-    int spacing = 30;
+    double spacing = 30;
+    final double DEFAULT_SPACING = 30;
     Matrix initMatrix = new Matrix(1, 0, 0, 1);
     Stage stage;
 
     Matrix finalPosMtx = initMatrix;
-
-    private double scale = 1.0;
-
 
     @FXML
     public void initialize() {
@@ -140,10 +132,6 @@ public class MainAppFXMLController {
         initShit.add(coord);
         userGraph.drawShit(initShit, canvasPane);
         System.out.println(graphPane.getHeight());
-
-
-
-
 
 //      Generates desired graph using matrix input
         btnGenerate.setOnAction(event -> {
@@ -211,8 +199,7 @@ public class MainAppFXMLController {
 //      Zoom functionality
         canvasPane.addEventHandler(ScrollEvent.SCROLL, event -> {
             if (event.getDeltaY() != 0) { // mouse events
-                double zoomFactor = (event.getDeltaY() > 0) ? 1.1 : 0.9; // modifying factors
-                scale *= zoomFactor;
+                double zoomFactor = (event.getDeltaY() > 0) ? 0.1 : -0.1; // modifying factors
 
                 GraphicsContext gc = canvasPane.getGraphicsContext2D();
                 gc.clearRect(0, 0, canvasPane.getWidth(), canvasPane.getHeight()); // Clear the canvas
@@ -220,8 +207,10 @@ public class MainAppFXMLController {
                 gc.save();
 
                 // scale canvas based on the scroll value
-                canvasPane.setScaleY(scale);
-                canvasPane.setScaleX(scale);
+                spacing += DEFAULT_SPACING * zoomFactor;
+                if (spacing <= 0) {
+                    spacing = 0.1;
+                }
 
                 gc.restore();
             }
@@ -242,7 +231,6 @@ public class MainAppFXMLController {
         spinnerC.setPromptText("Value C");
         spinnerD.setEditable(true);
         spinnerD.setPromptText("Value D");
-
 
         createSpinner(spinnerA, -100, 100, 1, 0.5);
         createSpinner(spinnerB, -100, 100, 0, 0.5);
