@@ -99,6 +99,7 @@ public class Graphs {
 
         // Drawn main axes
         gc.setStroke(graphColor);
+        gc.setGlobalAlpha(1);
         gc.strokeLine(offsets[0]- lineLen *ihat.getX(),
                 offsets[1] + lineLen * ihat.getY(),
                 offsets[0] + lineLen *ihat.getX(),
