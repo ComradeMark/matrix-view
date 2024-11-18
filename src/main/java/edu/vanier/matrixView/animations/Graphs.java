@@ -53,7 +53,7 @@ public class Graphs {
         GraphicsContext gc =
                 canvas.getGraphicsContext2D();
 
-        int numAxisPts = 40;
+        int numAxisPts = 4000;
         gc.setFill(Color.BLACK);
         // loop for creating points
         for (int i = -numAxisPts/2; i < numAxisPts/2 + 1; i++) {
@@ -69,7 +69,7 @@ public class Graphs {
         }
 
 
-        double lineLen = 10000;
+        double lineLen = 1000;
         ArrayList<Coordinate> tfmXCoords = Calculator.matrixMultiply(tfm, xCoords);
         ArrayList<Coordinate> tfmYCoords = Calculator.matrixMultiply(tfm, yCoords);
 
