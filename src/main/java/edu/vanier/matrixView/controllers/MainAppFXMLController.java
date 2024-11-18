@@ -8,6 +8,8 @@ import edu.vanier.matrixView.math.Calculator;
 import edu.vanier.matrixView.math.Coordinate;
 import edu.vanier.matrixView.math.Matrix;
 import edu.vanier.matrixView.math.Vector;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -44,6 +46,8 @@ public class MainAppFXMLController {
     TitledPane configPane;
     @FXML
     Spinner spinnerA = new Spinner(-1000, 1000, 1.0);
+    @FXML
+    Slider spacingSlider;
 
     @FXML
     Spinner spinnerB = new Spinner(Integer.MIN_VALUE, Integer.MAX_VALUE, 0);
@@ -111,6 +115,7 @@ public class MainAppFXMLController {
     @FXML
     public void initialize() {
 
+
 //        Sets desired spinner properties
         setSpinnerProperties();
 
@@ -132,34 +137,10 @@ public class MainAppFXMLController {
         initShit.add(coord);
         userGraph.drawShit(initShit, canvasPane);
         System.out.println(graphPane.getHeight());
-
+        generateGraph();
 //      Generates desired graph using matrix input
         btnGenerate.setOnAction(event -> {
-            double a = (double) spinnerA.getValue();
-            double b = (double) spinnerB.getValue();
-            double c = (double) spinnerC.getValue();
-            double d = (double) spinnerD.getValue();
-
-            userMatrix = new Matrix(a, b, c, d);
-            userGraph = new Graphs(initMatrix);
-            
-            setupAnimation();
-            animationTimer.start();
-
-            setupAnimation();
-            animationTimer.start();
-
-            fieldDet.setText(String.valueOf(Calculator.determinant(userMatrix)));
-
-            transA.setText(String.valueOf(Calculator.adjugate(userMatrix).getA()));
-            transB.setText(String.valueOf(Calculator.adjugate(userMatrix).getB()));
-            transC.setText(String.valueOf(Calculator.adjugate(userMatrix).getC()));
-            transD.setText(String.valueOf(Calculator.adjugate(userMatrix).getD()));
-
-            invA.setText(String.valueOf(Calculator.inverse(userMatrix).getA()));
-            invB.setText(String.valueOf(Calculator.inverse(userMatrix).getB()));
-            invC.setText(String.valueOf(Calculator.inverse(userMatrix).getC()));
-            invD.setText(String.valueOf(Calculator.inverse(userMatrix).getD()));
+           generateGraph();
         });
         //      Handles reset button behaviour
         btnReset.setOnAction(event -> {
@@ -197,6 +178,15 @@ public class MainAppFXMLController {
         });
 
 //      Zoom functionality
+        spacingSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue<?extends Number> observable, Number oldValue, Number newValue){
+                GraphicsContext gc = canvasPane.getGraphicsContext2D();
+                gc.clearRect(0, 0, canvasPane.getWidth(), canvasPane.getHeight()); // Clear the canvas
+                spacing = (double) newValue;
+            }
+        });
+
+
         canvasPane.addEventHandler(ScrollEvent.SCROLL, event -> {
             if (event.getDeltaY() != 0) { // mouse events
                 double zoomFactor = (event.getDeltaY() > 0) ? 0.1 : -0.1; // modifying factors
@@ -208,6 +198,7 @@ public class MainAppFXMLController {
 
                 // scale canvas based on the scroll value
                 spacing += DEFAULT_SPACING * zoomFactor;
+                spacingSlider.setValue(spacing);
                 if (spacing <= 0) {
                     spacing = 0.1;
                 }
@@ -216,7 +207,7 @@ public class MainAppFXMLController {
             }
         });
     detInfoBtn.setTooltip(new Tooltip("Launch DetInfo"));
-    resetBtn.setTooltip(new Tooltip("Reset configuration"));
+    resetBtn.setTooltip(new Tooltip("Reuse inverse for simulation"));
 
     }
 //Method to handle spinner properties
@@ -286,6 +277,33 @@ public class MainAppFXMLController {
                 lastUpdate = now;
             }
         };
+    }
+    private void generateGraph(){
+        double a = (double) spinnerA.getValue();
+        double b = (double) spinnerB.getValue();
+        double c = (double) spinnerC.getValue();
+        double d = (double) spinnerD.getValue();
+
+        userMatrix = new Matrix(a, b, c, d);
+        userGraph = new Graphs(initMatrix);
+
+        setupAnimation();
+        animationTimer.start();
+
+        setupAnimation();
+        animationTimer.start();
+
+        fieldDet.setText(String.valueOf(Calculator.determinant(userMatrix)));
+
+        transA.setText(String.valueOf(Calculator.adjugate(userMatrix).getA()));
+        transB.setText(String.valueOf(Calculator.adjugate(userMatrix).getB()));
+        transC.setText(String.valueOf(Calculator.adjugate(userMatrix).getC()));
+        transD.setText(String.valueOf(Calculator.adjugate(userMatrix).getD()));
+
+        invA.setText(String.valueOf(Calculator.inverse(userMatrix).getA()));
+        invB.setText(String.valueOf(Calculator.inverse(userMatrix).getB()));
+        invC.setText(String.valueOf(Calculator.inverse(userMatrix).getC()));
+        invD.setText(String.valueOf(Calculator.inverse(userMatrix).getD()));
     }
 
 
