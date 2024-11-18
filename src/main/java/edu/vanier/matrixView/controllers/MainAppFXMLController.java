@@ -16,6 +16,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -111,7 +112,10 @@ public class MainAppFXMLController {
     Matrix userMatrix;
 
     Matrix finalPosMtx = initMatrix;
-    
+
+    private double scale = 1.0;
+
+
     @FXML
     public void initialize() {
 
@@ -273,6 +277,26 @@ public class MainAppFXMLController {
         exportButton.setOnAction(event -> {
             DataExport.exportCanvasToPng(stage, canvasPane, userMatrix);
         });
+
+
+        canvasPane.addEventHandler(ScrollEvent.SCROLL, event -> {
+            if (event.getDeltaY() != 0) { // mouse events
+                double zoomFactor = (event.getDeltaY() > 0) ? 1.1 : 0.9; // modifying factors
+                scale *= zoomFactor;
+
+                GraphicsContext gc = canvasPane.getGraphicsContext2D();
+                gc.clearRect(0, 0, canvasPane.getWidth(), canvasPane.getHeight()); // Clear the canvas
+
+                gc.save();
+
+                // scale canvas based on the scroll value
+                canvasPane.setScaleY(scale);
+                canvasPane.setScaleX(scale);
+
+                gc.restore();
+            }
+        });
+
 
     }
 
