@@ -98,11 +98,6 @@ public class Graphs {
         }
 
         // Drawn main axes
-       gc = drawMainGridlines(gc, graphColor);
-        return gc;
-    }
-
-    public GraphicsContext drawMainGridlines(GraphicsContext gc, Color graphColor) {
         gc.setStroke(graphColor);
         gc.strokeLine(offsets[0]- lineLen *ihat.getX(),
                 offsets[1] + lineLen * ihat.getY(),
@@ -113,6 +108,10 @@ public class Graphs {
                 offsets[0] + lineLen *jhat.getX(),
                 offsets[1] - lineLen * jhat.getY());
         return gc;
+    }
+
+    public void drawMainGridlines(GraphicsContext gc) {
+
     }
 
     public void drawShit(ArrayList<Coordinate> initShit, Canvas canvas){

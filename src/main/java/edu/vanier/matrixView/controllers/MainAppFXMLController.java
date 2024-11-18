@@ -8,6 +8,8 @@ import edu.vanier.matrixView.math.Calculator;
 import edu.vanier.matrixView.math.Coordinate;
 import edu.vanier.matrixView.math.Matrix;
 import edu.vanier.matrixView.math.Vector;
+import javafx.animation.Interpolator;
+import javafx.animation.RotateTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -22,6 +24,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,8 +62,6 @@ public class MainAppFXMLController {
     Spinner spinnerD = new Spinner<Integer>(Integer.MIN_VALUE, Integer.MAX_VALUE, 0);
 
     @FXML
-    CheckBox showGrid;
-    @FXML
     Button detInfoBtn;
     @FXML
     Button resetBtn;
@@ -87,6 +88,8 @@ public class MainAppFXMLController {
     @FXML
     private Text intWarning;
 
+    @FXML
+    CheckBox showGrid;
     @FXML
     private TitledPane controlPane;
     @FXML
@@ -117,6 +120,7 @@ public class MainAppFXMLController {
     @FXML
     public void initialize() {
 
+
 //        Sets desired spinner properties
         setSpinnerProperties();
 
@@ -124,7 +128,6 @@ public class MainAppFXMLController {
         btnAbout.setOnAction((event ->
         {
             aboutUsStage aboutUs = new aboutUsStage();
-            aboutUs.setFullScreen(true);
 
         }));
         int width = (int) canvasPane.getWidth();
@@ -167,12 +170,18 @@ public class MainAppFXMLController {
         detInfoBtn.setOnAction(event -> {
             detInfoStage detInfo = new detInfoStage();
         });
+
+        resetBtn.setOnAction(event -> {
+            reuseInverseMatrix(width, height);
+        });
+
+
+
         
         // handles export button behaviour
         exportButton.setOnAction(event -> {
             DataExport.exportCanvasToPng(stage, canvasPane, userMatrix);
         });
-
 
 //      Zoom functionality
         spacingSlider.valueProperty().addListener(new ChangeListener<Number>() {
@@ -196,7 +205,6 @@ public class MainAppFXMLController {
                 // scale canvas based on the scroll value
                 spacing += DEFAULT_SPACING * zoomFactor;
                 spacingSlider.setValue(spacing);
-
                 if (spacing <= 0) {
                     spacing = 0.1;
                 }
@@ -227,7 +235,25 @@ public class MainAppFXMLController {
         createSpinner(spinnerD, -100, 100, 1, 0.5);
 
     }
-//    Method to separate spinners by value factories
+
+    private void reuseInverseMatrix(int width, int height) {
+        RotateTransition rt = new RotateTransition(Duration.millis(750), resetBtn.getGraphic());
+        userMatrix = Calculator.inverse(userMatrix);
+        spinnerA.getValueFactory().setValue(userMatrix.getA());
+        spinnerB.getValueFactory().setValue(userMatrix.getB());
+        spinnerC.getValueFactory().setValue(userMatrix.getC());
+        spinnerD.getValueFactory().setValue(userMatrix.getD());
+        drawDefaultSpace(width, height);
+        generateGraph();
+        rt.setByAngle(-360);
+        rt.setCycleCount(1);
+        rt.setAutoReverse(false);
+        rt.setInterpolator(Interpolator.EASE_IN);
+        rt.play();
+    }
+
+
+    //    Method to separate spinners by value factories
     private Spinner<Double> createSpinner(Spinner<Double> spinner, double min, double max, double initialValue, double step) {
 
         SpinnerValueFactory<Double> valueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(min, max, initialValue, step);
@@ -251,6 +277,9 @@ public class MainAppFXMLController {
 
         return spinner;
     }
+
+
+
 
     //      Draws default euclidean space
     public Graphs drawDefaultSpace(double width, double height){
@@ -276,7 +305,7 @@ public class MainAppFXMLController {
             }
         };
     }
-    private void generateGraph() {
+    private void generateGraph(){
         double a = (double) spinnerA.getValue();
         double b = (double) spinnerB.getValue();
         double c = (double) spinnerC.getValue();
@@ -312,8 +341,8 @@ public class MainAppFXMLController {
             canvasPane.getGraphicsContext2D().setGlobalAlpha(0.2);
             drawDefaultSpace(canvasPane.getWidth(), canvasPane.getHeight());
             canvasPane.getGraphicsContext2D().setGlobalAlpha(1);
-
         }
+
         Matrix moveMtx = Calculator.matrixSubtract(userMatrix, finalPosMtx);
         Matrix scaledMoveMtx = Calculator.scalarMult(deltaTime, moveMtx);
         finalPosMtx = Calculator.matrixAdd(finalPosMtx, scaledMoveMtx);
