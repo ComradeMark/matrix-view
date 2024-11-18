@@ -174,12 +174,12 @@
         </panes>
       </Accordion>
    </right>
-   <left>
+   <center>
       <Pane fx:id="graphPane" prefHeight="400.0" prefWidth="400.0" BorderPane.alignment="CENTER">
          <children>
             <Canvas fx:id="canvasPane" height="400.0" width="400.0" />
          </children></Pane>
-   </left>
+   </center>
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>

@@ -119,7 +119,8 @@ public class MainAppFXMLController {
 
     @FXML
     public void initialize() {
-
+        canvasPane.widthProperty().bind(graphPane.widthProperty());
+        canvasPane.heightProperty().bind(graphPane.heightProperty());
 
 //        Sets desired spinner properties
         setSpinnerProperties();
