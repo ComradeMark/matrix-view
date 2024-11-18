@@ -44,10 +44,10 @@ public class DataExport {
             gc.setGlobalAlpha(0.5);
             gc.setFill(Color.GREEN);
             // todo the color change does not work
-            gc.strokeText(String.valueOf(matrix), 50,50);
-            gc.strokeText(String.valueOf(det), 50,100);
-            gc.strokeText(String.valueOf(inv), 50,150);
-            gc.strokeText(String.valueOf(adj), 50,200);
+            gc.strokeText("Input matrix: " + String.valueOf(matrix), 50,50);
+            gc.strokeText("Determinant: " + String.valueOf(det), 50,100);
+            gc.strokeText("Inverse: " + String.valueOf(inv), 50,150);
+            gc.strokeText("Adjugate: " + String.valueOf(adj), 50,200);
             // Capture the content of the canvas into the WritableImage
             canvas.snapshot(null, writableImage);
 
