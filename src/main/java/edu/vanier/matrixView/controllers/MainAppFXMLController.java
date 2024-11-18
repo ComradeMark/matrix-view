@@ -205,8 +205,8 @@ public class MainAppFXMLController {
                 // scale canvas based on the scroll value
                 spacing += DEFAULT_SPACING * zoomFactor;
                 spacingSlider.setValue(spacing);
-                if (spacing <= 0) {
-                    spacing = 0.1;
+                if (spacing <= 10) {
+                    spacing = 10;
                 }
 
                 gc.restore();
