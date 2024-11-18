@@ -25,7 +25,7 @@ public class detInfoController {
         for (int i = 0; i < Calculator.operations.size(); i++) {
             outputText = outputText + Calculator.operations.get(i) + "\n";
         }
-        outputArea.setText(outputText);
+        outputArea.setText(outputText + "\n");
     }
 
 }

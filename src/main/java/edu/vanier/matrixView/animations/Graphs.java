@@ -53,7 +53,7 @@ public class Graphs {
         GraphicsContext gc =
                 canvas.getGraphicsContext2D();
 
-        int numAxisPts = 4000;
+        int numAxisPts = 100;
         gc.setFill(Color.BLACK);
         // loop for creating points
         for (int i = -numAxisPts/2; i < numAxisPts/2 + 1; i++) {
