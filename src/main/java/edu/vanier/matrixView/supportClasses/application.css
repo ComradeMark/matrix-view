@@ -1,31 +1,74 @@
+/* General background styling */
 #controllersContainer {
     -fx-background-color: #b4c5e4;
-
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-border-color: #9099b4;
 }
 
 #configPane {
     -fx-background-color: #b4c5e4;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-border-color: #9099b4;
 }
 
-.TextField {
-
+/* Styling for TextField */
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #9099b4;
+    -fx-border-radius: 3px;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
 }
 
-.Spinner {
-
+/* Styling for Spinner */
+.spinner {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #9099b4;
+    -fx-border-radius: 3px;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
 }
 
-.TitledPane {
+/* Styling for TitledPane */
+.title-pane {
     -fx-background-color: #b4c5e4;
-    --border-color: #090c9b;
+    -fx-border-color: #090c9b;
+    -fx-border-radius: 5px;
+    -fx-padding: 10px;
+    -fx-title-color: #333333;
+    -fx-font-size: 14px;
 }
 
-.ToolBar {
+/* Styling for Toolbar */
+.tool-bar {
     -fx-background-color: #b4c5e4;
+    -fx-border-color: #9099b4;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
 }
 
-.Button {
-    fx-font-size: 16px;
+/* Styling for Buttons */
+.button {
+    -fx-font-size: 16px;
     -fx-background-color: #3498db;
     -fx-text-fill: white;
+    -fx-border-radius: 5px;
+    -fx-border-color: #2980b9;
+    -fx-padding: 10px 15px;
 }
+
+/*.button:hover {*/
+/*    -fx-background-color: #2980b9;*/
+/*    -fx-cursor: hand;*/
+/*}*/
+
+/*.button:pressed {*/
+/*    -fx-background-color: #1e6587;*/
+/*    -fx-border-color: #1a5276;*/
+/*}*/
+
+

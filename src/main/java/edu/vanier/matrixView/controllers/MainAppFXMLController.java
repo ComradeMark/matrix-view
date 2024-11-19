@@ -288,7 +288,7 @@ public class MainAppFXMLController {
         // All graph insertion code
         Graphs mainGraph = new Graphs(simpleBasis);
 
-        mainGraph.drawGraph(width, height, canvasPane, Color.BLACK, Color.BLACK, spacing);
+        mainGraph.drawGraph(width, height, canvasPane, Color.web("#EA3B52", 0.5), Color.BLACK, spacing);
         return mainGraph;
     }
     
