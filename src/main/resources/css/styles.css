@@ -33,16 +33,6 @@
     -fx-text-fill: #333333;
 }
 
-/* Styling for TitledPane */
-.title-pane {
-    -fx-background-color: #b4c5e4;
-    -fx-border-color: #090c9b;
-    -fx-border-radius: 5px;
-    -fx-padding: 10px;
-    -fx-title-color: #333333;
-    -fx-font-size: 14px;
-}
-
 /* Styling for Toolbar */
 .tool-bar {
     -fx-background-color: #b4c5e4;
@@ -60,15 +50,5 @@
     -fx-border-color: #2980b9;
     -fx-padding: 10px 15px;
 }
-
-/*.button:hover {*/
-/*    -fx-background-color: #2980b9;*/
-/*    -fx-cursor: hand;*/
-/*}*/
-
-/*.button:pressed {*/
-/*    -fx-background-color: #1e6587;*/
-/*    -fx-border-color: #1a5276;*/
-/*}*/
 
 

@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.net.URL;
 import java.util.ArrayList;
 import javafx.animation.Timeline;
 
@@ -24,8 +25,18 @@ public class Driver extends Application {
         System.out.println(Calculator.matrixMultiply(mtx, coordinates));
         Matrix m1 = new Matrix(2, 3, -2, 4);
         Calculator c1 = new Calculator();
+
+        URL cssUrl = Driver.class.getResource("/css/styles.css");
+        if (cssUrl != null) {
+            System.out.println("CSS file found at: " + cssUrl.toExternalForm());
+        } else {
+            System.out.println("CSS file not found. Check the path and ensure the file is included in the build.");
+        }
+
         //Calculator.rowEchelon(m1);
         launch(args);
+
+
     }
 
     @Override

@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
 import java.util.logging.Level;
 
@@ -30,8 +31,9 @@ public class MainApp extends Application {
             MainAppFXMLController controller = new MainAppFXMLController();
             BorderPane root = (BorderPane)loadFXML(MAINAPP_LAYOUT, controller);
             scene = new Scene(root, 640, 480);
+            scene.getStylesheets().add((getClass().getResource("/css/styles.css").toExternalForm()));
+
             primaryStage.setScene(scene);
-            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("java/edu/vanier/matrixView/supportClasses/application.css")).toExternalForm());
 
             primaryStage.sizeToScene();
             // Put this application's main window on top of other already-opened windows
