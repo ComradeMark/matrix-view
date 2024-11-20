@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;
-import javafx.animation.Timeline;
 
 public class Driver extends Application {
     public static void main(String[] args) {
