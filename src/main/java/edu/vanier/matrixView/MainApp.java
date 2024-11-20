@@ -31,7 +31,7 @@ public class MainApp extends Application {
             MainAppFXMLController controller = new MainAppFXMLController();
             BorderPane root = (BorderPane)loadFXML(MAINAPP_LAYOUT, controller);
             scene = new Scene(root, 640, 480);
-            scene.getStylesheets().add((getClass().getResource("/css/styles.css").toExternalForm()));
+            scene.getStylesheets().add((getClass().getResource("css/styles.css").toExternalForm()));
 
             primaryStage.setScene(scene);
 

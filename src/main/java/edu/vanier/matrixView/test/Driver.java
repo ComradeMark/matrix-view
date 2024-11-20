@@ -45,6 +45,10 @@ public class Driver extends Application {
         loader.setController(new MainAppFXMLController());
         Parent root = loader.load();
         Scene scene = new Scene(root);
+        
+        scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+
+        
         primaryStage.setScene(scene);
         primaryStage.setTitle("MatrixView Home");
         primaryStage.show();
