@@ -1,54 +1,87 @@
-/* General background styling */
 #controllersContainer {
     -fx-background-color: #b4c5e4;
-    -fx-padding: 10px;
-    -fx-border-radius: 5px;
     -fx-border-color: #9099b4;
+    -fx-border-width: 1px;
 }
 
-#configPane {
-    -fx-background-color: #b4c5e4;
-    -fx-padding: 10px;
-    -fx-border-radius: 5px;
-    -fx-border-color: #9099b4;
-}
-
-/* Styling for TextField */
-.text-field {
-    -fx-background-color: #ffffff;
-    -fx-border-color: #9099b4;
-    -fx-border-radius: 3px;
-    -fx-padding: 5px;
-    -fx-font-size: 14px;
-    -fx-text-fill: #333333;
-}
-
-/* Styling for Spinner */
-.spinner {
-    -fx-background-color: #ffffff;
-    -fx-border-color: #9099b4;
-    -fx-border-radius: 3px;
-    -fx-padding: 5px;
-    -fx-font-size: 14px;
-    -fx-text-fill: #333333;
-}
-
-/* Styling for Toolbar */
-.tool-bar {
+.titled-pane {
     -fx-background-color: #b4c5e4;
     -fx-border-color: #9099b4;
-    -fx-border-radius: 5px;
-    -fx-padding: 5px;
+    -fx-border-width: 1px;
+    -fx-text-fill: #2c3e50;
+    -fx-font-size: 14px;
+    -fx-padding: 8px;
 }
 
-/* Styling for Buttons */
 .button {
-    -fx-font-size: 16px;
+    -fx-font-size: 12px;
     -fx-background-color: #3498db;
     -fx-text-fill: white;
-    -fx-border-radius: 5px;
+    -fx-border-radius: 3px;
     -fx-border-color: #2980b9;
-    -fx-padding: 10px 15px;
+    -fx-padding: 6px 8px;
+}
+#detInfoBtn {
+    -fx-font-size: 10px;
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-border-radius: 3px;
+    -fx-border-color: #2980b9;
+    -fx-padding: 4px 6px;
+}
+
+.text-field {
+    -fx-font-size: 12px;
+    -fx-background-color: #84bbe3;
+    -fx-text-fill: white;
+    -fx-border-color: #3498db;
+    -fx-border-radius: 3px;
+    -fx-padding: 4px;
 }
 
 
+.text {
+    -fx-font-size: 12px;
+    -fx-text-fill: #1e2f3f;
+}
+
+.slider {
+    -fx-control-inner-background: #b4c5e4;
+    -fx-background-color: #3498db;
+    -fx-padding: 4px;
+}
+.slider .track {
+    -fx-background-color: #2980b9;
+}
+.slider .thumb {
+    -fx-background-color: #3498db;
+}
+
+.spinner {
+    -fx-background-color: #84bbe3;
+    -fx-border-color: #3498db;
+    -fx-border-radius: 3px;
+    -fx-padding: 2px;
+}
+
+.check-box {
+    -fx-font-size: 12px;
+    -fx-text-fill: #2c3e50;
+}
+
+.tool-bar {
+    -fx-background-color: #b4c5e4;
+    -fx-padding: 8px;
+}
+
+.accordion .titled-pane .title {
+    -fx-background-color: transparent;
+}
+
+.accordion .titled-pane>*.content {
+    -fx-background-color: transparent;
+}
+
+.accordion .titled-pane>.title>.arrow-button>.arrow {
+    -fx-background-color: black;
+}

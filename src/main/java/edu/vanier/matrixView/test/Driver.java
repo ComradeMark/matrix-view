@@ -45,7 +45,7 @@ public class Driver extends Application {
         Parent root = loader.load();
         Scene scene = new Scene(root);
         
-        scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+        scene.getStylesheets().add("/css/styles.css");
 
         
         primaryStage.setScene(scene);
