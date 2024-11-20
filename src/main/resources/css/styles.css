@@ -85,3 +85,8 @@
 .accordion .titled-pane>.title>.arrow-button>.arrow {
     -fx-background-color: black;
 }
+
+#graphPane {
+    -fx-border-color: #9099b4;
+    -fx-border-width: 2px;
+}
