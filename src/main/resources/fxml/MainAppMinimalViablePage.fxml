@@ -40,7 +40,7 @@
                               </GridPane>
                               <Text fx:id="intWarning" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Invalid input" />
                               <Label fx:id="spacingLabel" alignment="BASELINE_RIGHT" text="Value" />
-                               <Slider fx:id="spacingSlider" blockIncrement="2" max="50" min="10" orientation="HORIZONTAL" prefWidth="300" />
+                               <Slider fx:id="spacingSlider" blockIncrement="2" max="90" value="50" min="10" orientation="HORIZONTAL" prefWidth="300" showTickLabels="true" showTickMarks="true" majorTickUnit="10" />
                               <Text fx:id="lineSpacingText" strokeType="OUTSIDE" strokeWidth="0.0" text="Line spacing">
                                  <font>
                                     <Font name="Calisto MT" size="12.0" />

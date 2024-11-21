@@ -208,6 +208,8 @@ public class MainAppFXMLController {
                 spacingSlider.setValue(spacing);
                 if (spacing <= 10) {
                     spacing = 10;
+                } else if (spacing >= 90) {
+                    spacing = 90;
                 }
 
                 gc.restore();
@@ -278,8 +280,6 @@ public class MainAppFXMLController {
 
         return spinner;
     }
-
-
 
 
     //      Draws default euclidean space

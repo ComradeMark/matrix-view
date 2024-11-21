@@ -16,6 +16,7 @@ public class detInfoController {
     private TextArea outputArea;
     @FXML
     public void initialize(){
+        // todo set up a exit button
         String outputText = "";
 
         detField.setEditable(false);
