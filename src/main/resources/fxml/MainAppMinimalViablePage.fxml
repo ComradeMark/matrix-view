@@ -80,7 +80,7 @@
                                           <Font size="9.0" />
                                        </font>
                                     </Button>
-                                    <TextField fx:id="fieldDet" prefHeight="26.0" prefWidth="74.0" GridPane.columnIndex="1" />
+                                    <TextField fx:id="fieldDet" prefHeight="26.0" prefWidth="74.0" GridPane.columnIndex="1" editable="false"/>
                                  </children>
                               </GridPane>
                            </children>
@@ -99,10 +99,10 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <TextField fx:id="transD" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                    <TextField fx:id="transA" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <TextField fx:id="transB" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                    <TextField fx:id="transC" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField fx:id="transD" GridPane.columnIndex="2" GridPane.rowIndex="2" editable="false"/>
+                                    <TextField fx:id="transA" GridPane.columnIndex="1" GridPane.rowIndex="1" editable="false"/>
+                                    <TextField fx:id="transB" GridPane.columnIndex="2" GridPane.rowIndex="1" editable="false"/>
+                                    <TextField fx:id="transC" GridPane.columnIndex="1" GridPane.rowIndex="2" editable="false"/>
                                     <Label prefHeight="17.0" prefWidth="59.0" text="Transpose" />
                                  </children>
                               </GridPane>
@@ -123,10 +123,10 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <TextField fx:id="invD" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                    <TextField fx:id="invA" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <TextField fx:id="invB" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                    <TextField fx:id="invC" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <TextField fx:id="invD" GridPane.columnIndex="2" GridPane.rowIndex="3" editable="false"/>
+                                    <TextField fx:id="invA" GridPane.columnIndex="1" GridPane.rowIndex="1" editable="false"/>
+                                    <TextField fx:id="invB" GridPane.columnIndex="2" GridPane.rowIndex="1" editable="false"/>
+                                    <TextField fx:id="invC" GridPane.columnIndex="1" GridPane.rowIndex="3" editable="false"/>
                                     <Label text="Inverse" />
                                     <Button fx:id="resetBtn" mnemonicParsing="false" GridPane.rowIndex="2">
                                        <graphic>
