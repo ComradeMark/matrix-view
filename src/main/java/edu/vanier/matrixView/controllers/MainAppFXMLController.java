@@ -334,8 +334,6 @@ public class MainAppFXMLController {
         invD.setText(String.valueOf(Calculator.inverse(userMatrix).getD()));
     }
 
-
-    
     private void updateAnimation(double deltaTime){
         userGraph.removeGraph(canvasPane.getGraphicsContext2D());
         if (showGrid.isSelected()) {
@@ -523,7 +521,6 @@ public class MainAppFXMLController {
     public void setCanvasPane(Canvas canvasPane) {
         this.canvasPane = canvasPane;
     }
-
 }
 
 

@@ -10,6 +10,7 @@ public class  aboutUsWindowController {
     private Button btnClose;
 
     public void initialize(){
+
         btnClose.setOnAction(this::handleCloseButtonAction);
     }
     @FXML
