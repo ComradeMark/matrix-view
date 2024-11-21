@@ -5,6 +5,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontSmoothingType;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
@@ -42,12 +44,13 @@ public class DataExport {
             Matrix inv = Calculator.adjugate(matrix);
             gc.setLineWidth(0.8);
             gc.setGlobalAlpha(0.5);
-            gc.setFill(Color.GREEN);
-            // todo the color change does not work
-            gc.strokeText("Input matrix: " + String.valueOf(matrix), 50,50);
-            gc.strokeText("Determinant: " + String.valueOf(det), 50,100);
-            gc.strokeText("Inverse: " + String.valueOf(inv), 50,150);
-            gc.strokeText("Adjugate: " + String.valueOf(adj), 50,200);
+            gc.setFill(Color.BLUE);
+            gc.setFont(new Font("Comic Sans MS", (canvas.getHeight() + canvas.getWidth()) / 2 * 0.032));
+            gc.setFontSmoothingType(FontSmoothingType.LCD);
+            gc.fillText("Input matrix: " + String.valueOf(matrix), 0,canvas.getHeight()/4);
+            gc.fillText("Determinant: " + String.valueOf(det), 0,canvas.getHeight()/4 + canvas.getHeight()*0.05);
+            gc.fillText("Inverse: " + String.valueOf(inv), 0,canvas.getHeight()/4 + canvas.getHeight()*0.1);
+            gc.fillText("Adjugate: " + String.valueOf(adj), 0,canvas.getHeight()/4 + canvas.getHeight()*0.15);
             // Capture the content of the canvas into the WritableImage
             canvas.snapshot(null, writableImage);
 
