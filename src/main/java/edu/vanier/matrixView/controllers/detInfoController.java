@@ -12,17 +12,26 @@ import static edu.vanier.matrixView.controllers.MainAppFXMLController.userMatrix
 
 
 public class detInfoController {
-
     @FXML
     private TextField detField;
     @FXML
     private TextArea outputArea;
-
     @FXML
     private Button goBack;
     @FXML
     public void initialize(){
-        // todo set up a exit button
+        goBack.setStyle("-fx-font-size: 12px;" +
+                "-fx-background-color: #3498db;" +
+                "-fx-text-fill: white;" +
+                "-fx-border-radius: 3px;" +
+                "-fx-border-color: #2980b9;" +
+                "-fx-padding: 6px 8px;"
+        );
+        outputArea.setStyle("-fx-border-color: #3498db;" +
+                            "-fx-border-radius: 3px;" +
+                            "-fx-padding: 4px;"
+        );
+
         String outputText = "";
 
         detField.setEditable(false);
@@ -35,7 +44,6 @@ public class detInfoController {
         outputArea.setText(outputText + "\n");
 
         goBack.setOnAction(this::handleGoBack);
-
     }
 
     public void handleGoBack(ActionEvent event) {

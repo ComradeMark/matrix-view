@@ -11,7 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.net.URL;
 import java.util.ArrayList;
 
 public class Driver extends Application {
@@ -25,17 +24,7 @@ public class Driver extends Application {
         Matrix m1 = new Matrix(2, 3, -2, 4);
         Calculator c1 = new Calculator();
 
-        URL cssUrl = Driver.class.getResource("/css/styles.css");
-        if (cssUrl != null) {
-            System.out.println("CSS file found at: " + cssUrl.toExternalForm());
-        } else {
-            System.out.println("CSS file not found. Check the path and ensure the file is included in the build.");
-        }
-
-        //Calculator.rowEchelon(m1);
         launch(args);
-
-
     }
 
     @Override
@@ -45,18 +34,10 @@ public class Driver extends Application {
         Parent root = loader.load();
         Scene scene = new Scene(root);
         
-        scene.getStylesheets().add("/css/styles.css");
-
+        scene.getStylesheets().add("/css/MainPage.css");
         
         primaryStage.setScene(scene);
         primaryStage.setTitle("MatrixView Home");
         primaryStage.show();
-        
-
-
-    }
-    
-    public void updateCanvas(){
-        
     }
 }

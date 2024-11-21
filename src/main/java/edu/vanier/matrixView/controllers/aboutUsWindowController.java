@@ -10,7 +10,13 @@ public class  aboutUsWindowController {
     private Button btnClose;
 
     public void initialize(){
-
+        btnClose.setStyle("-fx-font-size: 12px;" +
+                        "-fx-background-color: #3498db;" +
+                        "-fx-text-fill: white;" +
+                        "-fx-border-radius: 3px;" +
+                        "-fx-border-color: #2980b9;" +
+                        "-fx-padding: 6px 8px;"
+        );
         btnClose.setOnAction(this::handleCloseButtonAction);
     }
     @FXML
