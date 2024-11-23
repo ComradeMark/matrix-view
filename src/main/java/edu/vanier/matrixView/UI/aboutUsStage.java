@@ -7,16 +7,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class aboutUsStage extends Stage {
 
+    /**
+     * Method that initializes the "About Us" information page
+     */
     public aboutUsStage(){
         initComponents();
         initModality(Modality.APPLICATION_MODAL);
 
     }
+
+    /**
+     * Method that initializes the components of the stage by accessing the dedicated fxml file
+     */
     private void initComponents(){
         Stage aboutUsStage = new Stage();
         FXMLLoader loader = new FXMLLoader(Driver.class.getResource("/fxml/aboutUs.fxml"));

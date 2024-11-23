@@ -7,18 +7,24 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import static edu.vanier.matrixView.controllers.MainAppFXMLController.userMatrix;
 
-
+/**
+ * Class that acts as a controller for the determinant information page.
+ */
 public class detInfoController {
+
     @FXML
     private TextField detField;
     @FXML
     private TextArea outputArea;
     @FXML
     private Button goBack;
-    @FXML
+
+    /**
+     * Method that initializes the determinant information page.
+     * It also styles the exit button.
+     */
     public void initialize(){
         goBack.setStyle("-fx-font-size: 12px;" +
                 "-fx-background-color: #3498db;" +
@@ -46,8 +52,13 @@ public class detInfoController {
         goBack.setOnAction(this::handleGoBack);
     }
 
+    /**
+     * Method that allows the determinant stage to be closed
+     * @param event the expected user event
+     */
     public void handleGoBack(ActionEvent event) {
         Stage stage = (Stage) goBack.getScene().getWindow();
         stage.close();
     }
+
 }

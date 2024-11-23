@@ -4,22 +4,17 @@ import edu.vanier.matrixView.math.Calculator;
 import edu.vanier.matrixView.math.Coordinate;
 import edu.vanier.matrixView.math.Matrix;
 import edu.vanier.matrixView.math.Vector;
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import javafx.scene.shape.Line;
-import javafx.scene.canvas.*;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
+
+/**
+ * Class that contains the major logic of drawing graphs.
+ */
 public class Graphs {
-    //Todo see how we can update the coordinate system while the screen has a new dimension
 
-//    private int initialScreenHeight = 300;
-//    private int initialScreenWidth = 600;
-//    private int[] origin = {initialScreenWidth / 2 - 4, initialScreenHeight /2 - 4};
-
-
-    // Axis grid points
     private ArrayList<Coordinate> xCoords = new ArrayList<>();
     private ArrayList<Coordinate> yCoords = new ArrayList<>();
     private Coordinate origin = new Coordinate(0, 0);
@@ -30,21 +25,39 @@ public class Graphs {
     private double coordW = 10;
     private double coordH = 10;
 
-    private ArrayList<Integer> redColor = new ArrayList<>(Arrays.asList(250, 0, 0));
-    private ArrayList<Integer> greyColor = new ArrayList<>(Arrays.asList(250, 0, 0));
 
-
+    /**
+     * Constructor for the Graph object.
+     *
+     * @param userMatrix the entered matrix by the user
+     */
     public Graphs(Matrix userMatrix) {
         ihat = new Vector(userMatrix.getA(), userMatrix.getC());
         jhat = new Vector(userMatrix.getB(), userMatrix.getD());
         tfm = userMatrix;
     }
 
-//Removed all user graphs from pane. Used in reset method.
+
+    /**
+     * Method that removes all user graphs from pane. Used in reset method.
+     *
+     * @param gc The entered GraphicsContext object
+     */
     public void removeGraph(GraphicsContext gc){
         gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
     }
 
+    /**
+     * Method that draws a graph on a canvas using specified dimensions, colors, and spacing.
+     *
+     * @param width The width of the canvas
+     * @param height The height of the canvas
+     * @param canvas The canvas object to draw the graph on.
+     * @param graphColor The color of the main axes
+     * @param secondaryColor The color of the grid lines
+     * @param spacing The spacing between grid lines
+     * @return The GraphicsContext used for rendering the graph
+     */
     public GraphicsContext drawGraph(double width, double height, Canvas canvas, Color graphColor, Color secondaryColor, double spacing){
 
         double[] offsets = {width / 2, height /2};
@@ -57,12 +70,10 @@ public class Graphs {
         // loop for creating points
         for (int i = -numAxisPts/2; i < numAxisPts/2 + 1; i++) {
             if(i == 0){continue;}
-//            gc.fillOval(i * spacing + offsets[0], offsets[1], w, h);
             xCoords.add(new Coordinate(i * spacing , 0));
         }
         for (int j = -numAxisPts/2; j < numAxisPts/2 + 1; j++) {
             if(j == 0){continue;}
-//            gc.fillOval(offsets[0], j * spacing + offsets[1], w, h);
             yCoords.add(new Coordinate(0, j * spacing));
 
         }
@@ -111,10 +122,12 @@ public class Graphs {
         return gc;
     }
 
-    public void drawMainGridlines(GraphicsContext gc) {
-
-    }
-
+    //todo Tony fix this shit
+    /**
+     *
+     * @param initShit
+     * @param canvas
+     */
     public void drawShit(ArrayList<Coordinate> initShit, Canvas canvas){
         double[] offsets = {canvas.getWidth() / 2, canvas.getHeight() /2};
         GraphicsContext gc =
@@ -134,33 +147,12 @@ public class Graphs {
         }
     }
 
-    private Color getColorFromList(ArrayList<Integer> list) {
-        // Ensure the list has at least 3 values for RGB
-        if (list.size() < 3) {
-            throw new IllegalArgumentException("Color list must contain at least 3 values (red, green, blue).");
-        }
-
-        // Get the red, green, and blue values
-        int red = list.get(0);
-        int green = list.get(1);
-        int blue = list.get(2);
-
-        // Create and return the Color
-        return Color.rgb(red, green, blue);
-    }
-
-
-    public void updateRed() {
-        redColor.set(0, redColor.get(0) - 50);
-        // Todo might cause a problem if we try to stack more than 5
-    }
-
-    public void updateGrey() {
-        greyColor.set(0, greyColor.get(0) - 25);
-        greyColor.set(1, greyColor.get(1) - 25);
-        greyColor.set(2, greyColor.get(2) - 25);
-    }
-
+    /**
+     * Method that draws the main gridlines
+     * @param width The width of the canvas
+     * @param height The height of the canvas
+     * @param canvasPane The canvas object where the main axes will be drawn
+     */
     public void drawDefaultSpace(int width, int height, Canvas canvasPane){
         Matrix simpleBasis = new Matrix(1, 0, 0, 1);
         Graphs mainGraph = new Graphs(simpleBasis);
@@ -239,4 +231,5 @@ public class Graphs {
     public void setCoordH(double coordH) {
         this.coordH = coordH;
     }
+
 }

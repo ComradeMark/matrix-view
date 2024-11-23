@@ -1,7 +1,33 @@
+/* All the defined UI elements */
 #controllersContainer {
     -fx-background-color: #b4c5e4;
     -fx-border-color: #9099b4;
     -fx-border-width: 1px;
+}
+
+#detInfoBtn {
+    -fx-font-size: 10px;
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-border-radius: 3px;
+    -fx-border-color: #2980b9;
+    -fx-padding: 4px 6px;
+}
+
+#graphPane {
+    -fx-border-color: #9099b4;
+    -fx-border-width: 2px;
+}
+
+/* All styling to class elements */
+
+.button {
+    -fx-font-size: 12px;
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-border-radius: 3px;
+    -fx-border-color: #2980b9;
+    -fx-padding: 6px 8px;
 }
 
 .titled-pane {
@@ -12,24 +38,6 @@
     -fx-font-size: 14px;
     -fx-padding: 8px;
 }
-
-.button {
-    -fx-font-size: 12px;
-    -fx-background-color: #3498db;
-    -fx-text-fill: white;
-    -fx-border-radius: 3px;
-    -fx-border-color: #2980b9;
-    -fx-padding: 6px 8px;
-}
-#detInfoBtn {
-    -fx-font-size: 10px;
-    -fx-background-color: #3498db;
-    -fx-text-fill: white;
-    -fx-border-radius: 3px;
-    -fx-border-color: #2980b9;
-    -fx-padding: 4px 6px;
-}
-
 .text-field {
     -fx-font-size: 12px;
     -fx-background-color: #84bbe3;
@@ -39,22 +47,9 @@
     -fx-padding: 4px;
 }
 
-
 .text {
     -fx-font-size: 12px;
     -fx-text-fill: #1e2f3f;
-}
-
-.slider {
-    -fx-control-inner-background: #b4c5e4;
-    -fx-background-color: #3498db;
-    -fx-padding: 4px;
-}
-.slider .track {
-    -fx-background-color: #2980b9;
-}
-.slider .thumb {
-    -fx-background-color: #3498db;
 }
 
 .spinner {
@@ -74,20 +69,28 @@
     -fx-padding: 8px;
 }
 
+/* Slider */
+.slider {
+    -fx-control-inner-background: #b4c5e4;
+    -fx-background-color: #3498db;
+    -fx-padding: 4px;
+}
+.slider .track {
+    -fx-background-color: #2980b9;
+}
+.slider .thumb {
+    -fx-background-color: #3498db;
+}
+
+/* Accordion */
 .accordion .titled-pane .title {
     -fx-background-color: transparent;
 }
-
 .accordion .titled-pane>*.content {
     -fx-background-color: transparent;
 }
-
 .accordion .titled-pane>.title>.arrow-button>.arrow {
     -fx-background-color: black;
 }
 
-#graphPane {
-    -fx-border-color: #9099b4;
-    -fx-border-width: 2px;
-}
 

@@ -3,13 +3,19 @@ package edu.vanier.matrixView.math;
 /**
  * Custom class that creates a coordinate
  * Letters x and y represent the entries of the coordinate
- * The order of the entries are such: P(x, y)
  */
 
 public class Coordinate {
     public double x;
     public double y;
 
+    /**
+     * Constructor of a coordinate object that takes two entries.
+     * The order of the entries are such: P(x, y)
+     *
+     * @param x the entry corresponding to the first value
+     * @param y the entry corresponding to the first value
+     */
     public Coordinate(double x, double y) {
         this.x = x;
         this.y = y;
@@ -35,4 +41,5 @@ public class Coordinate {
     public String toString() {
         return "Coordinate{" + "x=" + x + ", y=" + y + '}';
     }
+
 }

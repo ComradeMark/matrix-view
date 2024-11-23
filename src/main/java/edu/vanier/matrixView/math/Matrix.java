@@ -2,7 +2,7 @@ package edu.vanier.matrixView.math;
 
 /**
  * Custom matrix class that will allow us to work with matrices.
- * Letters a,b,c, and d represents the entries of a 2 x 2 matrix
+ * Letters a,b,c, and d represent the entries of a two times two matrix
  * The order of the entries are such:
  * <p>
  * A(11) = a
@@ -11,14 +11,21 @@ package edu.vanier.matrixView.math;
  * A(22) = d
  */
 
-
 public class Matrix {
+
     public double a;
     public double b;
     public double c;
     public double d;
 
-
+    /**
+     * Constructor that initializes a Matrix given four entries
+     *
+     * @param a the entry corresponding to the first row and the first column
+     * @param b the entry corresponding to the first row and the second column
+     * @param c the entry corresponding to the second row and the first column
+     * @param d the entry corresponding to the second row and the second column
+     */
     public Matrix(double a, double b, double c, double d) {
         this.a = a;
         this.b = b;
@@ -67,7 +74,5 @@ public class Matrix {
                 ", d=" + d +
                 '}';
     }
+
 }
-
-
-

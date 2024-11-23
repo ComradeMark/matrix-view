@@ -3,11 +3,12 @@ package edu.vanier.matrixView.controllers;
 import edu.vanier.matrixView.UI.aboutUsStage;
 import edu.vanier.matrixView.UI.detInfoStage;
 import edu.vanier.matrixView.animations.Graphs;
-import edu.vanier.matrixView.supportClasses.DataExport;
 import edu.vanier.matrixView.math.Calculator;
 import edu.vanier.matrixView.math.Coordinate;
 import edu.vanier.matrixView.math.Matrix;
 import edu.vanier.matrixView.math.Vector;
+import edu.vanier.matrixView.supportClasses.DataExport;
+import javafx.animation.AnimationTimer;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
 import javafx.beans.value.ChangeListener;
@@ -29,18 +30,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import javafx.animation.AnimationTimer;
 
 /**
  * FXML controller for controlling the main window.
  */
 public class MainAppFXMLController {
+
     public static Matrix userMatrix;
     GraphicsContext ugraph;
     Graphs userGraph;
-
     private final static Logger logger = LoggerFactory.getLogger(MainAppFXMLController.class);
-
     @FXML
     BorderPane mainContainer;
     @FXML
@@ -51,16 +50,12 @@ public class MainAppFXMLController {
     Spinner spinnerA = new Spinner(-1000, 1000, 1.0);
     @FXML
     Slider spacingSlider;
-
     @FXML
     Spinner spinnerB = new Spinner(Integer.MIN_VALUE, Integer.MAX_VALUE, 0);
-
     @FXML
     Spinner spinnerC = new Spinner<Integer>(Integer.MIN_VALUE, Integer.MAX_VALUE, 0);
-
     @FXML
     Spinner spinnerD = new Spinner<Integer>(Integer.MIN_VALUE, Integer.MAX_VALUE, 0);
-
     @FXML
     Button detInfoBtn;
     @FXML
@@ -87,7 +82,6 @@ public class MainAppFXMLController {
     private TextField invD;
     @FXML
     private Text intWarning;
-
     @FXML
     CheckBox showGrid;
     @FXML
@@ -100,37 +94,35 @@ public class MainAppFXMLController {
     private Button btnAbout;
     @FXML
     private Pane graphPane;
-
     @FXML
     private Button btnSwitchScene;
     @FXML
     private Canvas canvasPane;
     protected static final String INITAL_VALUE = "0";
-    
     private AnimationTimer animationTimer;   
     private long lastUpdate = 0;
-    
     double spacing = 30;
     final double DEFAULT_SPACING = 30;
     Matrix initMatrix = new Matrix(1, 0, 0, 1);
     Stage stage;
-
     Matrix finalPosMtx = initMatrix;
 
-    @FXML
+    /**
+     * Method that defines the main application logic.
+     * Allows user interactions with various UI components.
+     */
     public void initialize() {
         canvasPane.widthProperty().bind(graphPane.widthProperty());
         canvasPane.heightProperty().bind(graphPane.heightProperty());
 
-//        Sets desired spinner properties
+        // Sets desired spinner properties
         setSpinnerProperties();
 
-//        Handles about section
-        btnAbout.setOnAction((event ->
-        {
+        // Handles about us page
+        btnAbout.setOnAction((event -> {
             aboutUsStage aboutUs = new aboutUsStage();
-
         }));
+
         int width = (int) canvasPane.getWidth();
         int height = (int) canvasPane.getHeight();
 
@@ -144,11 +136,11 @@ public class MainAppFXMLController {
         userGraph.drawShit(initShit, canvasPane);
         System.out.println(graphPane.getHeight());
         generateGraph();
-//      Generates desired graph using matrix input
+        // Generates desired graph using matrix input
         btnGenerate.setOnAction(event -> {
            generateGraph();
         });
-        //      Handles reset button behaviour
+        // Handles reset button behaviour
         btnReset.setOnAction(event -> {
             animationTimer.stop();
             userGraph.removeGraph(canvasPane.getGraphicsContext2D());
@@ -176,16 +168,19 @@ public class MainAppFXMLController {
             reuseInverseMatrix(width, height);
         });
 
-
-
-        
         // handles export button behaviour
         exportButton.setOnAction(event -> {
             DataExport.exportCanvasToPng(stage, canvasPane, userMatrix);
         });
 
-//      Zoom functionality
         spacingSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            /**
+             * Method that handles the zoom functionality
+             *
+             * @param observable The {@code ObservableValue} which value changed
+             * @param oldValue   The old value of the spacing between the lines
+             * @param newValue   The new value of the spacing between the lines
+             */
             public void changed(ObservableValue<?extends Number> observable, Number oldValue, Number newValue){
                 GraphicsContext gc = canvasPane.getGraphicsContext2D();
                 gc.clearRect(0, 0, canvasPane.getWidth(), canvasPane.getHeight()); // Clear the canvas
@@ -215,11 +210,13 @@ public class MainAppFXMLController {
                 gc.restore();
             }
         });
-    detInfoBtn.setTooltip(new Tooltip("Launch DetInfo"));
-    resetBtn.setTooltip(new Tooltip("Reuse inverse for simulation"));
-
+        detInfoBtn.setTooltip(new Tooltip("Launch DetInfo"));
+        resetBtn.setTooltip(new Tooltip("Reuse inverse for simulation"));
     }
-//Method to handle spinner properties
+
+    /**
+     * Method that handles spinner properties.
+     */
     private void setSpinnerProperties() {
         intWarning.setVisible(false);
         EventHandler<KeyEvent> enterKeyEventHandler;
@@ -236,9 +233,13 @@ public class MainAppFXMLController {
         createSpinner(spinnerB, -100, 100, 0, 0.5);
         createSpinner(spinnerC, -100, 100, 0, 0.5);
         createSpinner(spinnerD, -100, 100, 1, 0.5);
-
     }
 
+    /**
+     * Method that allows the user to see the inverse of the matrix they have drawn on the canvas.
+     * @param width the width of the canvas that stores the graph
+     * @param height the height of the canvas that stores the graph
+     */
     private void reuseInverseMatrix(int width, int height) {
         RotateTransition rt = new RotateTransition(Duration.millis(750), resetBtn.getGraphic());
         userMatrix = Calculator.inverse(userMatrix);
@@ -256,7 +257,16 @@ public class MainAppFXMLController {
     }
 
 
-    //    Method to separate spinners by value factories
+    /**
+     * Method to configure a Spinner<Double> with specified value constraints and input validation.
+     *
+     * @param spinner       The spinner instance to configure
+     * @param min           The minimum allowable value for the spinner
+     * @param max           The maximum allowable value for the spinner
+     * @param initialValue  The initial value to set for the spinner
+     * @param step          The increment/decrement size for the spinner.
+     * @return              The configured spinner
+     */
     private Spinner<Double> createSpinner(Spinner<Double> spinner, double min, double max, double initialValue, double step) {
 
         SpinnerValueFactory<Double> valueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(min, max, initialValue, step);
@@ -282,7 +292,12 @@ public class MainAppFXMLController {
     }
 
 
-    //      Draws default euclidean space
+    /**
+     * Method that draws the basic space (basis)
+     * @param width the width of the canvas that stores the graph
+     * @param height the height of the canvas that stores the graph
+     * @return the drawn default space
+     */
     public Graphs drawDefaultSpace(double width, double height){
         Matrix simpleBasis = initMatrix;
         // All graph insertion code
@@ -291,7 +306,11 @@ public class MainAppFXMLController {
         mainGraph.drawGraph(width, height, canvasPane, Color.web("#EA3B52", 0.5), Color.BLACK, spacing);
         return mainGraph;
     }
-    
+
+    /**
+     * Method that sets up the animation timeline.
+     * Calculates the deltaTime.
+     */
     private void setupAnimation() {
         animationTimer = new AnimationTimer() {
             @Override
@@ -299,13 +318,17 @@ public class MainAppFXMLController {
                 
                 if(lastUpdate > 0){
                     double deltaTime = (now - lastUpdate) / 1_000_000_000.0;
-                    
+
                     updateAnimation(deltaTime);
                 }
                 lastUpdate = now;
             }
         };
     }
+
+    /**
+     * Method that draws a graph based on the value user enters the spinners.
+     */
     private void generateGraph(){
         double a = (double) spinnerA.getValue();
         double b = (double) spinnerB.getValue();
@@ -334,6 +357,10 @@ public class MainAppFXMLController {
         invD.setText(String.valueOf(Calculator.inverse(userMatrix).getD()));
     }
 
+    /**
+     * Method that updates the animation based on a deltaTime.
+     * @param deltaTime the entered time interval between two consecutive frames
+     */
     private void updateAnimation(double deltaTime){
         userGraph.removeGraph(canvasPane.getGraphicsContext2D());
         if (showGrid.isSelected()) {
@@ -521,6 +548,5 @@ public class MainAppFXMLController {
     public void setCanvasPane(Canvas canvasPane) {
         this.canvasPane = canvasPane;
     }
+
 }
-
-

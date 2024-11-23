@@ -1,20 +1,24 @@
 package edu.vanier.matrixView.math;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
-import jdk.jshell.spi.ExecutionControl;
  public class Calculator {
+
      public static ArrayList<String> operations = new ArrayList<>();
 
-
+     /**
+      * Method that multiplies a given matrix by a given coordinate
+      *
+      * @param matrix      the inputted two by two matrix
+      * @param coordinates the inputted coordinate
+      * @return the resultant multiplication of the two entries
+      */
      public static ArrayList<Coordinate> matrixMultiply(Matrix matrix, ArrayList<Coordinate> coordinates) {
         ArrayList<Coordinate> outs = new ArrayList<>();
         double a = matrix.getA();
         double b = matrix.getB();
         double c = matrix.getC();
         double d = matrix.getD();
-
 
         for (Coordinate inCoord : coordinates) {
             double x = inCoord.getX();
@@ -32,49 +36,64 @@ import jdk.jshell.spi.ExecutionControl;
                     c * x + d * y
             ));
         }
-
         return outs;
+     }
+
+     /**
+      * Method that calculates the determinant of a matrix
+      *
+      * @param matrix the inputted two by two matrix
+      * @return returns the determinant of the matrix
+      */
+     public static double determinant(Matrix matrix) {
+         return matrix.getA() * matrix.getD() - matrix.getB() * matrix.getC();
     }
 
-
-    public static Vector[] matrixAdd(Matrix matrix, Coordinate[] coordinate) throws ExecutionControl.NotImplementedException {
-        throw new ExecutionControl.NotImplementedException("Not implemented");
-    }
-
-    public static double determinant(Matrix matrix) {
-        return matrix.getA() * matrix.getD() - matrix.getB() * matrix.getC();
-    }
-
-    public static Matrix adjugate(Matrix matrix) {
-        double a = matrix.getD();
+     /**
+      * Method that calculates the adjugate of a matrix
+      *
+      * @param matrix the inputted two by two matrix
+      * @return cofactor matrix of the entered matrix
+      */
+     public static Matrix adjugate(Matrix matrix) {
+         double a = matrix.getD();
         double d = matrix.getA();
         double b = matrix.getB() * -1;
         double c = matrix.getC() * -1;
         return new Matrix(a, b, c, d);
     }
 
-    public static Matrix inverse(Matrix matrix) {
+     /**
+      * Method that returns the inverse of a matrix
+      *
+      * @param matrix the inputted two by two matrix
+      * @return the inverse of the inputted matrix
+      */
+     public static Matrix inverse(Matrix matrix) {
         double det = determinant(matrix);
         Matrix temp = Calculator.adjugate(matrix);
         temp.setA(temp.getA() * det);
         temp.setB(temp.getB() * det);
         temp.setC(temp.getC() * det);
         temp.setD(temp.getD() * det);
-
         return temp;
     }
 
-    public static boolean isInvertible(Matrix matrix) {
+     /**
+      * Method that determines if a matrix is invertible or not
+      * @param matrix the inputted two by two matrix
+      * @return the boolean value whether the matrix is invertible or not
+      */
+     public static boolean isInvertible(Matrix matrix) {
         return Calculator.determinant(matrix) != 0;
-    }
+     }
 
-    /**
-     * Method that finds the row echelon form of a 2x2 matrix using the Gaussian algorithm
-     */
-
-    public static Matrix rowEchelon(Matrix matrix) {
-        //Storage for operations
-
+     /**
+      * Method that allows to use the row reduction process for two by two matrices
+      * @param matrix the inputted two by two matrix
+      * @return the simplified two by two matrix
+      */
+     public static Matrix rowEchelon(Matrix matrix) {
         //Creates temporary storage row echelon matrix
         Matrix rref = new Matrix(matrix.getA(), matrix.getB(), matrix.getC(), matrix.getD());
         //Creates rows and columns of matrix as arrays for easier manipulation
@@ -97,7 +116,7 @@ import jdk.jshell.spi.ExecutionControl;
             column2[0] = rref.getB();
             column2[1] = rref.getD();
             double[] pivotColumn = new double[2];
-            //Check if first element of row 1 is non-zero
+            //Check if the first element of row 1 is non-zero
             if (row1[0] != 0.00) {
                 //Use elementary row operations to put a 1 in the topmost position
                 double factor = row1[0];
@@ -133,39 +152,27 @@ import jdk.jshell.spi.ExecutionControl;
 
             return rref;
         }
-    return rref; }
+        return rref;
+     }
 
-    /**
-     * Static method that multiplies a row of matrix values by a scalar. Declared as a static to be able to use without instantiation.
-     */
-    private static double[] rowScalar(double pivotValue, double[] row, int rowValue){
-        System.out.println("Initial row: " + row.toString());
-        double scalar = 1/pivotValue;
-        row[0] = scalar*row[0];
-        row[1] = scalar*row[1];
-        return row;
-    }
-    /**
-     * Static method that swaps two arrays of matrix values. Declared as a static to be able to use without instantiation.
-     */
-    private static void rowSwap(){
-
-    }
-    /**
-     * Static method that multiplies a row of matrix values by a scalar, before adding that
-     * result to another array. Declared as a static to be able to use without instantiation.
-     */
-    private static void rowTimesAndAdd(double factor, double[] returnedArray, double[] enteredArray){
-        
-    }
-    private static void printMatrix(Matrix matrix){
+     /**
+      * Method that prints a matrix (for debugging purposes)
+      * @param matrix the inputted two by two matrix
+      */
+     private static void printMatrix(Matrix matrix){
         operations.add("[" + matrix.getA() + " " + matrix.getB() + "]");
         operations.add("[" + matrix.getC() + " " + matrix.getD() + "]");
         System.out.println("[" + matrix.getA() + " " + matrix.getB() + "]");
         System.out.println("[" + matrix.getC() + " " + matrix.getD() + "]");
     }
 
-    public static Matrix matrixSubtract(Matrix m1, Matrix m2){
+     /**
+      * Method that allows one matrix to be subtracted from another
+      * @param m1 the first inputted two by two matrix
+      * @param m2 the second inputted two by two matrix
+      * @return the resultant two by two matrix
+      */
+     public static Matrix matrixSubtract(Matrix m1, Matrix m2){
         return new Matrix(
                 m1.getA() - m2.getA(),
                 m1.getB() - m2.getB(),
@@ -173,8 +180,14 @@ import jdk.jshell.spi.ExecutionControl;
                 m1.getD() - m2.getD()
         );
     }
-    
-    public static Matrix matrixAdd(Matrix m1, Matrix m2){
+
+     /**
+      * Method that adds a matrix to another matrix
+      * @param m1 the first inputted two by two matrix
+      * @param m2 the second inputted two by two matrix
+      * @return the resultant two by two matrix
+      */
+     public static Matrix matrixAdd(Matrix m1, Matrix m2){
         return new Matrix(
                 m1.getA() + m2.getA(),
                 m1.getB() + m2.getB(),
@@ -182,8 +195,14 @@ import jdk.jshell.spi.ExecutionControl;
                 m1.getD() + m2.getD()
         );
     }
-    
-    public static Matrix scalarMult(double scalar, Matrix m){
+
+     /**
+      * Method that allows a matrix multiplication with a scalar value
+      * @param scalar the entered multiplier value
+      * @param m  the inputted two by two matrix
+      * @return the resultant two by two matrix
+      */
+     public static Matrix scalarMult(double scalar, Matrix m){
         return new Matrix(
                 m.getA() * scalar,
                 m.getB() * scalar,
@@ -191,4 +210,5 @@ import jdk.jshell.spi.ExecutionControl;
                 m.getD() * scalar
         );
     }
-}
+
+ }

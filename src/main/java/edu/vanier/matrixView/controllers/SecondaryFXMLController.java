@@ -9,8 +9,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * FXML controller class for a secondary scene.
- *
- * @author frostybee
  */
 public class SecondaryFXMLController {
 
@@ -29,4 +27,5 @@ public class SecondaryFXMLController {
         MainApp.switchScene(MainApp.MAINAPP_LAYOUT, new MainAppFXMLController());
         logger.info("Loaded the primary scene...");
     }
+
 }

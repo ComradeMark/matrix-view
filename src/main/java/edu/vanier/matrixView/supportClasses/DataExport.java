@@ -1,4 +1,5 @@
 package edu.vanier.matrixView.supportClasses;
+
 import edu.vanier.matrixView.math.Matrix;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.Canvas;
@@ -15,7 +16,6 @@ import java.io.File;
 import java.io.IOException;
 import edu.vanier.matrixView.math.Calculator;
 
-
 public class DataExport {
     /**
      * Exports the content of a JavaFX canvas to a PNG image file. This method
@@ -30,13 +30,11 @@ public class DataExport {
      * selected file location.
      */
     public static void exportCanvasToPng(Stage ownerStage, Canvas canvas, Matrix matrix) {
-        // Open the file chooser and get the selected file path
         GraphicsContext gc = canvas.getGraphicsContext2D();
         String text = String.valueOf(matrix);
         File selectedFile = openFileChooser(ownerStage, text);
 
         if (selectedFile != null) {
-            // Create a WritableImage with the same dimensions as the canvas
             WritableImage writableImage = new WritableImage((int) canvas.getWidth(), (int) canvas.getHeight());
             gc.drawImage(writableImage, 0, 0);
             double det = Calculator.determinant(matrix);
@@ -51,13 +49,10 @@ public class DataExport {
             gc.fillText("Determinant: " + String.valueOf(det), 0,canvas.getHeight()/4 + canvas.getHeight()*0.05);
             gc.fillText("Inverse: " + String.valueOf(inv), 0,canvas.getHeight()/4 + canvas.getHeight()*0.1);
             gc.fillText("Adjugate: " + String.valueOf(adj), 0,canvas.getHeight()/4 + canvas.getHeight()*0.15);
-            // Capture the content of the canvas into the WritableImage
             canvas.snapshot(null, writableImage);
 
-            // Convert the WritableImage to a BufferedImage
             BufferedImage bufferedImage = SwingFXUtils.fromFXImage(writableImage, null);
             gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
-
             try {
                 ImageIO.write(bufferedImage, "PNG", selectedFile);
             } catch (IOException e) {
@@ -81,20 +76,17 @@ public class DataExport {
      */
     private static File openFileChooser(Stage ownerStage, String text) {
         FileChooser fileChooser = new FileChooser();
-        // Add file filters (optional)
         FileChooser.ExtensionFilter textFilter = new FileChooser.ExtensionFilter("Text Files", "*.txt");
         FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif");
         fileChooser.getExtensionFilters().addAll(imageFilter, textFilter);
-        fileChooser.setInitialFileName(text);  // Default file name
-        // Set the initial directory of the FileChooser to the user's Desktop
+        fileChooser.setInitialFileName(text);
         File desktopDirectory = new File(System.getProperty("user.home"), "Desktop");
         if (desktopDirectory.exists() && desktopDirectory.isDirectory()) {
             fileChooser.setInitialDirectory(desktopDirectory);
         } else {
-            // Fallback to the user's home directory if Desktop is unavailable
             fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         }
-        // Show the file chooser and get the selected file
         return fileChooser.showSaveDialog(ownerStage);
     }
+
 }

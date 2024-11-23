@@ -9,17 +9,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
-import java.net.URL;
 import java.util.Objects;
 import java.util.logging.Level;
-
 
 public class MainApp extends Application {
 
     public static final String MAINAPP_LAYOUT = "MainAppMinimalViablePage";
-    public static final String SECONDARY_LAYOUT = "secondary_layout";
     private final static Logger logger = LoggerFactory.getLogger(MainApp.class);
     private static Scene scene;
 
@@ -27,22 +23,18 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         try {
             logger.info("Bootstrapping the application...");
-            // Load the scene of the primary stage.
+
             MainAppFXMLController controller = new MainAppFXMLController();
             BorderPane root = (BorderPane)loadFXML(MAINAPP_LAYOUT, controller);
             scene = new Scene(root, 640, 480);
-            scene.getStylesheets().add((getClass().getClassLoader().getResource("/css/MainPage.css").toExternalForm()));
+            scene.getStylesheets().add((Objects.requireNonNull(getClass().getClassLoader().getResource("/css/MainPage.css")).toExternalForm()));
 
             primaryStage.setScene(scene);
-
             primaryStage.sizeToScene();
-            // Put this application's main window on top of other already-opened windows
-            // upon launching the app.
 
             primaryStage.setAlwaysOnTop(true);
             primaryStage.show();
             primaryStage.setAlwaysOnTop(false);
-
         } catch (IOException ex) {
             logger.error(ex.getMessage(), ex);
         }
