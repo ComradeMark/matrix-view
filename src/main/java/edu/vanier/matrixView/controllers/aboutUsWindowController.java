@@ -20,10 +20,10 @@ public class  aboutUsWindowController {
      * */
     public void initialize(){
         btnClose.setStyle("-fx-font-size: 12px;" +
-                        "-fx-background-color: #3498db;" +
+                        "-fx-background-color: #C8C8C8;" +
                         "-fx-text-fill: white;" +
                         "-fx-border-radius: 3px;" +
-                        "-fx-border-color: #2980b9;" +
+                        "-fx-border-color: #9E9E9E;" +
                         "-fx-padding: 6px 8px;"
         );
         btnClose.setOnAction(this::handleCloseButtonAction);

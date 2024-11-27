@@ -27,13 +27,13 @@ public class detInfoController {
      */
     public void initialize(){
         goBack.setStyle("-fx-font-size: 12px;" +
-                "-fx-background-color: #3498db;" +
+                "-fx-background-color: #C8C8C8;" +
                 "-fx-text-fill: white;" +
                 "-fx-border-radius: 3px;" +
-                "-fx-border-color: #2980b9;" +
+                "-fx-border-color: #9E9E9E;" +
                 "-fx-padding: 6px 8px;"
         );
-        outputArea.setStyle("-fx-border-color: #3498db;" +
+        outputArea.setStyle("-fx-border-color: #C8C8C8;" +
                             "-fx-border-radius: 3px;" +
                             "-fx-padding: 4px;"
         );
