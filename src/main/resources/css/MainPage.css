@@ -36,7 +36,7 @@
     -fx-border-width: 1px;
     -fx-text-fill: #7a7a7a;
     -fx-font-size: 14px;
-    -fx-padding: 8px;
+    -fx-padding: 0px;
 }
 .text-field {
     -fx-font-size: 12px;
@@ -91,6 +91,13 @@
 }
 .accordion .titled-pane>.title>.arrow-button>.arrow {
     -fx-background-color: black;
+}
+
+/* V-Box */
+
+.vbox {
+    -fx-border-color: black;
+    -fx-border-width: 5px;
 }
 
 

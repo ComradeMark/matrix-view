@@ -44,21 +44,7 @@ public class MainApp extends Application {
         }
         
     }
-
-//    /**
-//     * Changes the primary stage's current scene.
-//     *
-//     * @param fxmlFile The name of the FXML file to be loaded.
-//     * @param fxmlController An instance of the FXML controller to be associated
-//     * with the loaded FXML scene graph.
-//     */
-//    public static void switchScene(String fxmlFile, Object fxmlController) {
-//        try {
-//            scene.setRoot(loadFXML(fxmlFile, fxmlController));
-//        } catch (IOException ex) {
-//            java.util.logging.Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
+    
 
     /**
      * Loads a scene graph from an FXML file.

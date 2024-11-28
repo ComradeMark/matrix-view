@@ -1,13 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.canvas.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 <?scenebuilder-stylesheet ../styles.css?>
 
-<BorderPane fx:id="mainContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="mainContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
    <right>
       <Accordion fx:id="controllersContainer" BorderPane.alignment="CENTER">
         <panes>
@@ -39,13 +57,8 @@
                                  </children>
                               </GridPane>
                               <Text fx:id="intWarning" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Invalid input" />
-                              <Label fx:id="spacingLabel" alignment="BASELINE_RIGHT" text="Value" />
-                               <Slider fx:id="spacingSlider" blockIncrement="2" max="90" value="50" min="10" orientation="HORIZONTAL" prefWidth="300" showTickLabels="true" showTickMarks="true" majorTickUnit="10" />
-                              <Text fx:id="lineSpacingText" strokeType="OUTSIDE" strokeWidth="0.0" text="Line spacing">
-                                 <font>
-                                    <Font name="Calisto MT" size="12.0" />
-                                 </font>
-                              </Text>
+                              <Label fx:id="spacingLabel" alignment="BASELINE_RIGHT" text="Line spacing" />
+                               <Slider fx:id="spacingSlider" blockIncrement="2" majorTickUnit="10" max="90" min="10" orientation="HORIZONTAL" prefWidth="300" showTickLabels="true" showTickMarks="true" value="50" />
                            </children>
                         </VBox>
                      </children>
@@ -56,11 +69,12 @@
                <content>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                        <HBox prefHeight="36.0" prefWidth="180.0">
                            <children>
-                              <GridPane>
+                              <GridPane prefHeight="0.0" prefWidth="180.0">
                                 <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="115.0" minWidth="10.0" prefWidth="108.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="53.0" minWidth="5.0" prefWidth="12.0" />
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                 </columnConstraints>
                                 <rowConstraints>
@@ -68,7 +82,7 @@
                                 </rowConstraints>
                                  <children>
                                     <Label text="Determinant" />
-                                    <Button fx:id="detInfoBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="119.0" text="Determinant">
+                                    <Button fx:id="detInfoBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="93.0" text="Determinant">
                                        <graphic>
                                           <ImageView fx:id="infoBtn" fitHeight="39.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -80,7 +94,7 @@
                                           <Font size="9.0" />
                                        </font>
                                     </Button>
-                                    <TextField fx:id="fieldDet" prefHeight="26.0" prefWidth="74.0" GridPane.columnIndex="1" editable="false"/>
+                                    <TextField fx:id="fieldDet" editable="false" prefHeight="0.0" prefWidth="22.0" GridPane.columnIndex="2" />
                                  </children>
                               </GridPane>
                            </children>
@@ -99,12 +113,18 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <TextField fx:id="transD" GridPane.columnIndex="2" GridPane.rowIndex="2" editable="false"/>
-                                    <TextField fx:id="transA" GridPane.columnIndex="1" GridPane.rowIndex="1" editable="false"/>
-                                    <TextField fx:id="transB" GridPane.columnIndex="2" GridPane.rowIndex="1" editable="false"/>
-                                    <TextField fx:id="transC" GridPane.columnIndex="1" GridPane.rowIndex="2" editable="false"/>
-                                    <Label prefHeight="17.0" prefWidth="59.0" text="Transpose" />
+                                    <TextField fx:id="transD" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <TextField fx:id="transA" editable="false" prefWidth="60.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField fx:id="transB" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <TextField fx:id="transC" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label prefHeight="17.0" prefWidth="77.0" text="Transpose">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font></Label>
                                  </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
                               </GridPane>
                            </children>
                         </HBox>
@@ -123,12 +143,15 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <TextField fx:id="invD" GridPane.columnIndex="2" GridPane.rowIndex="3" editable="false"/>
-                                    <TextField fx:id="invA" GridPane.columnIndex="1" GridPane.rowIndex="1" editable="false"/>
-                                    <TextField fx:id="invB" GridPane.columnIndex="2" GridPane.rowIndex="1" editable="false"/>
-                                    <TextField fx:id="invC" GridPane.columnIndex="1" GridPane.rowIndex="3" editable="false"/>
-                                    <Label text="Inverse" />
-                                    <Button fx:id="resetBtn" mnemonicParsing="false" GridPane.rowIndex="2">
+                                    <TextField fx:id="invD" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <TextField fx:id="invA" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField fx:id="invB" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <TextField fx:id="invC" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label text="Inverse">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font></Label>
+                                    <Button fx:id="resetBtn" mnemonicParsing="false" GridPane.rowIndex="3">
                                        <graphic>
                                           <ImageView fx:id="resetIcon" fitHeight="23.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
