@@ -1,6 +1,7 @@
 package edu.vanier.matrixView;
 
 import edu.vanier.matrixView.controllers.MainAppFXMLController;
+import edu.vanier.matrixView.test.Driver;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,13 +24,16 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         try {
             logger.info("Bootstrapping the application...");
+            FXMLLoader loader = new FXMLLoader(Driver.class.getResource("/fxml/MainAppMinimalViablePage.fxml"));
+            loader.setController(new MainAppFXMLController());
+            Parent root = loader.load();
+            scene = new Scene(root);
 
-            MainAppFXMLController controller = new MainAppFXMLController();
-            BorderPane root = (BorderPane)loadFXML(MAINAPP_LAYOUT, controller);
-            scene = new Scene(root, 640, 480);
-            scene.getStylesheets().add((Objects.requireNonNull(getClass().getClassLoader().getResource("/css/MainPage.css")).toExternalForm()));
+            scene.getStylesheets().add("/css/MainPage.css");
 
             primaryStage.setScene(scene);
+            primaryStage.setTitle("MatrixView Home");
+            primaryStage.show();
             primaryStage.sizeToScene();
 
             primaryStage.setAlwaysOnTop(true);
@@ -38,22 +42,23 @@ public class MainApp extends Application {
         } catch (IOException ex) {
             logger.error(ex.getMessage(), ex);
         }
+        
     }
 
-    /**
-     * Changes the primary stage's current scene.
-     *
-     * @param fxmlFile The name of the FXML file to be loaded.
-     * @param fxmlController An instance of the FXML controller to be associated
-     * with the loaded FXML scene graph.
-     */
-    public static void switchScene(String fxmlFile, Object fxmlController) {
-        try {
-            scene.setRoot(loadFXML(fxmlFile, fxmlController));
-        } catch (IOException ex) {
-            java.util.logging.Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+//    /**
+//     * Changes the primary stage's current scene.
+//     *
+//     * @param fxmlFile The name of the FXML file to be loaded.
+//     * @param fxmlController An instance of the FXML controller to be associated
+//     * with the loaded FXML scene graph.
+//     */
+//    public static void switchScene(String fxmlFile, Object fxmlController) {
+//        try {
+//            scene.setRoot(loadFXML(fxmlFile, fxmlController));
+//        } catch (IOException ex) {
+//            java.util.logging.Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 
     /**
      * Loads a scene graph from an FXML file.
