@@ -133,7 +133,7 @@ public class MainAppFXMLController {
         ArrayList<Coordinate> initShit = new ArrayList<>();
         initShit.add(v);
         initShit.add(coord);
-        userGraph.drawShit(initShit, canvasPane);
+        userGraph.drawItems(initShit, canvasPane);
         System.out.println(graphPane.getHeight());
         generateGraph();
         // Generates desired graph using matrix input
@@ -382,7 +382,7 @@ public class MainAppFXMLController {
         ArrayList<Coordinate> initShit = new ArrayList<>();
         initShit.add(v);
         initShit.add(coord);
-        userGraph.drawShit(initShit, canvasPane);
+        userGraph.drawItems(initShit, canvasPane);
 
         if (Math.abs(scaledMoveMtx.getA() + scaledMoveMtx.getB() + scaledMoveMtx.getC() + scaledMoveMtx.getD()) < 10000){
             animationTimer.stop();

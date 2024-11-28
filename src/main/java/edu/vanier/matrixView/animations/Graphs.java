@@ -130,7 +130,7 @@ public class Graphs {
      * @param canvas
      *
      */
-    public void drawShit(ArrayList<Coordinate> initItems, Canvas canvas){
+    public void drawItems(ArrayList<Coordinate> initItems, Canvas canvas){
         double[] offsets = {canvas.getWidth() / 2, canvas.getHeight() /2};
         GraphicsContext gc =
                 canvas.getGraphicsContext2D();
