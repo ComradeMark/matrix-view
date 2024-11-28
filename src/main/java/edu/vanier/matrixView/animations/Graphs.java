@@ -122,28 +122,30 @@ public class Graphs {
         return gc;
     }
 
-    //todo Tony fix this shit
     /**
+     *  Method that draws gridlines and new bases. Takes list of items to draw on canvas, and draws
+     *  them while maintaining linearity. Uses spacing and canvas dimensions for operations.
      *
-     * @param initShit
+     * @param initItems
      * @param canvas
+     *
      */
-    public void drawShit(ArrayList<Coordinate> initShit, Canvas canvas){
+    public void drawShit(ArrayList<Coordinate> initItems, Canvas canvas){
         double[] offsets = {canvas.getWidth() / 2, canvas.getHeight() /2};
         GraphicsContext gc =
                 canvas.getGraphicsContext2D();
 
         gc.setStroke(Color.BLUE);
-        ArrayList<Coordinate> tfmShit = Calculator.matrixMultiply(tfm, initShit);
+        ArrayList<Coordinate> tfmItems = Calculator.matrixMultiply(tfm, initItems);
 
-        for (Coordinate shit: tfmShit){
-            if (shit.getClass() == Vector.class){
-                gc.strokeLine(offsets[0], offsets[1], shit.getX() + offsets[0],
-                        -shit.getY()+ offsets[1]);
+        for (Coordinate item: tfmItems){
+            if (item.getClass() == Vector.class){
+                gc.strokeLine(offsets[0], offsets[1], item.getX() + offsets[0],
+                        -item.getY()+ offsets[1]);
                 continue;
             }
-            gc.fillOval(shit.getX() + offsets[0] - coordW/2,
-                    -shit.getY() + offsets[1] - coordH/2, coordW, coordH);
+            gc.fillOval(item.getX() + offsets[0] - coordW/2,
+                    -item.getY() + offsets[1] - coordH/2, coordW, coordH);
         }
     }
 
