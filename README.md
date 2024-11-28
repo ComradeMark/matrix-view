@@ -6,7 +6,7 @@
 MatrixView is the final team project for *Program development in a graphical environment, 420-203*
 Vanier College, Fall 2024 Semester.
 
-README Updated November 27, 2024 by Ahmet Yusuf Yildirim.
+README Updated November 28, 2024 by Mark Moutter.
 
 ## Features
 
@@ -49,14 +49,14 @@ Here are the main features of MT AI's MatrixView:
 
 ## How do I use MatrixView?
 
-Here are the steps to follow to have a functioning version of MT AI's MatrixView:
+Building MatrixView requires the end user to have a functioning version of IntelliJ IDEA or NetBeans with Gradle capabilities.
 
-1. Download the zip folder format of the project by going to https://github.com/ComradeMark/matrix-view.
-2. Extract the zip folder to an appropriate place.
-3. If the user choice of IDE is IntelliJ, after opening the project, the user must go to *Run* -> *Edit Configurations*.
-4. Add a new Gradle configuration to the project.
-5. Add the *run* condition in the *Run* command input field.
-6. Run the project.
+
+1. Download/Clone the project at https://github.com/ComradeMark/matrix-view
+2. If the user choice of IDE is IntelliJ, after opening the project, the user must go to *Run* -> *Edit Configurations*.
+3. Add a new Gradle configuration to the project.
+4. Add the *run* condition in the *Run* command input field.
+5. Run the project.
 
 ## Information on project commits and realization
 
@@ -80,15 +80,17 @@ Here are the steps to follow to have a functioning version of MT AI's MatrixView
    1. *Progress milestones*:
     Our current achievements align with our original timeline. We have finished the project earlier then expected, with some time to spare.
     We have implemented all the main features we originally wished to implement.
+
+   Project implementation was separated into three different builds 
    
-   2. *Challenges faced*:
+   3. *Challenges faced*:
     The main issue we faced was the fact that none of us had any experience when it comes to application development. There were also smaller issues
     around how we were going to implement our project and couple git conflicts. They were solved mainly with the help of the teacher's guidance and online research.
    
-   3. *Current stage*:
+   4. *Current stage*:
     The project has currently been finished, and is ready for deployment.
    
-   4. *Team contributions*: 
+   5. *Team contributions*: 
     Although difficult to track, each of us had our own major contribution to the project, despite every single one of us contributing 
     in every single part. Tony was responsible of the implementation of the animation. Mark was responsible for connecting UI elements so that we
     can get and assign values to the fields. Ahmet was responsible for implementing the export and the styling of the application. 
