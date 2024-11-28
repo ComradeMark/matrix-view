@@ -11,44 +11,43 @@ Vanier College, Fall 2024 Semester.
 ## Features
 
 ### 1. **Export Button**  
-   This button allows the user to export the current visual representation of the inputted matrix.
-   When exporting, the user has the to option to decide where he/she wants to export the image.
-   Each image will have as a default export name, the user inputted matrix.
-   The image also contains the calculated values of the matrix, such as the determinant, the inverse and the transpose.
+- This button allows the user to export the current visual representation of the inputted matrix.
+- When exporting, the user has the to option to decide where he/she wants to export the image.
+- Each image will have as a default export name, the user inputted matrix.
+- The image also contains the calculated values of the matrix, such as the determinant, the inverse and the transpose.
 
 ### 2. **Showing the Initial Grid**  
-    This checkbox field allows the user to compare the inputted matrix with the base matrix that we are all familiar with.
-    This base matrix represents the x and y lines in a graph.
+- This checkbox field allows the user to compare the inputted matrix with the base matrix that we are all familiar with.
+- This base matrix represents the x and y lines in a graph.
 
 ### 3. **The Main Area**  
-    This part of the application contains the cartesian plane that draws the shift in the space.
+- This part of the application contains the cartesian plane that draws the shift in the space.
 
 ### 4. **Resizability**  
-    The application has a responsive interface.
-    When the application window is resized, the canvas and the other UI components also resize to accommodate for the user action.
+- The application has a responsive interface.
+- When the application window is resized, the canvas and the other UI components also resize to accommodate for the user action.
 
 ### 5. **Zooming**  
-    The user can either zoom in or zoom out towards the matrix, either to see a more general view of the transformation in the space of to see a more detailed
+- The user can either zoom in or zoom out towards the matrix, either to see a more general view of the transformation in the space of to see a more detailed
      transformation.
-    To use this feature, the user can use the wheel of their mouse, or the dedicated slider in *Simulation configuration*. 
+- To use this feature, the user can use the wheel of their mouse, or the dedicated slider in *Simulation configuration*. 
 
 ### 6. **User Interaction**  
-    Allow the user to enter their own two by two matrix values. 
-    The spinners will allow the users to increment the current value by 0.5.
-    The spinners have a range of -100 to 100.
+- Allow the user to enter their own two by two matrix values. 
+- The spinners will allow the users to increment the current value by 0.5.
+- The spinners have a range of -100 to 100.
 
 ### 7. **Calculated Values**  
-    This section presents the calculated values of determinant, the inverse, and the transpose values of the matrix.
-    This section also contains a button that allows the user to visualize the inverse of the inputted matrix.
-    This section also contains *DetInfo*, which implements the row reduction method to say whether the matrix is invertible.
+- This section presents the calculated values of determinant, the inverse, and the transpose values of the matrix.
+- This section also contains a button that allows the user to visualize the inverse of the inputted matrix.
+- This section also contains *DetInfo*, which implements the row reduction method to say whether the matrix is invertible.
 
 ### 8. **Animation Control**  
-    This section allows the user to start or reset the simulation. 
+- This section allows the user to start or reset the simulation. 
 
 ## How do I use MatrixView?
 
 Building MatrixView requires the end user to have a functioning version of IntelliJ IDEA or NetBeans with Gradle capabilities.
-
 
 1. Download/Clone the project: [MatrixView GitHub Repository](https://github.com/ComradeMark/matrix-view).
 2. If the user choice of IDE is IntelliJ, after opening the project, the user must go to **Run** → **Edit Configurations**. 
