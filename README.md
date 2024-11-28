@@ -6,7 +6,7 @@
 MatrixView is the final team project for *Program development in a graphical environment, 420-203*
 Vanier College, Fall 2024 Semester.
 
-README Updated November 27, 2024 by Ahmet Yusuf Yildirim.
+README Updated November 28, 2024 by Mark Moutter.
 
 ## Features
 
