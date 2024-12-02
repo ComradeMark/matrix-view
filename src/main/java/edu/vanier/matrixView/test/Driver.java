@@ -1,43 +1,40 @@
 package edu.vanier.matrixView.test;
 
-import edu.vanier.matrixView.controllers.MainAppFXMLController;
 import edu.vanier.matrixView.math.Calculator;
 import edu.vanier.matrixView.math.Coordinate;
 import edu.vanier.matrixView.math.Matrix;
 import edu.vanier.matrixView.math.Vector;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
-public class Driver extends Application {
+public class Driver {
     public static void main(String[] args) {
         Matrix mtx = new Matrix(1, 0, 0, 1);
         Vector v = new Vector(3, 4);
         
         ArrayList<Coordinate> coordinates = new ArrayList<>();
         coordinates.add(v);
-        System.out.println(Calculator.matrixMultiply(mtx, coordinates));
-        Matrix m1 = new Matrix(2, 3, -2, 4);
-        Calculator c1 = new Calculator();
-
-        launch(args);
-    }
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(Driver.class.getResource("/fxml/MainAppMinimalViablePage.fxml"));
-        loader.setController(new MainAppFXMLController());
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
         
-        scene.getStylesheets().add("/css/MainPage.css");
+        System.out.println("Take Matrix: " + mtx + " and Vector " + v);
+        // Test matrix-vector multiplication
+        System.out.println("Matrix-vector mult: " + Calculator.matrixMultiply(mtx, coordinates));
         
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("MatrixView Home");
-        primaryStage.show();
+        // Testing scalar-matrix multiplication (used for animation)
+        System.out.println("Scalar-matrix mult (2 * Matrix): " + Calculator.scalarMult(2, mtx));
+
+        // Calculate matrix values
+        System.out.println("Invertible: " + Calculator.isInvertible(mtx));
+        System.out.println("Determinant: " + Calculator.determinant(mtx));
+        System.out.println("Determinant: " + Calculator.determinant(mtx));
+        
+        // Row reduction
+        System.out.println("Row echelon reduction: " + Calculator.rowEchelon(mtx));
+        
+        // Testing matrix-matrix operations
+        Matrix mtx2 = new Matrix(1, 1, 1, 1);
+        System.out.println("Given a second matrix " + mtx2);
+        System.out.println("Matrix + Matrix: " + Calculator.matrixAdd(mtx, mtx2));
+        System.out.println("Matrix - Matrix: " + Calculator.matrixSubtract(mtx, mtx2));
+        
     }
 }

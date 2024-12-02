@@ -22,7 +22,7 @@ public class Vector extends Coordinate {
 
     @Override
     public String toString() {
-        return "{"+super.toString() + ", Vector{" + "magnitude=" + magnitude + "}}";
+        return "Vector{x="+ x + ", y="+ y + ", " + "magnitude=" + magnitude + "}";
     }
 
 }
